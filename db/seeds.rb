@@ -9,9 +9,9 @@
 require 'faker'
 
 puts "seeding"
-puts "generating 30 users"
+puts "generating 50 users"
 user_array = []
-30.times do
+50.times do
   user = User.new(
     email: Faker::Internet.email,
     password: 123123
@@ -20,17 +20,28 @@ user_array = []
   user_array << user
 end
 
-puts "30 users created"
+puts "50 users created"
 puts "generating 10 groups"
 group_array = []
 10.times do
   group = Group.new(
     name: Faker::JapaneseMedia::Doraemon.gadget
   )
-  group.save!
   group.user = user_array.sample
-  group_array.delete(group.user)
+  group.save!
 end
+
+puts "adding 3 users to each group"
+
+Group.all.each do |group|
+  ug = UserGroup.new
+  ug.user = user_array.sample
+  user_array.delete(ug.user)
+  ug.group = group
+  ug.save!
+end
+
+puts "done adding users to each group"
 
 puts "10 groups generated"
 puts "creating 2 events per group"
@@ -39,7 +50,7 @@ Group.all.each do |group|
   2.times do
     event = Event.new(
       name: "event",
-      location: Faker::JapaneseMedia::FmaBrotherhood.city,
+      location: Faker::JapaneseMedia::Doraemon.location,
       start_date: Date.today,
       end_date: Date.today + 1,
       description: "Great event!"
