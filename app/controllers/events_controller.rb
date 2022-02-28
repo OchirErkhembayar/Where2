@@ -3,13 +3,12 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = Event.find(params[:group_id])
     @group = @event.group
     @usergroups = UserGroup.where('group_id = ?', @group.id)
     @users = @usergroups.map do |ug|
       ug.user
     end
-    raise
   end
 
   def new

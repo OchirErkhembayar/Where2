@@ -23,11 +23,13 @@ end
 puts "30 users created"
 puts "generating 90 groups"
 group_array = []
+ua = user_array
 90.times do
   group = Group.new(
     name: Faker::JapaneseMedia::Doraemon.gadget
   )
-  group.user = user_array.sample
+  group.user = ua.sample
+  ua.delete(group.user)
   group.save!
   group_array << group
 end
