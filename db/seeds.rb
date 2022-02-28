@@ -9,7 +9,7 @@
 require 'faker'
 
 puts "seeding"
-puts "generating 50 users"
+puts "generating 30 users"
 user_array = []
 50.times do
   user = User.new(
@@ -20,7 +20,7 @@ user_array = []
   user_array << user
 end
 
-puts "50 users created"
+puts "30 users created"
 puts "generating 10 groups"
 group_array = []
 10.times do
@@ -29,16 +29,19 @@ group_array = []
   )
   group.user = user_array.sample
   group.save!
+  group_array << group
 end
 
 puts "adding 3 users to each group"
 
 Group.all.each do |group|
-  ug = UserGroup.new
-  ug.user = user_array.sample
-  user_array.delete(ug.user)
-  ug.group = group
-  ug.save!
+  3.times do
+    ug = UserGroup.new
+    ug.user = user_array.sample
+    user_array.delete(ug.user)
+    ug.group = group
+    ug.save!
+  end
 end
 
 puts "done adding users to each group"
