@@ -1,8 +1,6 @@
-<h1>Events Page</h1>
+<h1>Event Users Page</h1>
 
-<%= form_for @event_user do |f| %>
-  <%= f.label :name %>
-  <%= f.label :description %>
-  <%= f.label :location %>
-  <%= f.submit "Add Event" %>
-<%= end %>
+<%= simple_form_for [ @event_user, @event ] do |f| %>
+  <%= f.input :first_name %>
+  <%= f.submit "Submit event", class: "btn btn-primary" %>
+<% end %>

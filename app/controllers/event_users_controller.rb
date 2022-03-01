@@ -4,12 +4,15 @@ class EventUsersController < ApplicationController
   end
 
   def new
-    @event_user = EventUser.new(params[:id])
+    @event_user = EventUser.new(params[:user_id])
     @event.set_user!(current_user)
     if @event_user == current_user
       redirect_to '/forms'
     else
       redirect_to events_path(@event_id)
     end
+  end
+
+  def create
   end
 end
