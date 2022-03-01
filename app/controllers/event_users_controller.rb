@@ -4,15 +4,22 @@ class EventUsersController < ApplicationController
   end
 
   def new
-    @event_user = EventUser.new(params[:user_id])
-    @event.set_user!(current_user)
-    if @event_user == current_user
-      redirect_to '/forms'
-    else
-      redirect_to events_path(@event_id)
-    end
+    @event_user = EventUser.new
+    @event = Event.find(params[:event_id])
+    @group = Group.find(@event.group_id)
   end
 
   def create
+    @event_user = EventUser.new
+    @group = Group.find(params[:group_id])
+    @user = User.find(params[:event_user][:user_id])
+    @event = Event.find(params[:event_id])
+    @event_user.user = @user
+    @event_user.event = @event
+    if @event_user.save
+      redirect_to "/groups/#{@event.id}/events/#{@group.id}"
+    else
+      render :new
+    end
   end
 end

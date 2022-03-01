@@ -9,3 +9,4 @@
     <p><%= user.email %></p>
   <% end %>
 </div>
+<%= link_to "Add user", new_group_event_event_user_path(@event.group, @event), class: "btn btn-danger" %>
