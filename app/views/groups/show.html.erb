@@ -1,7 +1,7 @@
 <%= link_to "all groups", groups_path, class: "btn btn-danger" %>
-<h1>Admin: <%= @group.user.email %></h1>
+<h1>Admin: <%= @group.user.first_name %></h1>
 <% @users.each do |user| %>
-  <h3><%= user.email %></h3>
+  <h3><%= user.first_name %></h3>
 <% end %>
 <% @events.each do |event| %>
   <h3><%= link_to event.name, group_event_path(event), class: "btn btn-danger" %></h3>
