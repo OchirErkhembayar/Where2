@@ -19,17 +19,16 @@ user_array = []
   user.save!
   user_array << user
 end
-
+puts user_array.size
 puts "30 users created"
 puts "generating 90 groups"
 group_array = []
-ua = user_array
 90.times do
+  ua = user_array
   group = Group.new(
     name: Faker::JapaneseMedia::Doraemon.gadget
   )
-  group.user = ua.sample
-  ua.delete(group.user)
+  group.user = user_array.sample
   group.save!
   group_array << group
 end
@@ -43,6 +42,10 @@ Group.all.each do |group|
     ug.group = group
     ug.save!
   end
+  ug = UserGroup.new
+  ug.user = group.user
+  ug.group = group
+  ug.save!
 end
 
 puts "done adding users to each group"
