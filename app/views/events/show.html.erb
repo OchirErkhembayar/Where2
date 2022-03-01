@@ -2,11 +2,11 @@
 <h1>Name: <%= @event.name %></h1>
 <h2>Location: <%= @event.location %></h2>
 <h3>Description: <%= @event.description %></h3>
-<p class="mx-3">Admin: <%= @group.user.email %></p>
+<p class="mx-3">Admin: <%= @group.user.first_name %></p>
 <h4>Attendees: </h4>
 <div class="mx-3">
   <% @users.each do |user| %>
-    <p><%= user.email %></p>
+    <p><%= user.first_name %></p>
   <% end %>
 </div>
 <%= link_to "Add user", new_group_event_event_user_path(@event.group, @event), class: "btn btn-danger" %>

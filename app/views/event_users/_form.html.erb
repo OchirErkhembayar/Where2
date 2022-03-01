@@ -1,7 +1,7 @@
 <div class="container">
   <%= simple_form_for([@group, @event, @event_user]) do |f| %>
   <div class="form-group mb-3 mx-5 px-5">
-      <%= f.association :user, label_method: :email, class: "form-control", placeholder: "Group name" %>
+      <%= f.association :user, label_method: :first_name, class: "form-control", placeholder: "Group name" %>
     <%= f.submit "Invite user", class: "btn btn-primary mb-3 w-100" %>
   </div>
   <% end %>
