@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   def index
-    @usergroups = UserGroup.where('user_id = ?', current_user)
+    @usergroups = UserGroup.where('user_id = ?', current_user.id)
   end
 
   def show
@@ -10,6 +10,7 @@ class GroupsController < ApplicationController
       ug.user
     end
     @events = Event.where('group_id = ?', @group.id)
+
   end
 
   def new
@@ -17,6 +18,17 @@ class GroupsController < ApplicationController
   end
 
   def create
+    @group = Group.new(set_group)
+    @group.user = current_user
+    @usergroup = UserGroup.new
+    @usergroup.group = @group
+    @usergroup.user = current_user
+    @usergroup.save
+    if @group.save
+      redirect_to '/groups'
+    else
+      render :new
+    end
   end
 
   def edit
@@ -26,5 +38,11 @@ class GroupsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def set_group
+    params.require(:group).permit(:name)
   end
 end
