@@ -1,10 +1,14 @@
 <div class="container">
-  <%= simple_form_for(@event_user) do |f| %>
+  <%= simple_form_for([@group, @event, @event_user]) do |f| %>
   <div class="form-group mb-3 mx-5 px-5">
+<<<<<<< HEAD
       <%= f.input :name, class: "form-control", placeholder: "Group name" %>
 <<<<<<< HEAD
     <%= f.submit "Submit furniture", class: "btn btn-primary mb-3 w-100" %>
 =======
+=======
+      <%= f.association :user, label_method: :email, class: "form-control", placeholder: "Group name" %>
+>>>>>>> fb2e3f2b908186fcde78b7e9f36bbacbad3f8565
     <%= f.submit "Invite user", class: "btn btn-primary mb-3 w-100" %>
 >>>>>>> 52ddb007db23d5f9acebebcf1bd7047c1c8faaa0
   </div>

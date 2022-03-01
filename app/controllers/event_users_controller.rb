@@ -1,73 +1,24 @@
 class EventUsersController < ApplicationController
   def index
-<<<<<<< HEAD
-    @event_users = EventUser.where('event_id = ?', current_event.id),where('status = ?', true)
+    @event_users = EventUser.where('event_id = ?', current_event.id)
   end
 
   def new
     @event_user = EventUser.new
-    # @event.set_user!(current_user)
-    # if @event_user == current_user
-    #   redirect_to '/forms'
-    # else
-    #   redirect_to events_path(@event_id)
-    # end
-  end
-
-  def show
-    @event = Event.find(params[:id])
-    @event_users = EventUsers.where('event_id = ?', @event_users.id)
-    @event_users = @event_users.map do |eu|
-      eu.event_user
-    end
+    @event = Event.find(params[:event_id])
+    @group = Group.find(@event.group_id)
   end
 
   def create
-    @event_users = EventUser.new(set_event_users)
-    @event_USER.user = current_user
     @event_user = EventUser.new
-    @usergroup.user = current_user
-    @event_user.accepted = true
+    @group = Group.find(params[:group_id])
+    @event = Event.find(params[:event_id])
+    @event_user.user_id = params[:event_user][:user_id]
+    @event_user.event = @event
     if @event_user.save
-      @event_user.event = @event
-      @usergroup.save!
-      redirect_to '/forms'
+      redirect_to "/groups/#{@event.id}/events/#{@group.id}"
     else
       render :new
     end
   end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
-  end
-
-  private
-
-
-  def set_event_users
-    params.require(:event_user).permit(:event_id)
-  end
-  end
-=======
-    @event_users = EventUser.all
-  end
-
-  def new
-    @event_user = EventUser.new(params[:user_id])
-    @event.set_user!(current_user)
-    if @event_user == current_user
-      redirect_to '/forms'
-    else
-      redirect_to events_path(@event_id)
-    end
-  end
-
-  def create
-  end
 end
->>>>>>> 52ddb007db23d5f9acebebcf1bd7047c1c8faaa0
