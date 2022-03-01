@@ -1,5 +1,6 @@
 class EventUsersController < ApplicationController
   def index
+<<<<<<< HEAD
     @event_users = EventUser.where('event_id = ?', current_event.id),where('status = ?', true)
   end
 
@@ -52,3 +53,21 @@ class EventUsersController < ApplicationController
     params.require(:event_user).permit(:event_id)
   end
   end
+=======
+    @event_users = EventUser.all
+  end
+
+  def new
+    @event_user = EventUser.new(params[:user_id])
+    @event.set_user!(current_user)
+    if @event_user == current_user
+      redirect_to '/forms'
+    else
+      redirect_to events_path(@event_id)
+    end
+  end
+
+  def create
+  end
+end
+>>>>>>> 52ddb007db23d5f9acebebcf1bd7047c1c8faaa0

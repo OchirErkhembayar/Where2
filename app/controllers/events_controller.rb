@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   def index
+    @events = Event.all
   end
 
   def show
@@ -25,6 +26,16 @@ class EventsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    @event = Event.find(params[:event])
+    @event.destroy
+    redirect_to "/groups/#{@event.group.id}"
+  end
+
+  def my_events
+    @events = Event.all.where("group_id = ?", current_user.id)
   end
 
   private
