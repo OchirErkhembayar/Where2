@@ -21,4 +21,14 @@ class EventUsersController < ApplicationController
       render :new
     end
   end
+
+  def accept
+    @event_user = EventUser.find(params[:event_id])
+    @event_user.status = true
+    if @event_user.save
+      redirect_to "/events"
+    else
+      render :index
+    end
+  end
 end
