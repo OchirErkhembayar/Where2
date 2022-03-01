@@ -7,3 +7,4 @@
   <h3><%= link_to event.name, group_event_path(event), class: "btn btn-danger" %></h3>
 <% end %>
 <%= link_to "add group members", new_group_usergroup_path(@group), class: "btn btn-danger" %>
+<%= link_to "create new group event", new_group_event_path(@group), class: "btn btn-danger" %>
