@@ -12,7 +12,11 @@ puts "seeding"
 puts "generating 20 users"
 user_array = []
 20.times do
+  first_name = Faker::JapaneseMedia::Naruto.character.split(' ').first.join
+  last_name = Faker::JapaneseMedia::Naruto.character.split(' ')[1].join
   user = User.new(
+    first_name: first_name,
+    last_name: last_name,
     email: Faker::Internet.email,
     password: 123123
   )
