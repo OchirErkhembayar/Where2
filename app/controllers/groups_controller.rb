@@ -10,7 +10,6 @@ class GroupsController < ApplicationController
       ug.user
     end
     @events = Event.where('group_id = ?', @group.id)
-
   end
 
   def new
