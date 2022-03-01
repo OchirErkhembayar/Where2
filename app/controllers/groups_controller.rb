@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   def index
-    @usergroups = UserGroup.where('user_id = ?', current_user)
+    @usergroups = UserGroup.where('user_id = ?', current_user.id).where('status = ?', true)
   end
 
   def show
@@ -17,6 +17,18 @@ class GroupsController < ApplicationController
   end
 
   def create
+    @group = Group.new(set_group)
+    @group.user = current_user
+    @usergroup = UserGroup.new
+    @usergroup.user = current_user
+    @usergroup.status = true
+    if @group.save
+      @usergroup.group = @group
+      @usergroup.save!
+      redirect_to '/groups'
+    else
+      render :new
+    end
   end
 
   def edit
@@ -26,5 +38,11 @@ class GroupsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def set_group
+    params.require(:group).permit(:name)
   end
 end

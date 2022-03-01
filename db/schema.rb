@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_28_172911) do
+ActiveRecord::Schema.define(version: 2022_03_01_140837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2022_02_28_172911) do
     t.bigint "event_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "status", default: false
     t.index ["event_id"], name: "index_event_users_on_event_id"
     t.index ["user_id"], name: "index_event_users_on_user_id"
   end
@@ -88,9 +89,9 @@ ActiveRecord::Schema.define(version: 2022_02_28_172911) do
   create_table "user_groups", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "group_id", null: false
-    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "status", default: false
     t.index ["group_id"], name: "index_user_groups_on_group_id"
     t.index ["user_id"], name: "index_user_groups_on_user_id"
   end

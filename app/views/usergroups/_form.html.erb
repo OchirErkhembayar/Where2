@@ -1,0 +1,6 @@
+<%= simple_form_for usergroup, url: group_usergroups_path(group)  do |f| %>
+  <div class="form-group mb-3 mx-5 px-5">
+    <%= f.association :user, label_method: :email, class: "form-control", placeholder: "Group name" %>
+  <%= f.submit "Submit furniture", class: "btn btn-primary mb-3 w-100" %>
+  </div>
+<% end %>

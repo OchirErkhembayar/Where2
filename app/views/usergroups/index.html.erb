@@ -1,0 +1,5 @@
+<h3>Your group invitations!</h3>
+<% @invitations.reverse.each do |invitation| %>
+  <h6><%= invitiation.group.user.email %> has invited you have been invited to join: <%= invitation.group.name.capitalize %>!</h6>
+
+<% end %>

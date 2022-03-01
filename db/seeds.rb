@@ -9,9 +9,9 @@
 require 'faker'
 
 puts "seeding"
-puts "generating 30 users"
+puts "generating 20 users"
 user_array = []
-30.times do
+20.times do
   user = User.new(
     email: Faker::Internet.email,
     password: 123123
@@ -20,11 +20,10 @@ user_array = []
   user_array << user
 end
 puts user_array.size
-puts "30 users created"
+puts "20 users created"
 puts "generating 90 groups"
 group_array = []
 90.times do
-  ua = user_array
   group = Group.new(
     name: Faker::JapaneseMedia::Doraemon.gadget
   )
@@ -40,6 +39,7 @@ Group.all.each do |group|
     ug = UserGroup.new
     ug.user = user_array.sample
     ug.group = group
+    ug.status = true
     ug.save!
   end
   ug = UserGroup.new
