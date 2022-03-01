@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         put :accept
       end
     end
+    resources :event_users, only: %i[index create]
   end
 
   resources :usergroups, only: %i[index]
