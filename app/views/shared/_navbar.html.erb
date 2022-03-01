@@ -12,7 +12,7 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <p class="nav-link"      >Hello, <%= current_user.email %></p>
+            <p class="nav-link"      >Hello, <%= current_user.first_name.capitalize %></p>
           </li>
           <li class="nav-item active">
             <%= link_to "Home", root_path, class: "nav-link" %>
