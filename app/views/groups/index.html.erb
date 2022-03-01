@@ -1,0 +1,4 @@
+<% @usergroups.each do |group| %>
+  <h1><%= group.group.name %></h1>
+  <p><%= link_to "see more", group_path(group.group), class: "btn btn-danger" %></p>
+<% end %>
