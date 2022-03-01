@@ -19,3 +19,9 @@
       </div>
     </div>
   </div>
+<div style="background-image: url(<%= asset_path "background.jpg" %>)" class="background-landing">
+  <% if user_signed_in? %>
+    <%= link_to "groups", groups_path, class: "btn btn-danger" %>
+    <%= link_to "invitations", usergroups_path(current_user), class: "btn btn-danger" %>
+  <% end %>
+</div>
