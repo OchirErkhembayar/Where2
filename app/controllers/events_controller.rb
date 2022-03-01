@@ -14,16 +14,24 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @group = Group.find(params[:group_id])
   end
 
   def create
-    @event = Event.new(event_params)
+    @event = Event.new(set_event)
+    @group = Group.find(params[:group_id])
+    @event.group = @group
+    if @event.save
+      redirect_to "/groups/#{@event.id}/events/#{@group.id}"
+    else
+      render :new
+    end
   end
 
   def destroy
+    @event = Event.find(params[:event])
     @event.destroy
-
-    redirect_to events_path(@event.event_user)
+    redirect_to "/groups/#{@event.group.id}"
   end
 
   def my_events
@@ -32,7 +40,7 @@ class EventsController < ApplicationController
 
   private
 
-  def event_params
-    params.require(:event).permit(:name, :description, :location)
+  def set_event
+    params.require(:event).permit(:name, :location, :description, :start_date, :end_date)
   end
 end
