@@ -1,4 +1,8 @@
 class UsergroupsController < ApplicationController
+  def index
+    @invitations = @usergroup.where('user_id = ?', current_user.id)
+  end
+
   def new
     @group = Group.find(params[:group_id])
     @usergroup = UserGroup.new
