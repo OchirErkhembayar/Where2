@@ -1,6 +1,6 @@
 class UsergroupsController < ApplicationController
   def index
-    @invitations = @usergroup.where('user_id = ?', current_user.id)
+    @invitations = UserGroup.where('user_id = ? AND status = ?', current_user.id, false)
   end
 
   def new
@@ -18,6 +18,22 @@ class UsergroupsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def accept
+    @usergroup = UserGroup.find(params[:id])
+    @usergroup.status = true
+    if @usergroup.save
+      redirect_to "/groups"
+    else
+      render :index
+    end
+  end
+
+  def destroy
+    @usergroup = UserGroup.find(params[:id])
+    @usergroup.destroy
+    redirect_to "/usergroups"
   end
 
   private
