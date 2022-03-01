@@ -12,6 +12,4 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  resources :usergroups, only: %i[index]
 end
