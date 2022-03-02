@@ -6,12 +6,12 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:group_id])
     @group = @event.group
-    @usergroups = UserGroup.where('group_id = ?', @group.id)
+    @usergroups = UserGroup.where('group_id = ? AND status = ?', @group.id, true)
     @users = @usergroups.map do |ug|
       ug.user
     end
+    @memberids = @users.map { |user| user.id }
     @eventusers = EventUser.where('event_id = ? AND status = ?', @event.id, true)
-    @eventusers.each { |eu| @users << eu.user }
   end
 
   def new
