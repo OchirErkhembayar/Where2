@@ -25,19 +25,30 @@ class GroupsController < ApplicationController
     if @group.save
       @usergroup.group = @group
       @usergroup.save!
-      redirect_to '/groups'
+      redirect_to "/groups/#{@group.id}"
     else
       render :new
     end
   end
 
   def edit
+    @group = Group.find(params[:id])
   end
 
   def update
+    @group = Group.find(params[:id])
+    @group.update(set_group)
+    if @group.save
+      redirect_to "/groups/#{@group.id}"
+    else
+      render :edit
+    end
   end
 
   def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
+    redirect_to "/groups"
   end
 
   private
