@@ -6,6 +6,7 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @usergroups = UserGroup.where('group_id = ? AND status = ?', @group.id, true)
+    @pendingusers = UserGroup.where('group_id = ? AND status = ?', @group.id, false)
     @users = @usergroups.map do |ug|
       ug.user
     end
