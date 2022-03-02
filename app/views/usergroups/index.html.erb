@@ -6,3 +6,12 @@
     <%= link_to "Decline", group_usergroup_path(invitation.group_id, invitation), method: :delete, class: "btn btn-danger" %>
   <% end %>
 <% end %>
+
+<h3>Your event invitations!</h3>
+<% if @eventinvitations.size > 0 %>
+  <% @eventinvitations.each do |invitation| %>
+    <h6><%= invitation.event.group.user.first_name %> has invited you to join: <%= invitation.event.name.capitalize %>!</h6>
+    <%= link_to "Accept", accept_event_user_path(invitation), method: :put, class: "btn btn-danger" %>
+    <%= link_to "Decline", event_user_path(invitation), method: :delete, class: "btn btn-danger" %>
+  <% end %>
+<% end %>

@@ -1,0 +1,4 @@
+<h3>Events you're attending!</h3>
+<% @event_users.each do |eventuser| %>
+  <p><%= link_to eventuser.event.name, group_event_path(eventuser.event.id, eventuser.event.group.id), class: "btn btn-danger" %></p>
+<% end %>

@@ -1,6 +1,6 @@
 class EventUsersController < ApplicationController
   def index
-    @event_users = EventUser.where('event_id = ?', current_event.id)
+    @event_users = EventUser.where('user_id = ? AND status = ?', current_user.id, true)
   end
 
   def new
@@ -23,12 +23,18 @@ class EventUsersController < ApplicationController
   end
 
   def accept
-    @event_user = EventUser.find(params[:event_id])
-    @event_user.status = true
-    if @event_user.save
-      redirect_to "/events"
+    @eventuser = EventUser.find(params[:id])
+    @eventuser.status = true
+    if @eventuser.save
+      redirect_to "/groups"
     else
       render :index
     end
+  end
+
+  def destroy
+    @eventuser = EventUser.find(params[:id])
+    @eventuser.destroy
+    redirect_to root_path
   end
 end

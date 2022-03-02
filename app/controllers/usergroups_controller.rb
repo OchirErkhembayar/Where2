@@ -1,6 +1,7 @@
 class UsergroupsController < ApplicationController
   def index
     @invitations = UserGroup.where('user_id = ? AND status = ?', current_user.id, false)
+    @eventinvitations = EventUser.where('user_id = ? AND status = ?', current_user.id, false)
   end
 
   def new
