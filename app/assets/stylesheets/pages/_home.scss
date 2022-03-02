@@ -1,19 +1,20 @@
 // Specific CSS for your home-page
 
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
 .background-landing{
-  height: 1095px;
+  height: 100vh;
   background-size: cover;
-  background-position:center ;
+  width: 100%;
+  position: absolute;
 }
 
 .frame {
-	position: absolute;
-	top: 50%;
-	left: 44%;
-	width: 600px;
-	height: 400px;
-	margin-top: -310px;
-	margin-left: -200px;
+	top: 0%;
+	left: 0%;
 	border-radius: 2px;
 	overflow: hidden;
 	color: white;
@@ -22,7 +23,9 @@
 	-moz-osx-font-smoothing: grayscale;
 	justify-content: center;
 	align-items: center;
-
+  position: fixed;
+  margin: 10% ;
+  padding: 132px 450px;
 }
 
 .button-landing-sign {
