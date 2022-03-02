@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_01_173711) do
+ActiveRecord::Schema.define(version: 2022_03_02_174250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2022_03_01_173711) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_favourite_events_on_event_id"
     t.index ["user_id"], name: "index_favourite_events_on_user_id"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.bigint "friend_one_id"
+    t.bigint "friend_two_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["friend_one_id"], name: "index_friendships_on_friend_one_id"
+    t.index ["friend_two_id"], name: "index_friendships_on_friend_two_id"
   end
 
   create_table "group_notifications", force: :cascade do |t|
@@ -115,6 +124,8 @@ ActiveRecord::Schema.define(version: 2022_03_01_173711) do
   add_foreign_key "events", "groups"
   add_foreign_key "favourite_events", "events"
   add_foreign_key "favourite_events", "users"
+  add_foreign_key "friendships", "users", column: "friend_one_id"
+  add_foreign_key "friendships", "users", column: "friend_two_id"
   add_foreign_key "group_notifications", "groups"
   add_foreign_key "groups", "users"
   add_foreign_key "messages", "events"

@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :user_groups, dependent: :destroy
   has_many :favourite_events, dependent: :destroy
   has_one :group
+  has_many :friendships
 end
