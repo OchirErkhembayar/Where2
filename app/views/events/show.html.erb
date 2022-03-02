@@ -1,60 +1,68 @@
-<% if @memberids.include? current_user.id %>
-  <%= link_to "back to group", group_path(@event.group), class: "btn btn-danger" %>
-<% end %>
-<h1>Name: <%= @event.name %></h1>
-<h2>Location: <%= @event.location %></h2>
-<h3>Description: <%= @event.description %></h3>
-<p class="mx-3">Admin: <%= @group.user.first_name %></p>
-<h4>Group Attendees: </h4>
-<div class="mx-3">
-  <% @users.each do |user| %>
-    <p><%= user == current_user ? "You" : user.first_name %></p>
-  <% end %>
-</div>
-<h4>Invited Attendees:</h4>
-<div class="mx-3">
-  <% @eventusers.each do |user| %>
-    <p><%= user.user == current_user ? "You" : user.user.first_name.capitalize %></p>
-  <% end %>
-</div>
-<%= link_to "Add user", new_group_event_event_user_path(@event.group, @event), class: "btn btn-danger" %>
-</div>
-
-<div class="messages">
-  <% @event.messages.each do |message| %>
-    <%= message.messages.content %>>
-        <small>
-          <strong><%= message.user.email %></strong>
-          <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-        </small>
-        <p><%= message.content %></p>
-      </div>
-  <% end %>
-</div>
-
-<%= simple_form_for [@group, @event, @message],
-  remote: true,
-  html: {class: "d-flex"} do |f|
-%>
-  <%= f.input :content,
-    label: false,
-    placeholder: "Message ##{@event.name}",
-    wrapper_html: {class: "flex-grow-1"}
-  %>
-  <%= f.submit "Send", class: "btn btn-primary" %>
-<% end %>
-
-
-<div class="row">
-  <div class="col">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>@group.name</th>
-        </tr>
-      </thead>
-
-    </table>
+<div class="show-container d-flex">
+  <div class="info-container">
+    <% if @memberids.include? current_user.id %>
+      <%= link_to "back to group", group_path(@event.group), class: "btn btn-danger" %>
+    <% end %>
+    <h1>Name: <%= @event.name %></h1>
+    <h2>Location: <%= @event.location %></h2>
+    <h3>Description: <%= @event.description %></h3>
+    <p class="mx-3">Admin: <%= @group.user.first_name %></p>
+    <h4>Group Attendees: </h4>
+    <div class="mx-3">
+      <% @users.each do |user| %>
+        <p><%= user == current_user ? "You" : user.first_name %></p>
+      <% end %>
+    </div>
+    <h4>Invited Attendees:</h4>
+    <div class="mx-3">
+      <% @eventusers.each do |user| %>
+        <p><%= user.user == current_user ? "You" : user.user.first_name.capitalize %></p>
+      <% end %>
+    </div>
+    <%= link_to "Add user", new_group_event_event_user_path(@event.group, @event), class: "btn btn-danger" %>
   </div>
+  <div class="messages-container">
+      <div class="col-lg-12">
+        <div class="messages">
 
+          <% @event.messages.each do |message| %>
+            <%= message.messages.content %>>
+                <small>
+                  <strong><%= message.user.email %></strong>
+                  <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+                </small>
+                <p><%= message.content %></p>
+            <% end %>
+        </div>
+      </div>
+
+    <div class="form-container">
+        <%= simple_form_for [@group, @event, @message],
+          remote: true,
+          html: {class: "d-flex align-items-center"} do |f|
+        %>
+          <%= f.input :content,
+            label: false,
+            placeholder: "Message ##{@event.name}",
+            wrapper_html: {class: "flex-grow-1"}
+          %>
+          <%= f.submit "Send", class: "btn btn-primary" %>
+        <% end %>
+    </div>
+  </div>
 </div>
+
+
+    <%# <div class="row">
+      <div class="col">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>@group.name</th>
+            </tr>
+          </thead>
+
+        </table>
+      </div>
+
+    </div> %>
