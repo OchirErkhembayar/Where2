@@ -32,11 +32,11 @@
           <% @users.each do |user| %>
             <% @pendingusers.each do |user| %>
               <tr>
-                <td><h4><%= user.user.first_name %>  Status: Pending</h4></td>
+                <td><h4><%= user.user == current_user ? "You" : user.user.first_name %>  Status: Pending</h4></td>
               </tr>
             <% end %>
             <tr>
-              <td><h4><%= user.first_name %></h4></td>
+              <td><h4><%= user == current_user ? "You" : user.first_name %></h4></td>
             </tr>
           <% end %>
 
