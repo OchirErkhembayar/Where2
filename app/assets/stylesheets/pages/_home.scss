@@ -9,10 +9,10 @@
 .frame {
 	position: absolute;
 	top: 50%;
-	left: 49%;
-	width: 400px;
+	left: 44%;
+	width: 600px;
 	height: 400px;
-	margin-top: -200px;
+	margin-top: -310px;
 	margin-left: -200px;
 	border-radius: 2px;
 	overflow: hidden;
@@ -20,7 +20,6 @@
 	font-family: Raleway, Helvetica, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	display: flex;
 	justify-content: center;
 	align-items: center;
 
@@ -69,4 +68,12 @@
 			stroke-dashoffset: -420;
 		}
 	}
+}
+
+.landing-page-text {
+  justify-content: center;
+  color: black;
+  font-family: Raleway, Helvetica, sans-serif;
+  margin-bottom: 120px;
+  text-align: center;
 }
