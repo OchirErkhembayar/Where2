@@ -13,6 +13,7 @@ class EventsController < ApplicationController
     @memberids = @users.map { |user| user.id }
     @eventusers = EventUser.where('event_id = ? AND status = ?', @event.id, true)
     @messages = Event.where('event_id = ?', @event_id)
+    @message = Message.new
   end
 
   def new

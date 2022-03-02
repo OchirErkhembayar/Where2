@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :groups do
     resources :events, only: %i[index show new create] do
+      resources :messages, only: %i[create]
       resources :event_users, only: %i[create new]
     end
     resources :usergroups, only: %i[new create destroy] do

@@ -21,8 +21,8 @@
 </div>
 
 <div class="messages">
-  <% @event.messages.content each do |message| %>
-    <%= message.content %>>
+  <% @event.messages.each do |message| %>
+    <%= message.messages.content %>>
         <small>
           <strong><%= message.user.email %></strong>
           <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
@@ -31,3 +31,15 @@
       </div>
   <% end %>
 </div>
+
+<%= simple_form_for [@group, @event, @message],
+  remote: true,
+  html: {class: "d-flex"} do |f|
+%>
+  <%= f.input :content,
+    label: false,
+    placeholder: "Message ##{@event.name}",
+    wrapper_html: {class: "flex-grow-1"}
+  %>
+  <%= f.submit "Send", class: "btn btn-primary" %>
+<% end %>

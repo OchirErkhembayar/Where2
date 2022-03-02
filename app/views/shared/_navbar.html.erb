@@ -1,7 +1,7 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <%= link_to root_path, class: "navbar-brand" do %>
-      <%=image_tag "logo-new.png"%>
+      <%=image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png"%>
     <% end %>
   <h1 class="nav-title">WHERE2</h1>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,8 +11,8 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item">
-            <p class="nav-link"      >Hello, <%= current_user.first_name.capitalize %></p>
+          <li class="nav-item d-flex align-items-center">
+            <p class="nav-link">Hello, <strong><%= current_user.first_name.capitalize %></strong></p>
           </li>
           <li class="nav-item active">
             <%= link_to "Home", root_path, class: "nav-link" %>
