@@ -1,6 +1,17 @@
 class EventUsersController < ApplicationController
   def index
     @event_users = EventUser.where('user_id = ? AND status = ?', current_user.id, true)
+    @myusergroups = UserGroup.where('user_id = ? AND status = ?', current_user.id, true)
+    @groups = []
+    @myusergroups.each do |ug|
+      @groups << Group.find(ug.group_id)
+    end
+    @events = []
+    @groups.each do |ug|
+      Event.where('group_id = ?', ug.id).each do |event|
+        @events << event
+      end
+    end
   end
 
   def new
