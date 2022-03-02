@@ -1,10 +1,20 @@
-<%= link_to "all groups", groups_path, class: "btn btn-danger" %>
-<h1>Admin: <%= @group.user.first_name %></h1>
-<% @users.each do |user| %>
-  <h3><%= user.first_name %></h3>
-<% end %>
-<% @events.each do |event| %>
-  <h3><%= link_to event.name, group_event_path(event), class: "btn btn-danger" %></h3>
-<% end %>
-<%= link_to "add group members", new_group_usergroup_path(@group), class: "btn btn-danger" %>
-<%= link_to "create new group event", new_group_event_path(@group), class: "btn btn-danger" %>
+<div class="container pt-3">
+  <%= link_to "all groups", groups_path, class: "btn btn-danger" %>
+  <h1><%= @group.name %></h1>
+  <br>
+  <h3>Admin: <%= @group.user.first_name %></h3>
+  <br>
+  <h3>Group Members</h3>
+  <% @users.each do |user| %>
+    <h4><%= user.first_name %></h4>
+  <% end %>
+  <% @events.each do |event| %>
+    <h3><%= link_to event.name, group_event_path(event), class: "btn btn-danger" %></h3>
+  <% end %>
+  <%= link_to "Add group members", new_group_usergroup_path(@group), class: "btn btn-danger" %>
+  <%= link_to "Create new group event", new_group_event_path(@group), class: "btn btn-danger" %>
+  <% if @group.user == current_user %>
+    <%= link_to "Edit group name", edit_group_path(@group), class: "btn btn-danger" %>
+    <%= link_to "Destroy Group", group_path(@group), method: :delete, class: "btn btn-danger" %>
+  <% end %>
+</div>
