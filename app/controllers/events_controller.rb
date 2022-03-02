@@ -12,6 +12,10 @@ class EventsController < ApplicationController
     end
     @memberids = @users.map { |user| user.id }
     @eventusers = EventUser.where('event_id = ? AND status = ?', @event.id, true)
+    @Event.messages.content.each do |message|
+      @messages = Event.where('event_id = ?', @event_id)
+      @messages.content
+    end
   end
 
   def new
