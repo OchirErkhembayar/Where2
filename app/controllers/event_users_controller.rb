@@ -1,6 +1,10 @@
 class EventUsersController < ApplicationController
   def index
     @event_users = EventUser.where('user_id = ? AND status = ?', current_user.id, true)
+    if @event_users.size > 0
+      @event_users = @event_users.reject { |event| event.event.end_date <= Date.today }
+      @event_users = @event_users.sort_by { |event| event.event.end_date } if @event_users.size > 0
+    end
     @myusergroups = UserGroup.where('user_id = ? AND status = ?', current_user.id, true)
     @groups = []
     @myusergroups.each do |ug|

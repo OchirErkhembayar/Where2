@@ -1,4 +1,4 @@
-<h3>Your group invitations!</h3>
+<!--<h3>Your group invitations!</h3>
 <% if @invitations.size > 0 %>
   <% @invitations.reverse.each do |invitation| %>
     <h6><%= invitation.group.user.first_name %> has invited you have been invited to join: <%= invitation.group.name.capitalize %>!</h6>
@@ -15,3 +15,51 @@
     <%= link_to "Decline", event_user_path(invitation), method: :delete, class: "btn btn-danger" %>
   <% end %>
 <% end %>
+-->
+
+<div class="container">
+  <div class="row pt-5 d-flex justify-content-center">
+    <table class="table" style="width: 600px;">
+      <thead>
+        <tr>
+          <th scope="col">Your Group Invitations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @invitations.size > 0 %>
+          <% @invitations.reverse.each do |invitation| %>
+            <tr>
+              <td>
+                <strong><%= invitation.group.user.first_name %></strong> has invited you to join: <strong><%= invitation.group.name.capitalize %></strong>
+                <%= link_to "Accept", accept_group_usergroup_path(invitation.group_id, invitation), method: :put, class: "btn btn-primary btn-sm" %>
+                <%= link_to "Decline", group_usergroup_path(invitation.group_id, invitation), method: :delete, class: "btn btn-primary btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row pt-5 d-flex justify-content-center">
+    <table class="table" style="width: 600px">
+      <thead>
+        <tr>
+          <th scope="col">Your Event Invitations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @eventinvitations.size > 0 %>
+          <% @eventinvitations.reverse.each do |invitation| %>
+            <tr>
+              <td>
+                <strong><%= invitation.event.group.user.first_name %></strong> has invited you to join: <strong><%= invitation.event.name.capitalize %></strong>
+                <%= link_to "Accept", accept_event_user_path(invitation), method: :put, class: "btn btn-primary btn-sm" %>
+                <%= link_to "Decline", event_user_path(invitation), method: :delete, class: "btn btn-primary btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

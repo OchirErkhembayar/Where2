@@ -1,6 +1,7 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: #FFFAD5;
+  z-index: 1;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -15,4 +16,10 @@
 .nav-title{
   font-family: 'Josefin Sans', sans-serif;
   font-weight: lighter;
+}
+
+
+.nav-link {
+    font-family: Raleway, Helvetica, sans-serif;
+    color: black;
 }

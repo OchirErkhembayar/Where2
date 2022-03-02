@@ -2,6 +2,9 @@ class UsergroupsController < ApplicationController
   def index
     @invitations = UserGroup.where('user_id = ? AND status = ?', current_user.id, false)
     @eventinvitations = EventUser.where('user_id = ? AND status = ?', current_user.id, false)
+    if @eventinvitations.length.positive?
+      @eventinvitations = @eventinvitations.reject { |ei| ei.event.end_date <= Date.today }
+    end
   end
 
   def new
@@ -25,7 +28,7 @@ class UsergroupsController < ApplicationController
     @usergroup = UserGroup.find(params[:id])
     @usergroup.status = true
     if @usergroup.save
-      redirect_to "/groups"
+      redirect_to "/groups/#{@usergroup.group.id}"
     else
       render :index
     end
