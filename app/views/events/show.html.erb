@@ -4,7 +4,7 @@
 <h1>Name: <%= @event.name %></h1>
 <h2>Location: <%= @event.location %></h2>
 <h3>Description: <%= @event.description %></h3>
-<p class="mx-3">Admin: <%= @group.user == current_user ? "You" : @group.user.first_name %></p>
+<p class="mx-3">Admin: <%= @group.user.first_name %></p>
 <h4>Group Attendees: </h4>
 <div class="mx-3">
   <% @users.each do |user| %>
@@ -18,3 +18,28 @@
   <% end %>
 </div>
 <%= link_to "Add user", new_group_event_event_user_path(@event.group, @event), class: "btn btn-danger" %>
+</div>
+
+<div class="messages">
+  <% @event.messages.each do |message| %>
+    <%= message.messages.content %>>
+        <small>
+          <strong><%= message.user.email %></strong>
+          <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+        </small>
+        <p><%= message.content %></p>
+      </div>
+  <% end %>
+</div>
+
+<%= simple_form_for [@group, @event, @message],
+  remote: true,
+  html: {class: "d-flex"} do |f|
+%>
+  <%= f.input :content,
+    label: false,
+    placeholder: "Message ##{@event.name}",
+    wrapper_html: {class: "flex-grow-1"}
+  %>
+  <%= f.submit "Send", class: "btn btn-primary" %>
+<% end %>
