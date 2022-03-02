@@ -1,4 +1,10 @@
-<h3>Events you're attending!</h3>
-<% @event_users.each do |eventuser| %>
-  <p><%= link_to eventuser.event.name, group_event_path(eventuser.event.id, eventuser.event.group.id), class: "btn btn-danger" %></p>
-<% end %>
+<div class="container">
+  <h3 class="pb-2">Events you were invited to!</h3>
+  <% @event_users.each do |eventuser| %>
+    <p><%= link_to eventuser.event.name, group_event_path(eventuser.event.id, eventuser.event.group.id), class: "btn btn-danger" %></p>
+  <% end %>
+  <h3 class="py-2">Your group events!</h3>
+  <% @events.each do |event| %>
+    <p><%= link_to event.name, group_event_path(event, event.group.id), class: "btn btn-danger" %></p>
+  <% end %>
+</div>
