@@ -1,6 +1,18 @@
 class EventUsersController < ApplicationController
   def index
     @event_users = EventUser.where('user_id = ? AND status = ?', current_user.id, true)
+    @myusergroups = UserGroup.where('user_id = ? AND status = ?', current_user.id, true)
+    @groups = []
+    @myusergroups.each do |ug|
+      @groups << Group.find(ug.group_id)
+    end
+    @events = []
+    @groups.each do |ug|
+      Event.where('group_id = ?', ug.id).each do |event|
+        @events << event
+      end
+    end
+    @events.reject! { |event| event.end_date <= Date.today }.sort_by! { |event| event.end_date }
   end
 
   def new
@@ -26,7 +38,7 @@ class EventUsersController < ApplicationController
     @eventuser = EventUser.find(params[:id])
     @eventuser.status = true
     if @eventuser.save
-      redirect_to "/groups"
+      redirect_to "/groups/#{@eventuser.event.id}/events/#{@eventuser.event.group.id}"
     else
       render :index
     end

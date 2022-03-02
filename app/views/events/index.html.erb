@@ -1,10 +1,7 @@
 
-
-
-
 <div class="container my-5">
   <div class="d-flex justify-content-center">
-    <h1>My Groups</h1>
+    <h1>Past Events</h1>
   </div>
   <table class="table my-3 table-striped table-hover table-sm">
     <thead class="thead-dark">
@@ -14,15 +11,12 @@
       </tr>
     </thead>
     <tbody>
-      <% @usergroups.reverse.each do |group| %>
+      <% @events.each do |event| %>
         <tr>
-          <td><h3><%= link_to group.group.name, group_path(group.group)%></h3></td>
-          <td><h3><%= group.group.user.first_name.capitalize %></h3></td>
+          <td><h3><%= link_to event.name, group_event_path(event, event.group)%> ended: <%= event.end_date %></h3></td>
+          <td><h3><%= event.group.user.first_name.capitalize %></h3></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <div class="d-flex justify-content-center">
-    <%= link_to "Create a new group", new_group_path, class: "btn btn-primary" %>
-  </div>
 </div>

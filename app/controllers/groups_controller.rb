@@ -6,10 +6,11 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @usergroups = UserGroup.where('group_id = ? AND status = ?', @group.id, true)
+    @pendingusers = UserGroup.where('group_id = ? AND status = ?', @group.id, false)
     @users = @usergroups.map do |ug|
       ug.user
     end
-    @events = Event.where('group_id = ?', @group.id)
+    @events = Event.where('group_id = ?', @group.id).reject { |event| event.end_date <= Date.today }
   end
 
   def new
@@ -25,19 +26,30 @@ class GroupsController < ApplicationController
     if @group.save
       @usergroup.group = @group
       @usergroup.save!
-      redirect_to '/groups'
+      redirect_to "/groups/#{@group.id}"
     else
       render :new
     end
   end
 
   def edit
+    @group = Group.find(params[:id])
   end
 
   def update
+    @group = Group.find(params[:id])
+    @group.update(set_group)
+    if @group.save
+      redirect_to "/groups/#{@group.id}"
+    else
+      render :edit
+    end
   end
 
   def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
+    redirect_to "/groups"
   end
 
   private
