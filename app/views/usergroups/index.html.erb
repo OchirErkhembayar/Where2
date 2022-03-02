@@ -52,9 +52,9 @@
           <% @eventinvitations.reverse.each do |invitation| %>
             <tr>
               <td>
-                <strong><%= invitation.group.user.first_name %></strong> has invited you to join: <strong><%= invitation.group.name.capitalize %></strong>
-                <%= link_to "Accept", accept_event_user_path(invitation.group_id, invitation), method: :put, class: "btn btn-primary btn-sm" %>
-                <%= link_to "Decline", event_user_path(invitation.group_id, invitation), method: :delete, class: "btn btn-primary btn-sm" %>
+                <strong><%= invitation.event.group.user.first_name %></strong> has invited you to join: <strong><%= invitation.event.name.capitalize %></strong>
+                <%= link_to "Accept", accept_event_user_path(invitation), method: :put, class: "btn btn-primary btn-sm" %>
+                <%= link_to "Decline", event_user_path(invitation), method: :delete, class: "btn btn-primary btn-sm" %>
               </td>
             </tr>
           <% end %>
