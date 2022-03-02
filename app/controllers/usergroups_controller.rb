@@ -25,7 +25,7 @@ class UsergroupsController < ApplicationController
     @usergroup = UserGroup.find(params[:id])
     @usergroup.status = true
     if @usergroup.save
-      redirect_to "/groups"
+      redirect_to "/groups/#{@usergroup.group.id}"
     else
       render :index
     end
