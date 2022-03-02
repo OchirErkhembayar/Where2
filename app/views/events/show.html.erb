@@ -22,12 +22,12 @@
 
 <div class="messages">
   <% @event.messages.content each do |message| %>
-
+    <%= message.content %>>
         <small>
           <strong><%= message.user.email %></strong>
           <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
         </small>
         <p><%= message.content %></p>
       </div>
-    <% end %>
+  <% end %>
 </div>
