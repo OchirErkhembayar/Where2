@@ -18,11 +18,9 @@
   <% end %>
 </div>
 <%= link_to "Add user", new_group_event_event_user_path(@event.group, @event), class: "btn btn-danger" %>
-<<<<<<< HEAD
-
 
 <div class="container chatroom">
-  <h1>#<%= @event.name %></h1>
+  <h1><%= @event.name %></h1>
 
   <div class="messages">
     <% @event.messages.each do |message| %>
@@ -37,6 +35,18 @@
   </div>
 </div>
 
+<%= simple_form_for [@group, @event, @message],
+  remote: true,
+  html: {class: "d-flex"} do |f|
+%>
+  <%= f.input :content,
+    label: false,
+    placeholder: "Message ##{@event.name}",
+    wrapper_html: {class: "flex-grow-1"}
+  %>
+  <%= f.submit "Send", class: "btn btn-primary" %>
+<% end %>
+
 <div class="row">
   <div class="col">
     <table class="table">
@@ -50,5 +60,3 @@
   </div>
 
 </div>
-=======
->>>>>>> bb94e6642fbf431bf41f99af0951b1569fa3e106
