@@ -23,9 +23,9 @@ body, html {
 	-moz-osx-font-smoothing: grayscale;
 	justify-content: center;
 	align-items: center;
-  position: fixed;
-  margin: 10% ;
-  padding: 132px 450px;
+  // position: fixed;
+  margin: 8% ;
+  // padding: 132px 450px;
 }
 
 .button-landing-sign {
@@ -79,4 +79,5 @@ body, html {
   font-family: Raleway, Helvetica, sans-serif;
   margin-bottom: 120px;
   text-align: center;
+  padding: 0 150px;
 }
