@@ -20,6 +20,22 @@
 <%= link_to "Add user", new_group_event_event_user_path(@event.group, @event), class: "btn btn-danger" %>
 
 
+<div class="container chatroom">
+  <h1>#<%= @event.name %></h1>
+
+  <div class="messages">
+    <% @event.messages.each do |message| %>
+      <div id="message-<%= message.id %>">
+        <small>
+          <strong><%= message.user.nickname %></strong>
+          <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+        </small>
+        <p><%= message.content %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <div class="row">
   <div class="col">
     <table class="table">
