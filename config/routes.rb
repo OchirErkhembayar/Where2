@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :groups do
     resources :events, only: %i[index show new create] do
-      resources :event_users, only: %i[index create new]
+      resources :event_users, only: %i[create new]
     end
     resources :usergroups, only: %i[new create destroy] do
       member do
@@ -13,4 +13,9 @@ Rails.application.routes.draw do
     end
   end
   resources :usergroups, only: %i[index]
+  resources :event_users, only: %i[index destroy] do
+    member do
+      put :accept
+    end
+  end
 end
