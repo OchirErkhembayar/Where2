@@ -1,10 +1,80 @@
-<%= link_to "all groups", groups_path, class: "btn btn-danger" %>
-<h1>Admin: <%= @group.user.first_name %></h1>
-<% @users.each do |user| %>
-  <h3><%= user.first_name %></h3>
-<% end %>
-<% @events.each do |event| %>
-  <h3><%= link_to event.name, group_event_path(event), class: "btn btn-danger" %></h3>
-<% end %>
-<%= link_to "add group members", new_group_usergroup_path(@group), class: "btn btn-danger" %>
-<%= link_to "create new group event", new_group_event_path(@group), class: "btn btn-danger" %>
+<!-- <div class="container pt-3">
+  <%= link_to "all groups", groups_path, class: "btn btn-danger" %>
+  <h1><%= @group.name %></h1>
+  <br>
+  <h3>Admin: <%= @group.user.first_name %></h3>
+  <br>
+  <h3>Group Members</h3>
+  <% @users.each do |user| %>
+    <h4><%= user.first_name %></h4>
+  <% end %>
+  <% @events.each do |event| %>
+    <h3><%= link_to event.name, group_event_path(event), class: "btn btn-danger" %></h3>
+  <% end %>
+  <%= link_to "Add group members", new_group_usergroup_path(@group), class: "btn btn-danger" %>
+  <%= link_to "Create new group event", new_group_event_path(@group), class: "btn btn-danger" %>
+  <% if @group.user == current_user %>
+    <%= link_to "Edit group name", edit_group_path(@group), class: "btn btn-danger" %>
+    <%= link_to "Destroy Group", group_path(@group), method: :delete, class: "btn btn-danger" %>
+  <% end %>
+</div>
+-->
+<div class="container">
+  <div class="row">
+    <div class="col-sm d-flex justify-content-center">
+      <table class="table my-3 table-striped table-hover table-sm">
+        <thead>
+          <tr>
+            <th scope="col"><%=@group.name%></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <% @pendingusers.each do |user| %>
+              <tr>
+                <td><h4><%= user.user.first_name %>  Status: Pending</h4></td>
+              </tr>
+            <% end %>
+            <tr>
+              <td><h4><%= user.first_name %></h4></td>
+            </tr>
+          <% end %>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg align-center">
+      <div class="row">
+        <h2>Group Events</h2>
+      </div>
+      <div class="row">
+        <% @events.each do |event| %>
+          <div class="card my-2" style="height: 400px;">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" style="height: 270px;"/>
+            <div class="d-flex justify-content-center align-items-end">
+              <h3><%= link_to event.name, group_event_path(event), class: "btn btn-danger" %></h3>
+            </div>
+          </div>
+        <% end %>
+      </div>
+   </div>
+  <div class="row">
+    <div class="col">
+      <%= link_to "Add group members", new_group_usergroup_path(@group), class: "btn btn-primary width: 100" %>
+    </div>
+
+    <% if @group.user == current_user %>
+    <div class="col">
+      <%= link_to "Edit group name", edit_group_path(@group), class: "btn btn-primary" %>
+    </div>
+    <div class="col">
+       <%= link_to "Delete Group", group_path(@group), method: :delete, class: "btn btn-primary" %>
+    </div>
+    <div class="col">
+      <%= link_to "Create new group event", new_group_event_path(@group), class: "btn btn-primary" %>
+    </div>
+
+
+  <% end %>
+  </div>
+</div>
