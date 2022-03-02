@@ -1,4 +1,4 @@
-<% if @memberids.include? current_user.id %>
+<!-- <% if @memberids.include? current_user.id %>
   <%= link_to "back to group", group_path(@event.group), class: "btn btn-danger" %>
 <% end %>
 <h1>Name: <%= @event.name %></h1>
@@ -19,17 +19,45 @@
 </div>
 <%= link_to "Add user", new_group_event_event_user_path(@event.group, @event), class: "btn btn-danger" %>
 
+-->
+<div class="container">
+  <div class="col-3">
+    <div class="row">
+      <table class="group-table">
+        <thead>
+          <tr>
+            <th scope="col"><h1><%= @group.name %></h1></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><p><%= user == current_user ? "You" : user.first_name %></p></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-<div class="row">
-  <div class="col">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>@group.name</th>
-        </tr>
-      </thead>
+    </div>
 
-    </table>
+     <div class="row">
+      <table class="group-table">
+        <thead>
+          <tr>
+            <th scope="col"><h1>Other invitees</h1></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @eventusers.each do |user| %>
+            <tr>
+              <td><p><%= user.user == current_user ? "You" : user.user.first_name %></p></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+
   </div>
 
 </div>
