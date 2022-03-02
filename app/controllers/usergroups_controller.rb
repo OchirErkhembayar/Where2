@@ -2,6 +2,9 @@ class UsergroupsController < ApplicationController
   def index
     @invitations = UserGroup.where('user_id = ? AND status = ?', current_user.id, false)
     @eventinvitations = EventUser.where('user_id = ? AND status = ?', current_user.id, false)
+    if @eventinvitations.length.positive?
+      @eventinvitations = @eventinvitations.reject { |ei| ei.event.end_date <= Date.today }
+    end
   end
 
   def new
