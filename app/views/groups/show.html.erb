@@ -22,21 +22,21 @@
 <div class="container">
   <div class="row">
     <div class="col-sm pt-3">
-      <table class="table my-3 table-striped table-hover table-sm">
+      <table class="group-table my-3 table-striped table-hover table-sm">
         <thead>
           <tr>
             <th scope="col">
               <%=@group.name%>
               <%= link_to edit_group_path(@group) do  %>
-                <img src="https://www.seekpng.com/png/full/202-2022672_edit-comments-edit-icon-png-circle.png" class="icon" alt="">
+                <img src="https://www.seekpng.com/png/full/202-2022672_edit-comments-edit-icon-png-circle.png" class="group-icon" alt="">
               <% end %>
               <%= link_to group_path(@group), method: :delete do  %>
-                <img src="https://www.seekpng.com/png/full/202-2022743_edit-delete-icon-png-download-delete-icon-png.png" class="icon" alt="">
+                <img src="https://www.seekpng.com/png/full/202-2022743_edit-delete-icon-png-download-delete-icon-png.png" class="group-icon" alt="">
               <% end %>
             </th>
             <th scope="col">
               <%= link_to new_group_usergroup_path(@group) do  %>
-                <img src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/button_add-1024.png" class="icon" alt="" style="float:right">
+                <img src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/button_add-1024.png" class="group-icon" alt="" style="float:right">
               <% end %>
             </th>
           </tr>
@@ -62,7 +62,7 @@
         <h2>
           Group Events
           <%= link_to new_group_event_path(@group) do  %>
-            <img src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/button_add-1024.png" class="icon" alt="">
+            <img src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/button_add-1024.png" class="group-icon" alt="">
           <% end %>
         </h2>
       </div>
