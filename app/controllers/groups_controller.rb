@@ -10,7 +10,7 @@ class GroupsController < ApplicationController
     @users = @usergroups.map do |ug|
       ug.user
     end
-    @events = Event.where('group_id = ?', @group.id)
+    @events = Event.where('group_id = ?', @group.id).reject { |event| event.end_date <= Date.today }
   end
 
   def new
