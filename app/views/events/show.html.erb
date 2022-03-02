@@ -8,13 +8,13 @@
 <h4>Group Attendees: </h4>
 <div class="mx-3">
   <% @users.each do |user| %>
-    <p><%= user.first_name %></p>
+    <p><%= user == current_user ? "You" : user.first_name %></p>
   <% end %>
 </div>
 <h4>Invited Attendees:</h4>
 <div class="mx-3">
   <% @eventusers.each do |user| %>
-    <p><%= user.user.first_name.capitalize %></p>
+    <p><%= user.user == current_user ? "You" : user.user.first_name.capitalize %></p>
   <% end %>
 </div>
 <%= link_to "Add user", new_group_event_event_user_path(@event.group, @event), class: "btn btn-danger" %>
