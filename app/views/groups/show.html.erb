@@ -30,6 +30,11 @@
         </thead>
         <tbody>
           <% @users.each do |user| %>
+            <% @pendingusers.each do |user| %>
+              <tr>
+                <td><h4><%= user.user.first_name %>  Status: Pending</h4></td>
+              </tr>
+            <% end %>
             <tr>
               <td><h4><%= user.first_name %></h4></td>
             </tr>
@@ -44,8 +49,11 @@
       </div>
       <div class="row">
         <% @events.each do |event| %>
-          <div class="card">
-            <h3><%= link_to event.name, group_event_path(event), class: "btn btn-danger" %></h3>
+          <div class="card my-2" style="height: 400px;">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" style="height: 270px;"/>
+            <div class="d-flex justify-content-center align-items-end">
+              <h3><%= link_to event.name, group_event_path(event), class: "btn btn-danger" %></h3>
+            </div>
           </div>
         <% end %>
       </div>
