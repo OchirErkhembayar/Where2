@@ -10,7 +10,7 @@ class EventsController < ApplicationController
     @users = @usergroups.map do |ug|
       ug.user
     end
-    @eventusers = EventUser.where('event_id = ?', @event.id)
+    @eventusers = EventUser.where('event_id = ? AND status = ?', @event.id, true)
     @eventusers.each { |eu| @users << eu.user }
   end
 
