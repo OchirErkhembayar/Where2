@@ -1,6 +1,6 @@
 class EventUsersController < ApplicationController
   def index
-    @event_users = EventUser.all
+    @event_users = EventUser.where('event_id = ?', current_event.id)
   end
 
   def new
