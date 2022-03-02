@@ -12,7 +12,10 @@ class EventUsersController < ApplicationController
         @events << event
       end
     end
-    @events.reject! { |event| event.end_date <= Date.today }.sort_by! { |event| event.end_date }
+    if @events.length > 0
+      @events.reject! { |event| event.end_date <= Date.today }
+      @events.sort_by! { |event| event.end_date } if @events.length > 0
+    end
   end
 
   def new
