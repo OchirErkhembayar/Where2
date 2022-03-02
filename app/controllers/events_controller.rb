@@ -10,6 +10,7 @@ class EventsController < ApplicationController
     @users = @usergroups.map do |ug|
       ug.user
     end
+    @memberids = @users.map { |user| user.id }
     @eventusers = EventUser.where('event_id = ? AND status = ?', @event.id, true)
   end
 

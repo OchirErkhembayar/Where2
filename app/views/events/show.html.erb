@@ -1,4 +1,6 @@
-<%= link_to "back to group", group_path(@event.group), class: "btn btn-danger" %>
+<% if @memberids.include? current_user.id %>
+  <%= link_to "back to group", group_path(@event.group), class: "btn btn-danger" %>
+<% end %>
 <h1>Name: <%= @event.name %></h1>
 <h2>Location: <%= @event.location %></h2>
 <h3>Description: <%= @event.description %></h3>
