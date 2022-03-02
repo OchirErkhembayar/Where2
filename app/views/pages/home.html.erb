@@ -3,15 +3,17 @@
     <%= link_to "groups", groups_path, class: "btn btn-danger" %>
     <%= link_to "events", event_users_path, class: "btn btn-danger" %>
     <%= link_to "invitations", usergroups_path(current_user), class: "btn btn-danger" %>
-  <% end %>
-<div class="frame">
-  <p  class="landing-page-text">At Where2, we have created a new and fun way for you and your friends to connect and organise events. Are you tired of having not having one place where you can organise all your events with your friends, well now you can.  With Where2 you can now organise, plan and search for events in your local area. Planning has never been easier !</p>
-	<div class="button-landing-sign">
-		<span>Sign Up!</span>
-		<svg>
-		<polyline class="o1" points="0 0, 150 0, 150 55, 0 55, 0 0"></polyline>
-		<polyline class="o2" points="0 0, 150 0, 150 55, 0 55, 0 0"></polyline>
-	</svg>
-	</div>
+  <% else %>
+    <div class="frame">
+      <p  class="landing-page-text">At Where2, we have created a new and fun way for you and your friends to connect and organise events. Are you tired of having not having one place where you can organise all your events with your friends, well now you can.  With Where2 you can now organise, plan and search for events in your local area. Planning has never been easier !</p>
+      <div class="button-landing-sign">
+        <span>Sign Up!</span>
+        <svg>
+        <polyline class="o1" points="0 0, 150 0, 150 55, 0 55, 0 0"></polyline>
+        <polyline class="o2" points="0 0, 150 0, 150 55, 0 55, 0 0"></polyline>
+      </svg>
+      </div>
 
-</div>
+    </div>
+
+  <% end %>
