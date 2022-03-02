@@ -37,7 +37,7 @@ class EventUsersController < ApplicationController
     @eventuser = EventUser.find(params[:id])
     @eventuser.status = true
     if @eventuser.save
-      redirect_to "/groups"
+      redirect_to "/groups/#{@eventuser.event.id}/events/#{@eventuser.event.group.id}"
     else
       render :index
     end

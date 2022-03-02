@@ -11,7 +11,6 @@ class EventsController < ApplicationController
       ug.user
     end
     @eventusers = EventUser.where('event_id = ? AND status = ?', @event.id, true)
-    @eventusers.each { |eu| @users << eu.user }
   end
 
   def new
