@@ -4,11 +4,13 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :groups do
     resources :events, only: %i[show new create] do
+      resources :messages, only: %i[create]
       resources :event_users, only: %i[create new]
     end
     resources :usergroups, only: %i[new create destroy] do
       member do
         put :accept
+        delete :kick
       end
     end
   end
@@ -20,7 +22,7 @@ Rails.application.routes.draw do
     end
   end
   resources :users, only: %i[show] do
-    resources :friendships, only: %i[show new create destroy] do
+    resources :friendships, only: %i[create destroy] do
       member do
         put :accept
       end

@@ -2,19 +2,31 @@
   <h3>Your friend requests</h3>
   <% @friendship_requests.each do |friendship| %>
     <p><%= User.find(friendship.friend_one_id).first_name.capitalize %> has sent you a friend request!</p>
-    <%= link_to "Accept", accept_user_friendship_path(current_user.id, friendship.id), method: :put, class: "btn btn-danger" %>
+    <%= link_to "Accept", accept_user_friendship_path(current_user, friendship), method: :put, class: "btn btn-danger" %>
     <%= link_to "Decline", user_friendship_path(current_user, friendship), method: :delete, class: "btn btn-danger" %>
   <% end %>
 </div>
 <div class="container">
   <h3>Your friends</h3>
-  <% @two_is_friends.each do |f| %>
-    <p><%= User.find(f.friend_two_id).first_name %></p>
-    <%= link_to "Delete friend", user_friendship_path(current_user, f), method: :delete, class: "btn btn-danger" %>
+  <% if @two_is_friends %>
+    <% @two_is_friends.each do |f| %>
+      <p><%= User.find(f.friend_two_id).first_name %></p>
+      <%= link_to "Delete friend", user_friendship_path(current_user, f), method: :delete, class: "btn btn-danger" %>
+    <% end %>
   <% end %>
-  <% @one_is_friends.each do |f| %>
-    <p><%= User.find(f.friend_one_id).first_name %></p>
-    <%= link_to "Delete friend", user_friendship_path(current_user, f), method: :delete, class: "btn btn-danger" %>
+  <% if @one_is_friends %>
+    <% @one_is_friends.each do |f| %>
+      <p><%= User.find(f.friend_one_id).first_name %></p>
+      <%= link_to "Delete friend", user_friendship_path(current_user, f), method: :delete, class: "btn btn-danger" %>
+    <% end %>
+  <% end %>
+  <% if @friendships_pending %>
+    <% @friendships_pending.each do |f| %>
+      <% if User.find(f.friend_one_id) == current_user %>
+        <p><%= User.find(f.friend_two_id).first_name %> (pending)</p>
+         <%= link_to "cancel", user_friendship_path(current_user, f), method: :delete, class: "btn btn-danger" %>
+      <% end %>
+    <% end %>
   <% end %>
 </div>
 <div class="container">

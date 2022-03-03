@@ -19,6 +19,7 @@
   <% end %>
 </div>
 -->
+<<<<<<< HEAD
 
 
 <div class="container" data-controller="open-form">
@@ -46,6 +47,13 @@
         </div>
       </div>
     </div>
+=======
+<div class="container">
+<% if current_user != @group.user %>
+  <%= link_to "Leave Group", group_usergroup_path(@group, current_user), method: :delete, class: "btn btn-danger" %>
+<% end %>
+<%= link_to "all groups", groups_path, class: "btn btn-danger" %>
+>>>>>>> c736049c092db5e544384bb0d938ba312caaa4be
   <div class="row">
     <div class="col-sm pt-3">
       <table class="table group-table my-3 table-striped table-hover table-sm">
@@ -74,7 +82,14 @@
             <tr>
               <td><h4>
                 <%= user == current_user ? "You" : user.first_name %>
-                <%= link_to "Add friend", user_friendships_path(user), method: :post, class: "btn btn-danger" %>
+                <% if user != current_user %>
+                  <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
+                    <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-danger" %>
+                  <% end %>
+                  <% if current_user == @group.user %>
+                    <%= link_to "Kick", kick_group_usergroup_path(@group, user), method: :delete, class: "btn btn-danger mb-3" %>
+                  <% end %>
+                <% end %>
               </h4></td>
             </tr>
           <% end %>

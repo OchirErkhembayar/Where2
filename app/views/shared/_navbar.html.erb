@@ -12,19 +12,31 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <p class="nav-link"      >Hello, <%= current_user.first_name.capitalize %></p>
+            <p class="nav-link">Hello, <%= current_user.first_name.capitalize %></p>
           </li>
           <li class="nav-item active">
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
+            <% if @notification_count %>
+              <% if @notification_count > 0 %>
+                <%= link_to "#{@notification_count} invitation#{@notification_count == 1 ? "" : "s"}", usergroups_path(current_user), class: "nav-link" %>
+              <% end %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <% if @friend_count %>
+              <% if @friend_count > 0 %>
+                <%= link_to "#{@friend_count} friend request#{@friend_count == 1 ? "" : "s"}", friendships_path, class: "nav-link" %>
+              <% end %>
+            <% end %>
           </li>
           <li class="nav-item dropdown">
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <%= link_to "Events", event_users_path, class: "dropdown-item" %>
+              <%= link_to "Groups", groups_path, class: "dropdown-item" %>
+              <%= link_to "Friends", friendships_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>
           </li>
