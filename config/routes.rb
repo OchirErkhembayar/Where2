@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :groups do
-    resources :events, only: %i[show new create] do
+    resources :events, only: %i[show new create update] do
       resources :messages, only: %i[create]
       resources :event_users, only: %i[create new]
     end

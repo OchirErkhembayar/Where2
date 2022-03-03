@@ -57,3 +57,12 @@
     </div>
   </div>
 </div>
+
+<%= simple_form_for([@event.group, @event]) do |f| %>
+  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+  <%= f.submit "Add photos", class: "btn btn-primary mb-3 w-100" %>
+<% end %>
+
+<% @event.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
