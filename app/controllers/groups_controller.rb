@@ -11,6 +11,8 @@ class GroupsController < ApplicationController
       ug.user
     end
     @events = Event.where('group_id = ?', @group.id).reject { |event| event.end_date <= Date.today }
+    @usergroup = UserGroup.new
+    @event = Event.new
   end
 
   def new
