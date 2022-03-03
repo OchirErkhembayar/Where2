@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
   <h3 class="pb-2">Events you were invited to!</h3>
   <% @event_users.each do |eventuser| %>
     <p><%= link_to eventuser.event.name, group_event_path(eventuser.event.id, eventuser.event.group.id), class: "btn btn-danger" %></p>
@@ -7,4 +7,43 @@
   <% @events.each do |event| %>
     <p><%= link_to event.name, group_event_path(event, event.group.id), class: "btn btn-danger" %></p>
   <% end %>
+</div>
+-->
+
+<div class="container my-5">
+  <div class="d-flex justify-content-center">
+    <table class="table my-3 table-striped table-hover table-sm" style="width: 600px;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"> My Group Events</th>
+        <th scope="col">Invited By</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @events.each do |event| %>
+        <tr>
+          <td><p><%= link_to event.name, group_event_path(event, event.group.id)%></p></td>
+          <td><p><%= link_to  %> </p></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+  <div class="d-flex justify-content-center">
+    <table class="table my-3 table-striped table-hover table-sm" style="width: 600px;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Other Events</th>
+        <th scope="col">Invited By</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @event_users.each do |eventuser| %>
+        <tr>
+          <td><p><%= link_to eventuser.event.name, group_event_path(eventuser.event.id, eventuser.event.group.id)%></p></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
 </div>
