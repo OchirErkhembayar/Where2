@@ -55,7 +55,7 @@
                     <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-danger" %>
                   <% end %>
                   <% if current_user == @group.user %>
-                    <%= link_to "Kick", group_usergroup_path(user), method: :delete, class: "btn btn-danger mb-3" %>
+                    <%= link_to "Kick", kick_group_usergroup_path(@group, user), method: :delete, class: "btn btn-danger mb-3" %>
                   <% end %>
                 <% end %>
               </h4></td>

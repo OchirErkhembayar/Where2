@@ -35,24 +35,19 @@ class UsergroupsController < ApplicationController
   end
 
   def destroy
-    raise
-    if params[:group_id]
-      @usergroup = UserGroup.where('user_id = ? AND group_id = ?', current_user.id, params[:group_id])
-      @usergroup.first.destroy
-      if @usergroup.first.status == false
-        redirect_to "/usergroups"
-      else
-        redirect_to "/groups"
-      end
+    @usergroup = UserGroup.where('user_id = ? AND group_id = ?', current_user.id, params[:group_id])
+    @usergroup.first.destroy
+    if @usergroup.first.status == false
+      redirect_to "/usergroups"
     else
-      @usergroup = UserGroup.find(params[:id])
-      @usergroup.destroy
-      if @usergroup.status == false
-        redirect_to "/usergroups"
-      else
-        redirect_to "/groups"
-      end
+      redirect_to "/groups"
     end
+  end
+
+  def kick
+    @usergroup = UserGroup.where('user_id = ? AND group_id = ?', params[:id], params[:group_id]).first
+    @usergroup.destroy
+    redirect_to "/groups/#{@usergroup.group_id}"
   end
 
   private

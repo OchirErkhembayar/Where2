@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :usergroups, only: %i[new create destroy] do
       member do
         put :accept
+        delete :kick
       end
     end
   end
