@@ -41,7 +41,7 @@
       <% @event_users.each do |eventuser| %>
         <tr>
           <td><p><%= link_to eventuser.event.name, group_event_path(eventuser.event.id, eventuser.event.group.id)%></p></td>
-          <td><p><%= event_user.event.group.user.first_name.capitalize %></p></td>
+          <td><p><%= eventuser.event.group.user.first_name.capitalize %></p></td>
         </tr>
       <% end %>
     </tbody>

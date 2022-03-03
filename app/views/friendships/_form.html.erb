@@ -1,0 +1,8 @@
+<div class="container">
+  <%= simple_form_for([current_user, @friendship]) do |f| %>
+  <div class="form-group mb-3 mx-5 px-5">
+      <%= f.association :user, label_method: :first_name, class: "form-control", placeholder: "Group name" %>
+    <%= f.submit "Send friend request", class: "btn btn-primary mb-3 w-100" %>
+  </div>
+  <% end %>
+</div>

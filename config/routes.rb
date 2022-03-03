@@ -19,4 +19,12 @@ Rails.application.routes.draw do
       put :accept
     end
   end
+  resources :users, only: %i[show] do
+    resources :friendships, only: %i[show new create destroy] do
+      member do
+        put :accept
+      end
+    end
+  end
+  resources :friendships, only: %i[index]
 end
