@@ -58,7 +58,7 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    @event.update(set_event)
+    @event.photos.attach(params[:event][:photos])
     @event.save
     redirect_to "/groups/#{@event.id}/events/#{@event.group.id}"
   end
