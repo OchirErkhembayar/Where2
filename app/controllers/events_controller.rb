@@ -56,6 +56,13 @@ class EventsController < ApplicationController
     end
   end
 
+  def update
+    @event = Event.find(params[:id])
+    @event.update(set_event)
+    @event.save
+    redirect_to "/groups/#{@event.id}/events/#{@event.group.id}"
+  end
+
   def destroy
     @event = Event.find(params[:event])
     @event.destroy
@@ -69,6 +76,6 @@ class EventsController < ApplicationController
   private
 
   def set_event
-    params.require(:event).permit(:name, :location, :description, :start_date, :end_date)
+    params.require(:event).permit(:name, :location, :description, :start_date, :end_date, photos: [])
   end
 end
