@@ -1,3 +1,5 @@
+<div class="container">
+<%= link_to "back to group", group_path(@event.group), class: "btn btn-danger" %>
 <% if @memberids.include? current_user.id %>
   <%= link_to "back to group", group_path(@event.group), class: "btn btn-danger" %>
 <% end %>
@@ -18,3 +20,39 @@
   <% end %>
 </div>
 <%= link_to "Add user", new_group_event_event_user_path(@event.group, @event), class: "btn btn-danger" %>
+
+<div class="container chatroom" data_controller="chatroom-subscription" data-chatroom-subscription-chatroom-id-value="<%= @event.id %>">
+  <h1><%= @event.name %></h1>
+
+  <div class="messages" data-chatroom-subscription-target="messages">
+    <% @event.messages.each do |message| %>
+      <%= render "messages/message", message: message %>
+    <% end %>
+  </div>
+</div>
+
+<%= simple_form_for [@group, @event, @message], remote: true,
+  html: {data: {event_subscription_target: "form"}, class: "d-flex"}  do |f|
+%>
+  <%= f.input :content,
+    label: false,
+    placeholder: "Message ##{@event.name}",
+    wrapper_html: {class: "flex-grow-1"}
+  %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <%= f.submit "Send", class: "btn btn-primary" %>
+<% end %>
+
+<div class="row">
+  <div class="col">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>@group.name</th>
+        </tr>
+      </thead>
+
+    </table>
+  </div>
+
+</div>
