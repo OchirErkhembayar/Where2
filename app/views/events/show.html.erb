@@ -86,7 +86,7 @@
           <span class="visually-hidden">Next</span>
         </button>
         <%= simple_form_for([@event.group, @event], remote: true) do |f| %>
-          <div class="form-group mb-3 pe-5">
+          <div class="form-group mt-4">
             <%= f.input :photos, as: :file, input_html: { multiple: true } %>
             <%= f.submit "Add photos", class: "btn btn-warning mb-3 w-100" %>
           </div>
