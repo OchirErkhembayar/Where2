@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
   end
   resources :users, only: %i[show] do
-    resources :friendships, only: %i[show new create destroy] do
+    resources :friendships, only: %i[show create destroy] do
       member do
         put :accept
       end
