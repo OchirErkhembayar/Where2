@@ -8,13 +8,17 @@
 </div>
 <div class="container">
   <h3>Your friends</h3>
-  <% @two_is_friends.each do |f| %>
-    <p><%= User.find(f.friend_two_id).first_name %></p>
-    <%= link_to "Delete friend", user_friendship_path(current_user, f), method: :delete, class: "btn btn-danger" %>
+  <% if @two_is_friends %>
+    <% @two_is_friends.each do |f| %>
+      <p><%= User.find(f.friend_two_id).first_name %></p>
+      <%= link_to "Delete friend", user_friendship_path(current_user, f), method: :delete, class: "btn btn-danger" %>
+    <% end %>
   <% end %>
-  <% @one_is_friends.each do |f| %>
-    <p><%= User.find(f.friend_one_id).first_name %></p>
-    <%= link_to "Delete friend", user_friendship_path(current_user, f), method: :delete, class: "btn btn-danger" %>
+  <% if @one_is_friends %>
+    <% @one_is_friends.each do |f| %>
+      <p><%= User.find(f.friend_one_id).first_name %></p>
+      <%= link_to "Delete friend", user_friendship_path(current_user, f), method: :delete, class: "btn btn-danger" %>
+    <% end %>
   <% end %>
 </div>
 <div class="container">

@@ -5,8 +5,10 @@ class FriendshipsController < ApplicationController
     if @friendships_notaccepted.length.positive?
       @friendships = @friendships_notaccepted.select { |fs| fs.confirmed == true }
     end
-    @two_is_friends = @friendships.select { |f| f.friend_one_id == current_user.id } # friend_two_id is friend
-    @one_is_friends = @friendships.select { |f| f.friend_two_id == current_user.id } # friend_one_id is friend
+    if @friendships && @friendships.length.positive?
+      @two_is_friends = @friendships.select { |f| f.friend_one_id == current_user.id } # friend_two_id is friend
+      @one_is_friends = @friendships.select { |f| f.friend_two_id == current_user.id } # friend_one_id is friend
+    end
     @friendship = Friendship.new
   end
 
@@ -18,12 +20,15 @@ class FriendshipsController < ApplicationController
 
   def create
     @friendship = Friendship.new
-    if params[:user_id].id == current_user.id
-    @friendship.friend_one_id = current_user.id
-    @friendship.friend_two_id = User.find(params[:user_id]).id
-    raise
+    if params[:user_id] != current_user.id
+      @friendship.friend_one_id = current_user.id
+      @friendship.friend_two_id = User.find(params[:friendship][:friend_two_id]).id
+    else
+      @friendship.friend_one_id = current_user.id
+      @friendship.friend_two_id = User.find(params[:user_id]).id
+    end
     @friendship.save!
-    redirect_to "/"
+    redirect_to "/friendships"
   end
 
   def destroy
@@ -36,6 +41,6 @@ class FriendshipsController < ApplicationController
     @friendship = Friendship.find(params[:id])
     @friendship.confirmed = true
     @friendship.save
-    redirect_to "/"
+    redirect_to "/friendships"
   end
 end
