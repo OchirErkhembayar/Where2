@@ -25,6 +25,9 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:group_id])
+    if EventUser.where('user_id = ? AND event_id = ?', current_user.id, @event.id).empty? && UserGroup.where('user_id = ? AND group_id = ?', current_user.id, @event.group.id).empty?
+      redirect_to root_path, alert: "Naughty.. Not for your eyes."
+    end
     @group = @event.group
     @usergroups = UserGroup.where('group_id = ? AND status = ?', @group.id, true)
     @users = @usergroups.map do |ug|
