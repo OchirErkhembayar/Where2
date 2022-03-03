@@ -67,3 +67,5 @@
 <% @event.photos.each do |photo| %>
   <%= cl_image_tag photo.key, style: "height: 50%; width: 50%", crop: :fill %>
 <% end %>
+
+<%= cl_image_tag current_user.photo.key, style: "height: 50%; width: 50%", crop: :fill %>
