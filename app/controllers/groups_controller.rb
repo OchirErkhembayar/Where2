@@ -4,14 +4,21 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @group = Group.find(params[:id])
-    @usergroups = UserGroup.where('group_id = ? AND status = ?', @group.id, true)
-    @pendingusers = UserGroup.where('group_id = ? AND status = ?', @group.id, false)
-    @users = @usergroups.map do |ug|
-      ug.user
+    if UserGroup.where('group_id = ? AND user_id = ?', params[:id].to_i, current_user.id).empty?
+      redirect_to "/groups", alert: "Naughty, naughty...."
     end
-    @events = Event.where('group_id = ?', @group.id).reject { |event| event.end_date <= Date.today }
-    @my_friendships = Friendship.where('friend_one_id = ? OR friend_two_id = ?', current_user.id, current_user.id)
+    if Group.where('id = ?', params[:id]).empty?
+      redirect_to "/groups"
+    else
+      @group = Group.find(params[:id])
+      @usergroups = UserGroup.where('group_id = ? AND status = ?', @group.id, true)
+      @pendingusers = UserGroup.where('group_id = ? AND status = ?', @group.id, false)
+      @users = @usergroups.map do |ug|
+        ug.user
+      end
+      @events = Event.where('group_id = ?', @group.id).reject { |event| event.end_date <= Date.today }
+      @my_friendships = Friendship.where('friend_one_id = ? OR friend_two_id = ?', current_user.id, current_user.id)
+    end
   end
 
   def new
