@@ -1,58 +1,53 @@
 <div class="container">
-<%= link_to "back to group", group_path(@event.group), class: "btn btn-danger" %>
-<% if @memberids.include? current_user.id %>
-  <%= link_to "back to group", group_path(@event.group), class: "btn btn-danger" %>
-<% end %>
-<h1>Name: <%= @event.name %></h1>
-<h2>Location: <%= @event.location %></h2>
-<h3>Description: <%= @event.description %></h3>
-<p class="mx-3">Admin: <%= @group.user == current_user ? "You" : @group.user.first_name %></p>
-<h4>Group Attendees: </h4>
-<div class="mx-3">
-  <% @users.each do |user| %>
-    <p><%= user == current_user ? "You" : user.first_name %></p>
-  <% end %>
-</div>
-<h4>Invited Attendees:</h4>
-<div class="mx-3">
-  <% @eventusers.each do |user| %>
-    <p><%= user.user == current_user ? "You" : user.user.first_name.capitalize %></p>
-  <% end %>
-</div>
-<%= link_to "Add user", new_group_event_event_user_path(@event.group, @event), class: "btn btn-danger" %>
+  <div class="row">
+    <div class="col">
+      <div class="container">
+        <% if @memberids.include? current_user.id %>
+          <%= link_to "back to group", group_path(@event.group), class: "btn btn-danger" %>
+        <% end %>
+        <h1>Name: <%= @event.name %></h1>
+        <h2>Location: <%= @event.location %></h2>
+        <h3>Description: <%= @event.description %></h3>
+        <p class="mx-3">Admin: <%= @group.user == current_user ? "You" : @group.user.first_name %></p>
+        <h4>Group Attendees: </h4>
+        <div class="mx-3">
+          <% @users.each do |user| %>
+            <p><%= user == current_user ? "You" : user.first_name %></p>
+          <% end %>
+        </div>
+        <h4>Invited Attendees:</h4>
+        <div class="mx-3">
+          <% @eventusers.each do |user| %>
+            <p><%= user.user == current_user ? "You" : user.user.first_name.capitalize %></p>
+            <% if current_user == @event.group.user %>
+              <%= link_to "Kick", event_user_path(user), method: :delete, class: "btn btn-danger mb-3" %>
+            <% end %>
+          <% end %>
+      </div>
+      <%= link_to "Add user", new_group_event_event_user_path(@event.group, @event), class: "btn btn-danger" %>
+    </div>
+    <div class="col">
+      <div class="container chatroom" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>">
+        <h2 class="mt-3">Chat</h2>
+        <div style="background-color: white; border: 1px solid black;" class="p-3 mb-5">
+          <div class="messages mb-3" data-event-subscription-target="messages">
+            <% @event.messages.each do |message| %>
+              <%= render "messages/message", message: message %>
+            <% end %>
+          </div>
 
-<div class="container chatroom" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>">
-  <h1><%= @event.name %></h1>
-
-  <div class="messages" data-event-subscription-target="messages">
-    <% @event.messages.each do |message| %>
-      <%= render "messages/message", message: message %>
-    <% end %>
+          <%= simple_form_for [@group, @event, @message], remote: true,
+            html: {data: {event_subscription_target: "form"}, class: "d-flex"}  do |f| %>
+            <%= f.input :content,
+              label: false,
+              placeholder: "Message ##{@event.name}",
+              wrapper_html: {class: "flex-grow-1"}
+            %>
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            <%= f.submit "Send", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <%= simple_form_for [@group, @event, @message], remote: true,
-    html: {data: {event_subscription_target: "form"}, class: "d-flex"}  do |f|
-  %>
-    <%= f.input :content,
-      label: false,
-      placeholder: "Message ##{@event.name}",
-      wrapper_html: {class: "flex-grow-1"}
-    %>
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <%= f.submit "Send", class: "btn btn-primary" %>
-  <% end %>
-</div>
-
-<div class="row">
-  <div class="col">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>@group.name</th>
-        </tr>
-      </thead>
-
-    </table>
-  </div>
-
 </div>
