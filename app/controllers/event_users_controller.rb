@@ -21,6 +21,7 @@ class EventUsersController < ApplicationController
       @events.sort_by! { |event| event.end_date } if @events.length > 0
     end
   end
+
   def new
     @event_user = EventUser.new
     @event = Event.find(params[:event_id])

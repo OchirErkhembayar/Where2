@@ -20,6 +20,7 @@
 </div>
 -->
 <div class="container">
+<%= link_to "all groups", groups_path, class: "btn btn-danger" %>
   <div class="row">
     <div class="col-sm pt-3">
       <table class="table group-table my-3 table-striped table-hover table-sm">
@@ -46,7 +47,11 @@
             <tr>
               <td><h4>
                 <%= user == current_user ? "You" : user.first_name %>
-                <%= link_to "Add friend", user_friendships_path(user), method: :post, class: "btn btn-danger" %>
+                <% if user != current_user %>
+                  <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
+                    <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-danger" %>
+                  <% end %>
+                <% end %>
               </h4></td>
             </tr>
           <% end %>

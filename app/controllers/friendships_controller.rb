@@ -16,12 +16,12 @@ class FriendshipsController < ApplicationController
   def show
   end
 
-  def new
-  end
-
   def create
     @friendship = Friendship.new
-    if params[:user_id] != current_user.id
+    if params[:format]
+      @friendship.friend_one_id = current_user.id
+      @friendship.friend_two_id = User.find(params[:format]).id
+    elsif params[:user_id] != current_user.id
       @friendship.friend_one_id = current_user.id
       @friendship.friend_two_id = User.find(params[:friendship][:friend_two_id]).id
     else
