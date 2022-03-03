@@ -25,6 +25,12 @@
           <% end %>
       </div>
       <%= link_to "Add user", new_group_event_event_user_path(@event.group, @event), class: "btn btn-danger" %>
+      <%= simple_form_for([@group, @event, @event_user], remote: true) do |f| %>
+      <div class="form-group mb-3 mx-5 px-5">
+          <%= f.association :user, label_method: :first_name, class: "form-control", placeholder: "Group name" %>
+        <%= f.submit "Invite user", class: "btn btn-primary mb-3 w-100" %>
+      </div>
+      <% end %>
     </div>
     <div class="col">
       <div class="container chatroom" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>">
