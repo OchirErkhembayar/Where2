@@ -20,6 +20,9 @@
 </div>
 -->
 <div class="container">
+<% if current_user != @group.user %>
+  <%= link_to "Leave Group", group_usergroup_path(@group, current_user), method: :delete, class: "btn btn-danger" %>
+<% end %>
 <%= link_to "all groups", groups_path, class: "btn btn-danger" %>
   <div class="row">
     <div class="col-sm pt-3">
@@ -50,6 +53,9 @@
                 <% if user != current_user %>
                   <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
                     <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-danger" %>
+                  <% end %>
+                  <% if current_user == @group.user %>
+                    <%= link_to "Kick", kick_group_usergroup_path(@group, user), method: :delete, class: "btn btn-danger mb-3" %>
                   <% end %>
                 <% end %>
               </h4></td>

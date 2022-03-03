@@ -34,6 +34,7 @@ class EventsController < ApplicationController
     @eventusers = EventUser.where('event_id = ? AND status = ?', @event.id, true)
     @messages = Event.where('event_id = ?', @event_id)
     @message = Message.new
+    @event_user = EventUser.new
   end
 
   def new
