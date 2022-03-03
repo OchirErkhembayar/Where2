@@ -112,8 +112,9 @@ body, html {
   font-weight: lighter;
   padding-top: 50px;
   margin-top: 42px;
-  margin-left: 261px;
+  margin-left: 165px;
   font-size: 70px;
+  text-decoration: underline 2pt;
 }
 
 .btn-datway
@@ -149,4 +150,58 @@ body, html {
 
   .btn-datway:hover::before{
     width: 100%;
+  }
+
+  .link_wrapper{
+    position: relative;
+  }
+
+  .btn-test{
+    display: block;
+    width: 250px;
+    height: 50px;
+    line-height: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    background:#FFB341 ;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all .35s;
+    height: 73px;
+  }
+
+  .arrow-button{
+    width: 50px;
+    height: 50px;
+    border: 3px solid transparent;
+    position: absolute;
+    transform: rotate(45deg);
+    right: 0;
+    top: 0;
+    z-index: -1;
+    transition: all .35s;
+  }
+
+  .arrow-button svg{
+    width: 30px;
+    position: absolute;
+    top: calc(50% - 15px);
+    left: calc(50% - 15px);
+    transform: rotate(-45deg);
+    fill: #FFB341;
+    transition: all .35s;
+  }
+
+  .btn-test:hover{
+    width: 200px;
+    border: 3px solid #FFB341;
+    background: transparent;
+    color: #FFB341;
+  }
+
+  .btn-test:hover + .icon{
+    border: 3px solid #FFB341;
+    right: -25%;
   }
