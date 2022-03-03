@@ -19,6 +19,10 @@ class GroupsController < ApplicationController
       @events = Event.where('group_id = ?', @group.id).reject { |event| event.end_date <= Date.today }
       @my_friendships = Friendship.where('friend_one_id = ? OR friend_two_id = ?', current_user.id, current_user.id)
     end
+    @events = Event.where('group_id = ?', @group.id).reject { |event| event.end_date <= Date.today }
+    @usergroup = UserGroup.new
+    @event = Event.new
+    @my_friendships = Friendship.where('friend_one_id = ? OR friend_two_id = ?', current_user.id, current_user.id)
   end
 
   def new
