@@ -46,7 +46,7 @@ class EventsController < ApplicationController
     @group = Group.find(params[:group_id])
     @event.group = @group
     if @event.save
-      redirect_to "/groups/#{@event.id}/events/#{@group.id}"
+      redirect_to "/groups/#{@group.id}/events/#{@event.id}"
     else
       render :new
     end
