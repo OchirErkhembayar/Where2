@@ -19,7 +19,6 @@
   <% end %>
 </div>
 -->
-<<<<<<< HEAD
 
 
 <div class="container" data-controller="open-form">
@@ -47,13 +46,11 @@
         </div>
       </div>
     </div>
-=======
 <div class="container">
 <% if current_user != @group.user %>
   <%= link_to "Leave Group", group_usergroup_path(@group, current_user), method: :delete, class: "btn btn-danger" %>
 <% end %>
 <%= link_to "all groups", groups_path, class: "btn btn-danger" %>
->>>>>>> c736049c092db5e544384bb0d938ba312caaa4be
   <div class="row">
     <div class="col-sm pt-3">
       <table class="table group-table my-3 table-striped table-hover table-sm">
