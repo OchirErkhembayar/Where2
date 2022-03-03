@@ -2,7 +2,7 @@
   <h3>Your friend requests</h3>
   <% @friendship_requests.each do |friendship| %>
     <p><%= User.find(friendship.friend_one_id).first_name.capitalize %> has sent you a friend request!</p>
-    <%= link_to "Accept", accept_user_friendship_path(current_user.id, friendship.id), method: :put, class: "btn btn-danger" %>
+    <%= link_to "Accept", accept_user_friendship_path(current_user, friendship), method: :put, class: "btn btn-danger" %>
     <%= link_to "Decline", user_friendship_path(current_user, friendship), method: :delete, class: "btn btn-danger" %>
   <% end %>
 </div>
