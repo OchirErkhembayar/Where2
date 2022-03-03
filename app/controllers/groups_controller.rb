@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   def index
     @usergroups = UserGroup.where('user_id = ?', current_user.id).where('status = ?', true)
+    @group = Group.new
   end
 
   def show
