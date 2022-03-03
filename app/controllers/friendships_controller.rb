@@ -4,6 +4,7 @@ class FriendshipsController < ApplicationController
     @friendships_notaccepted = Friendship.where('friend_two_id = ? OR friend_one_id = ?', current_user.id, current_user.id)
     if @friendships_notaccepted.length.positive?
       @friendships = @friendships_notaccepted.select { |fs| fs.confirmed == true }
+      @friendships_pending = @friendships_notaccepted.select { |fs| fs.confirmed == false }
     end
     if @friendships && @friendships.length.positive?
       @two_is_friends = @friendships.select { |f| f.friend_one_id == current_user.id } # friend_two_id is friend

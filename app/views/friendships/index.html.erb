@@ -20,6 +20,14 @@
       <%= link_to "Delete friend", user_friendship_path(current_user, f), method: :delete, class: "btn btn-danger" %>
     <% end %>
   <% end %>
+  <% if @friendships_pending %>
+    <% @friendships_pending.each do |f| %>
+      <% if User.find(f.friend_one_id) == current_user %>
+        <p><%= User.find(f.friend_two_id).first_name %> (pending)</p>
+         <%= link_to "cancel", user_friendship_path(current_user, f), method: :delete, class: "btn btn-danger" %>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
 <div class="container">
   <%= render "form" %>
