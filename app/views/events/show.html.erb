@@ -8,7 +8,7 @@
               <%= link_to "back to group", group_path(@event.group), class: "btn btn-warning w-100" %>
             </div>
           <% end %>
-          <div class="me-5 p-3 my-3 rounded" style="background-color: white; border: 1px solid black;">
+          <div class="me-5 p-3 my-3 rounded pb-4" style="background-color: #F4F4F4; border: 1px solid black;">
             <h1>Name: <%= @event.name %></h1>
             <h2>Location: <%= @event.location %></h2>
             <h3>Description: <%= @event.description %></h3>
@@ -45,7 +45,7 @@
         <% end %>
         <div class="chatroom me-5" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>">
         <h2 class="">Chat</h2>
-        <div style="background-color: white; border: 1px solid black;" class="p-3 mb-5 rounded">
+        <div style="background-color: #F4F4F4; border: 1px solid black;" class="p-3 mb-5 rounded">
           <div class="messages mb-3" data-event-subscription-target="messages">
             <% @event.messages.last(5).each do |message| %>
               <%= render "messages/message", message: message %>
