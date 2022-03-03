@@ -81,3 +81,49 @@ body, html {
   text-align: center;
   padding: 0 150px;
 }
+
+
+.home-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 900px;
+  width: 900px;
+  margin: 0 auto;
+}
+
+.grid-section{
+  height: 300px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-image {
+  background-size: cover;
+  height: 300px;
+  width: 300px;
+
+}
+
+.dash-text {
+  color: black;
+  font-family:'Josefin Sans', sans-serif;
+  font-weight: lighter;
+  padding-top: 50px;
+  margin-top: 42px;
+  margin-left: 261px;
+  font-size: 70px;
+}
+
+.btn-datway {
+  color: #f1f0f0;
+  background-color: #fd9310;
+  font-family: 'Josefin Sans';
+  height: 130px;
+  width: 249px;
+}
+
+.btn-datway:hover {
+  background-color: #ffb459;
+}
