@@ -182,3 +182,7 @@ body, html {
     border: 3px solid #FFB341;
     right: -25%;
   }
+
+  * {
+    box-sizing: border-box;
+  }
