@@ -98,8 +98,8 @@
       <% else %>
         <div class="col-6 d-flex flex-column">
         <%= simple_form_for([@event.group, @event], remote: true) do |f| %>
-          <%= f.input :photos, as: :file, input_html: { multiple: true }, label: false %>
           <%= f.submit "Add your first photos!", class: "btn btn-primary mb-3 w-100" %>
+          <%= f.input :photos, as: :file, input_html: { multiple: true }, label: false %>
         <% end %>
         </div>
       <% end %>
