@@ -32,8 +32,29 @@
         <% end %>
     </div>
 
-    <div class="d-flex justify-content-center">
-      <button type="button" class= "btn btn-primary", data-bs-toggle="modal" data-bs-target="#newGroup">New Group</button>
-    </div>
-    </div>
+  <div class="d-flex justify-content-center">
+    <h1>My Groups</h1>
+  </div>
+  <div class="d-flex justify-content-center">
+    <table class="table group-table my-3 table-striped table-hover table-sm" style="width: 600px%;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"> Name</th>
+        <th scope="col"> Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @usergroups.reverse.each do |group| %>
+        <tr>
+          <td><h6><%= link_to group.group.name, group_path(group.group)%></h6></td>
+          <td><h6><%= group.group.user.first_name.capitalize %></h3></h6>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newGroup">New Group</button>
+  </div>
 </div>
