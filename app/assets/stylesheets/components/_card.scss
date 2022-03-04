@@ -76,3 +76,30 @@
   width: 100%;
   object-fit: cover;
 }
+
+
+.group-card{
+  height: 100px;
+  width: 800px;
+  background-color: #FFB341;
+  font-family: 'Josefin Sans', sans-serif;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  margin: 0 auto 16px;
+  align-items: center;
+  a {
+    color:rgba(255, 255, 255, 0.904);
+    margin-left: 40px;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+}
+
+.group-card:hover{
+  background-color:#faa21d;
+
+ a{
+   color:#ffffff ;
+ }
+}
