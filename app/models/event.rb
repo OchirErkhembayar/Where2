@@ -6,5 +6,4 @@ class Event < ApplicationRecord
   has_many :favourite_events, dependent: :destroy
   has_many_attached :photos
   validates :name, :description, :location, :start_date, :end_date, presence: true
-  has_many :messages
 end
