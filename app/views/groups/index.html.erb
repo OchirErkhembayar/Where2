@@ -2,19 +2,36 @@
 
 
 
-<div class="container my-5">
-  <div class="modal fade" id="newGroup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="newGroupForm" aria-hidden="true" >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class data-open-form-target="form" ="modal-body">
-            <%= render "form", group: @group%>
+<div style="background-image: url(<%= asset_path "index-background2.jpg" %>) ;background-position: bottom;" class="background-landing">
+  <div class="container my-5">
+    <div class="modal fade" id="newGroup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="newGroupForm" aria-hidden="true" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class data-open-form-target="form" = "modal-body">
+              <%= render "form", group: @group%>
+            </div>
           </div>
         </div>
       </div>
+    <div class="d-flex justify-content-center">
+      <h1 class="dash-text" style="margin-left:0;">My Groups</h1>
     </div>
+    <div>
+        <% @usergroups.reverse.each do |group| %>
+          <div class="group-card">
+            <% if current_user.photo.attached? %>
+                      <%= cl_image_tag current_user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+            <% else %>
+              <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 75px; width: 90px;" %>
+            <% end %>
+              <h3><%= link_to group.group.name, group_path(group.group)%></h3>
+          </div>
+        <% end %>
+    </div>
+
   <div class="d-flex justify-content-center">
     <h1>My Groups</h1>
   </div>
