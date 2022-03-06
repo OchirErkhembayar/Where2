@@ -146,7 +146,7 @@
 </div>
 <%= simple_form_for @usergroup, url: group_usergroups_path(@group)  do |f| %>
   <div class="form-group mb-3 px-5">
-    <%= f.association :user, collection: User.all, label_method: :first_name, input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Type your friend's name", class: "flex-grow" %>
+    <%= f.association :user, collection: current_user.user_group_invites(@group), label_method: :first_name, input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Type your friend's name", class: "flex-grow" %>
   <%= f.submit "Submit", class: "btn btn-primary mb-3 w-100" %>
   </div>
 <% end %>
