@@ -1,6 +1,6 @@
 <%= simple_form_for usergroup, url: group_usergroups_path(group)  do |f| %>
-  <div class="form-group mb-3 mx-5 px-5">
-    <%= f.association :user, label_method: :first_name, class: "form-control", placeholder: "Group name" %>
+  <div class="form-group mb-3 px-5">
+    <%= f.association :user, collection: User.all, label_method: :first_name, input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Type your friend's name", class: "flex-grow" %>
   <%= f.submit "Submit", class: "btn btn-primary mb-3 w-100" %>
   </div>
 <% end %>

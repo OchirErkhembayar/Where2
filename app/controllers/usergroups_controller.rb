@@ -13,9 +13,10 @@ class UsergroupsController < ApplicationController
   end
 
   def create
+    raise
     @usergroup = UserGroup.new
     @group = Group.find(params[:group_id])
-    @usergroup.user_id = params[:user_group][:user_id].to_i
+    @usergroup.user_id = params[:user_group][:user_id][1]
     @usergroup.group = @group
     if @usergroup.save
       redirect_to "/groups/#{@group.id}"

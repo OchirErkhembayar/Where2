@@ -42,8 +42,8 @@
           </div>
         <%= simple_form_for([@group, @event, @event_user], remote: true) do |f| %>
         <div class="form-group pe-5">
-            <%= f.association :user, label_method: :first_name, class: "form-control", placeholder: "Group name" %>
-          <%= f.submit "Invite user", class: "btn btn-primary ml-3 w-100 mb-3" %>
+            <%= f.input :user, collection: User.all, label_method: :first_name, input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Add your friends" %>
+          <%= f.submit "Invite friends", class: "btn btn-primary ml-3 w-100 mb-3" %>
         </div>
         <% end %>
         <div class="chatroom me-5" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>">
