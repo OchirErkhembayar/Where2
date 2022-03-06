@@ -21,14 +21,20 @@ class FriendshipsController < ApplicationController
     if params[:format]
       @friendship.friend_one_id = current_user.id
       @friendship.friend_two_id = User.find(params[:format]).id
+      @friendship.save
     elsif params[:user_id] != current_user.id
-      @friendship.friend_one_id = current_user.id
-      @friendship.friend_two_id = User.find(params[:friendship][:friend_two_id]).id
+      friend_ids = params[:friendship][:friend_two_id].select { |id| id != "" }
+      friend_ids.each do |id|
+        @friendship = Friendship.new
+        @friendship.friend_one_id = current_user.id
+        @friendship.friend_two_id = User.find(id).id
+        @friendship.save
+      end
     else
       @friendship.friend_one_id = current_user.id
       @friendship.friend_two_id = User.find(params[:user_id]).id
+      @friendship.save!
     end
-    @friendship.save!
     redirect_to "/friendships"
   end
 
