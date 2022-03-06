@@ -40,9 +40,9 @@
               <% end %>
             </div>
           </div>
-        <%= simple_form_for([@group, @event, @event_user], remote: true) do |f| %>
+        <%= simple_form_for @event_user, url: event_users_path(@event) do |f| %>
         <div class="form-group pe-5">
-            <%= f.input :user, collection: User.all, label_method: :first_name, input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Add your friends" %>
+            <%= f.association :user, collection: current_user.friends, label_method: :first_name, method: :post, input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Add your friends" %>
           <%= f.submit "Invite friends", class: "btn btn-primary ml-3 w-100 mb-3" %>
         </div>
         <% end %>

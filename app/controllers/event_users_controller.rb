@@ -29,16 +29,18 @@ class EventUsersController < ApplicationController
   end
 
   def create
-    @event_user = EventUser.new
-    @group = Group.find(params[:group_id])
-    @event = Event.find(params[:event_id])
-    @event_user.user_id = params[:event_user][:user_id]
-    @event_user.event = @event
-    if @event_user.save
-      redirect_to "/groups/#{@event.id}/events/#{@group.id}"
-    else
-      render :new
+    @event = Event.find(params[:format])
+    @group = Group.find(@event.group_id)
+    params[:event_user][:user_id].select { |i| i != "" }.each do |id|
+      @eventuser = EventUser.new
+      @user = User.find(id)
+      @eventuser.event = @event
+      @eventuser.user = @user
+      unless @eventuser.save
+        render :new
+      end
     end
+    redirect_to "/groups/#{@event.id}/events/#{@group.id}"
   end
 
   def accept
