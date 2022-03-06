@@ -11,7 +11,7 @@
           <div class="me-5 p-3 my-3 rounded pb-4" style="background-color: #F4F4F4; border: 1px solid black;">
             <div class="card-product infos d-flex flex-column justify-content-center" style="height: auto;">
             <h3 class="mt-3"><%= @event.name %></h1>
-            <h5>Location - <%= @event.location %></h5>
+            <h5 class="text-center">Location - <%= @event.location %></h5>
             <h6 class="mb-1">Description: <%= @event.description %></h6>
             <h6 class="mb-3 mt-1"><%= @event.start_date %> - <%= @event.end_date %></h6>
             </div>
@@ -106,3 +106,8 @@
     </div>
   </div>
 </div>
+
+<div style="width: 100%; height: 600px;"
+  data-controller="mapbox"
+  data-mapbox-markers-value="<%= @markers.to_json %>"
+  data-mapbox-api-key-value="<%= ENV['pk.eyJ1Ijoib2NoaXItZXJraGVtYmF5YXIiLCJhIjoiY2t6OGdlMHdvMDlueDJxbzZ5czQ1YmlnZSJ9.VX0Pu-ohOqUu9CDOvFGQ8g'] %>"></div>

@@ -38,6 +38,12 @@ class EventsController < ApplicationController
     @messages = Event.where('event_id = ?', @event_id)
     @message = Message.new
     @event_user = EventUser.new
+    @markers = [@event].map do |event|
+      {
+        lat: event.latitude,
+        lng: event.longitude
+      }
+    end
   end
 
   def new
