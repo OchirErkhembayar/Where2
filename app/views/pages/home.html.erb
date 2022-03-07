@@ -2,10 +2,15 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h3 class="dash-text text-center">Dashboard</h3>
-        <div class="card-trip p-3" style="border-radius: 15px;">
-          <h3>Upcoming Events</h3>
-        </div>
+        <h3 class="dash-text text-center mt-5" style="margin: 0;">Upcoming</h3>
+          <% @events.each do |event| %>
+            <%= link_to group_event_path(event, event.group.id), style: "text-decoration: none; color: white; font-weight: bold; font-size: 15px;" do %>
+              <div class="card-trip p-3 d-flex justify-content-between mt-3" style="border-radius: 15px; background-color: #F4B658;">
+                <h6 style="text-decoration: none; color: white;" class="mt-1"><%= event.name %> - Group: <%= event.group.name %></h6>
+                <p style="color: white; font-weight: bold;" class="mt-1"><%= event.start_date %> - <%= event.end_date %></p>
+              </div>
+            <% end %>
+          <% end %>
       </div>
       <div class="col">
         <div class="d-flex justify-content-center" style="margin-right: 130px; padding: 0;">
