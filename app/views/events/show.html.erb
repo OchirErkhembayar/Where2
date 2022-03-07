@@ -20,7 +20,7 @@
         <div class="chatroom me-5 w-100" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>">
           <div style="background-color: #F4F4F4; border: 1px solid black; height: 400px; overflow: scroll;" class="p-3 mb-3 rounded message-box">
             <div class="messages mb-3" data-event-subscription-target="messages">
-              <% @event.each do |message| %>
+              <% @event.messages.each do |message| %>
                 <%= render "messages/message", message: message %>
               <% end %>
             </div>
