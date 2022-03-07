@@ -11,6 +11,7 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .card-product {
@@ -48,9 +49,10 @@
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   .card-trip-user {
     position: absolute;
-    right: 16px;
-    top: -20px;
-    width: 40px;
+    right: 160px;
+    width: 90px;
+    height: 90px;
+    bottom: -10px;
   }
   .card-trip-infos {
     padding: 16px;

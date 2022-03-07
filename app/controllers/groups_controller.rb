@@ -68,6 +68,6 @@ class GroupsController < ApplicationController
   private
 
   def set_group
-    params.require(:group).permit(:name)
+    params.require(:group).permit(:name, :photo)
   end
 end

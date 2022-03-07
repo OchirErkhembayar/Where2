@@ -13,6 +13,7 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "pages/events_show";
 
 body {
   background: #FFF9D5;
@@ -27,4 +28,8 @@ body {
 .btn-primary:hover{
   background-color: #faa21d;
   border-color:  #faa21d;
+}
+
+abbr[title="required"] {
+  display: none;
 }
