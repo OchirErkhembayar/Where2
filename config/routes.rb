@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :events, only: %i[index]
+  resources :events, only: %i[index destroy]
   resources :usergroups, only: %i[index]
   resources :event_users, only: %i[index destroy create] do
     member do

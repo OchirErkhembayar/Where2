@@ -7,9 +7,11 @@ body, html {
 
 .background-landing{
   height: 100vh;
-  background-size: cover;
   width: 100%;
   position: absolute;
+  background-size: cover;
+  background-position: 100% 70%;
+  background-repeat: no-repeat;
 }
 
 .frame {
@@ -92,8 +94,8 @@ body, html {
 }
 
 .grid-section{
-  height: 285px;
-  width: 330px;
+  height: 180px;
+  width: 310px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,8 +103,8 @@ body, html {
 
 .home-image {
   background-size: cover;
-  height: 344px;
-  width: 323px;
+  height: 310px;
+  width: 255px;
 
 }
 
@@ -122,10 +124,9 @@ body, html {
   color: black;
   font-family:'Josefin Sans', sans-serif;
   font-weight: lighter;
-  padding-top: 50px;
-  margin-top: 42px;
-  margin-left: 165px;
-  font-size: 70px;
+  font-size: 50px;
+  margin-top: 30px;
+  margin-left: 100px;
   text-decoration: underline 2pt;
 }
 
