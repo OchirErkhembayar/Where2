@@ -48,7 +48,7 @@
       </div>
       <div class="card-trip mt-3 p-3" style="border-radius: 15px; height: auto;">
         <h5 class="p-3">Members</h5>
-        <% @users.each do |user| %>
+        <% @users.sort_by { |u| u.created_at }.reverse.each do |user| %>
           <h6 class="m-2 d-flex align-items-center">
             <div>
               <% if user.photo.attached? %>
@@ -119,10 +119,35 @@
           <% end %>
         </div>
       </div>
+      <% if @events_past.length > 0 %>
+      <div class="col-12 col-xl-8 w-100 mt-3">
+        <div class="card-trip px-4 py-3" style="border-radius: 15px;">
+          <h3 class="text-center">Past Events</h3>
+          <div class="row">
+            <% @events_past.each do |event| %>
+              <div class="col-12 col-xl-6">
+                <%= link_to group_event_path(event), style: "text-decoration: none; color: white;" do %>
+                  <div class="card-product justify-content-center rounded mb-1 mt-3" style="height: 120px; background-color: #F4B658;">
+                    <div class="card-product-infos text-center">
+                      <h2 class="mb-2"><%= event.name.capitalize %></h2>
+                      <h6 style="color: white;"><%= event.location %></h6>
+                      <h6 style="color: white;" class="mb-2"><%= event.start_date %> - <%= event.end_date %></h6>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
     </div>
   </div>
 </div>
 
+<% if @events_past != nil && @events_past.length > 0 %>
+
+<% end %>
 
 <div class="container" data-controller="open-form">
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
