@@ -124,13 +124,13 @@
         </div>
         <div class="row">
           <% @events.each do |event| %>
-            <div class="col-6">
-              <div class="card my-2" style="height: 300px;">
-                <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" style="height: 150px;"/>
+            <div class="col-12 col-xl-6">
+              <div class="card my-2" style="height: 200px;">
                   <div class="d-flex flex-column justify-content-right align-items-center pb-2" style="height: 65px;">
                     <h5 class="mt-4"><%= event.name.capitalize %></h5>
+                    <p><%= event.location %></p>
                     <p style="color: black;" class="mb-2"><%= event.start_date %> - <%= event.end_date %></p>
-                    <h3><%= link_to "Event Page", group_event_path(event), class: "btn btn-primary" %></h3>
+                    <h3><%= link_to "Event Page", group_event_path(event), class: "btn btn-primary" %><%= link_to "Cancel event", group_event_path(event), method: :destroy, class: "btn btn-primary ms-3" if current_user == @group.user %></h3>
                   </div>
               </div>
             </div>
