@@ -18,14 +18,23 @@
     <div class="row py-3">
       <div class="col-12 col-sm-4 mt-2">
         <div class="chatroom me-5 w-100" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>">
+<<<<<<< HEAD
           <div style="background-color: #F4F4F4; border: 1px solid black; height: 400px; overflow: scroll;" class="p-3 mb-3 rounded message-box">
+=======
+          <div style="background-color: #F4F4F4; border: 1px solid black;" class="p-3 mb-3 rounded message-box">
+>>>>>>> Scrollbar
             <div class="messages mb-3" data-event-subscription-target="messages">
               <% @event.messages.last(5).each do |message| %>
                 <%= render "messages/message", message: message %>
               <% end %>
             </div>
+<<<<<<< HEAD
           </div>
             <%= simple_form_for [@group, @event, @message], remote: true,
+=======
+            </div>
+              <%= simple_form_for [@group, @event, @message], remote: true,
+>>>>>>> Scrollbar
               html: {data: {event_subscription_target: "form"}, class: "d-flex"}  do |f| %>
               <%= f.text_field :content,
                 label: false,
@@ -36,6 +45,10 @@
               <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
               <%= f.submit "Send", class: "btn btn-primary btn-sm ms-2 send-button" %>
             <% end %>
+<<<<<<< HEAD
+=======
+
+>>>>>>> Scrollbar
         </div>
       </div>
       <div class="col-12 col-sm-4 me-0 pe-1 attendees">

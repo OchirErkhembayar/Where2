@@ -11,6 +11,10 @@ application.load(definitionsFromContext(context))
 const updateScroll = () => {
   const element = document.querySelector(".message-box");
   element.scrollTop = element.scrollHeight;
+<<<<<<< HEAD
+=======
+  console.log("hello");
+>>>>>>> Scrollbar
 }
 
 updateScroll();
