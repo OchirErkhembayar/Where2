@@ -3,6 +3,9 @@
     <div class="row">
       <div class="col">
         <h3 class="dash-text text-center">Dashboard</h3>
+        <div class="card-trip">
+
+        </div>
       </div>
       <div class="col">
         <div class="d-flex justify-content-center" style="margin-right: 130px; padding: 0;">
@@ -19,7 +22,7 @@
             <%= link_to "Invitation#{@notification_count == 1 ? "" : "s"} (#{@notification_count})", usergroups_path(current_user), class: "btn btn-test" %>
           </div>
           <div class="link_wrapper col-6">
-            <%= link_to "Invitation#{@notification_count == 1 ? "" : "s"} (#{@notification_count})", usergroups_path(current_user), class: "btn btn-test" %>
+            <%= link_to "Past Events", events_path, class: "btn btn-test" %>
           </div>
         </div>
       </div>
