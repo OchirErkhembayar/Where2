@@ -24,8 +24,11 @@
         <% if @invitations.size > 0 %>
           <% @invitations.reverse.each do |invitation| %>
             <strong><%= invitation.group.user.first_name %></strong> has invited you to join: <strong><%= invitation.group.name.capitalize %></strong>
-            <%= link_to "Accept", accept_group_usergroup_path(invitation.group_id, invitation), method: :put, class: "btn btn-primary btn-sm" %>
-            <%= link_to "Decline", group_usergroup_path(invitation.group_id, invitation), method: :delete, class: "btn btn-primary btn-sm" %>
+            <%= link_to "Accept", accept_group_usergroup_path(invitation.group, invitation), method: :put, class: "btn btn-primary btn-sm" %>
+            <%= link_to "Decline", group_usergroup_path(invitation.group, invitation), method: :delete, class: "btn btn-primary btn-sm" %>
+            <%= link_to group_usergroup_path(invitation.group, invitation), method: :delete, style: "color: red;", class: "ms-3 mt-1" do%>
+              <i class="fas fa-ban"></i>
+            <% end %>
           <% end %>
         <% end %>
       </div>
