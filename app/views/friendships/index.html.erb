@@ -14,7 +14,7 @@
                 <% end %>
                 <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_two_id).first_name %></h6>
               </div>
-              <%= link_to "Delete friend", friendship_path(f), method: :delete, class: "btn btn-danger" %>
+              <%= link_to "DESTROY!!!", friendship_path(f), method: :delete, class: "btn btn-danger" %>
             </div>
           <% end %>
         <% end %>
@@ -29,7 +29,7 @@
                 <% end %>
                 <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_one_id).first_name %></h6>
               </div>
-              <%= link_to "Delete friend", friendship_path(f), method: :delete, class: "btn btn-danger" %>
+              <%= link_to "DESTROY!!!", friendship_path(friendship), method: :delete, class: "btn btn-danger" %>
             </div>
           <% end %>
         <% end %>
@@ -37,7 +37,7 @@
     </div>
     <div class="col-12 col-xl-4">
       <div class="card-trip mt-3 p-3" style="border-radius: 15px; height: auto;">
-        <h4 class="text-center">Accept/Decline</h4>
+        <h4 class="text-center">Accept/Decline Requests</h4>
         <% @friendship_requests.each do |friendship| %>
           <div class="d-flex my-3 justify-content-between">
             <div class="d-flex">
@@ -56,7 +56,7 @@
     </div>
     <div class="col-12 col-xl-4">
       <div class="card-trip mt-3 p-3" style="border-radius: 15px; height: auto;">
-        <h4 class="text-center">Add friends</h4>
+        <h4 class="text-center">Send friend requests</h4>
         <% if @friendships_pending %>
           <% @friendships_pending.each do |f| %>
             <% if User.find(f.friend_one_id) == current_user %>
