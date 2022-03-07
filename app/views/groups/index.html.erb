@@ -23,7 +23,7 @@
         <% @usergroups.reverse.each do |group| %>
           <div class="group-card">
             <% if current_user.photo.attached? %>
-                      <%= cl_image_tag current_user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                      <%= cl_image_tag current_user.photo.key, class: "avatar", style: "height: 75px; width: 90px;" %>
             <% else %>
               <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 75px; width: 90px;" %>
             <% end %>
