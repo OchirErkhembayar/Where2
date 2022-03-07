@@ -28,7 +28,7 @@
         <div class="modal-header">
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class data-open-form-target="form" ="modal-body">
+        <div class data-open-form-target="form" class="modal-body">
           <%= render "usergroups/form", usergroup: @usergroup, group: @group%>
         </div>
       </div>
@@ -144,3 +144,9 @@
     </div>
   </div>
 </div>
+<%= simple_form_for @usergroup, url: group_usergroups_path(@group)  do |f| %>
+  <div class="form-group mb-3 px-5">
+    <%= f.association :user, collection: current_user.user_group_invites(@group), label_method: :first_name, input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Type your friend's name", class: "flex-grow" %>
+  <%= f.submit "Submit", class: "btn btn-primary mb-3 w-100" %>
+  </div>
+<% end %>
