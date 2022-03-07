@@ -17,10 +17,13 @@
   <div class="row py-3">
     <div class="col-12 col-sm-4 mt-2">
       <div class="chatroom me-5 w-100" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>">
-        <div style="background-color: #F4F4F4; border: 1px solid black; overflow-y: scroll;" class="p-3 mb-3 rounded">
+        <div style="background-color: #F4F4F4; border: 1px solid black;" class="p-3 mb-3 rounded" data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+
           <div class="messages mb-3" data-controller="infinite-scroll" data-event-subscription-target="messages">
             <% @event.messages.last(5).each do |message| %>
-              <%= render "messages/message", message: message %>
+              <% unless message.content.empty? %>
+                <%= render "messages/message", message: message %>
+              <% end %>
             <% end %>
           </div>
 
