@@ -28,3 +28,7 @@ body {
   background-color: #faa21d;
   border-color:  #faa21d;
 }
+
+abbr[title="required"] {
+  display: none;
+}
