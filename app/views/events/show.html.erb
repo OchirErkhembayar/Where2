@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="row py-3">
-      <div class="col-12 col-sm-4 mt-2">
+      <div class="col-12 col-sm-4">
         <div class="chatroom me-5 w-100" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>">
           <div style="background-color: #F4F4F4; border: 1px solid black; height: 400px; overflow: scroll;" class="p-3 mb-3 rounded message-box">
             <div class="messages mb-3" data-event-subscription-target="messages">
@@ -89,7 +89,7 @@
           <% end %>
       </div>
       <div class="col-12 col-sm-4 me-0 pe-1">
-        <div style="height: 400px;" class="w-100 container mt-2"
+        <div style="height: 400px;" class="w-100 container"
           data-controller="mapbox"
           data-mapbox-markers-value="<%= @markers.to_json %>"
           data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
