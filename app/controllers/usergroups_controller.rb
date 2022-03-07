@@ -15,13 +15,16 @@ class UsergroupsController < ApplicationController
   def create
     @usergroup = UserGroup.new
     @group = Group.find(params[:group_id])
-    @usergroup.user_id = params[:user_group][:user_id].to_i
-    @usergroup.group = @group
-    if @usergroup.save
-      redirect_to "/groups/#{@group.id}"
-    else
-      render :new
+    user_ids = params[:user_group][:user_id].select { |p| p != "" }
+    user_ids.each do |id|
+      @usergroup = UserGroup.new
+      @usergroup.user = User.find(id)
+      @usergroup.group = @group
+      unless @usergroup.save
+        render :new
+      end
     end
+    redirect_to "/groups/#{@group.id}"
   end
 
   def accept
