@@ -20,11 +20,15 @@
 </div>
 -->
 
-<div class="container">
+<div class="container mb-5 mt-3">
   <div class="row container">
     <div class="col-12 col-xl-4">
       <div class="card-trip" style="border-radius: 15px; height: 400px;">
-        <%= cl_image_tag @group.photo.key %>
+        <% if @group.photo.attached? %>
+          <%= cl_image_tag @group.photo.key %>
+        <% else %>
+          <%= image_tag "background" %>
+        <% end %>
         <div class="card-trip-infos">
           <%= cl_image_tag @group.user.photo.key, class: "card-trip-user avatar-bordered" %>
         </div>
@@ -79,6 +83,8 @@
             <h6 class="m-2 d-flex align-items-center">
               <% if user.user.photo.attached? %>
                 <%= cl_image_tag user.user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+              <% else %>
+                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
               <% end %>
               <div class="ms-3"><%= user.user == current_user ? "You" : user.user.first_name %> - pending</div>
               </p>
