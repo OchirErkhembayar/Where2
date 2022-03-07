@@ -18,48 +18,28 @@
 -->
 
 <div class="container">
-  <div class="row pt-5 d-flex justify-content-center">
-    <table class="table" style="width: 600px;">
-      <thead>
-        <tr>
-          <th scope="col">Your Group Invitations</th>
-        </tr>
-      </thead>
-      <tbody>
+  <div class="d-flex justify-content-center">
+    <div class="card-trip px-5 py-4 col-6" style="border-radius: 15px; max-width: 800px">
+      <h4 class="text-center">Your Group Invitations </h4>
         <% if @invitations.size > 0 %>
           <% @invitations.reverse.each do |invitation| %>
-            <tr>
-              <td>
-                <strong><%= invitation.group.user.first_name %></strong> has invited you to join: <strong><%= invitation.group.name.capitalize %></strong>
-                <%= link_to "Accept", accept_group_usergroup_path(invitation.group_id, invitation), method: :put, class: "btn btn-primary btn-sm" %>
-                <%= link_to "Decline", group_usergroup_path(invitation.group_id, invitation), method: :delete, class: "btn btn-primary btn-sm" %>
-              </td>
-            </tr>
+            <strong><%= invitation.group.user.first_name %></strong> has invited you to join: <strong><%= invitation.group.name.capitalize %></strong>
+            <%= link_to "Accept", accept_group_usergroup_path(invitation.group_id, invitation), method: :put, class: "btn btn-primary btn-sm" %>
+            <%= link_to "Decline", group_usergroup_path(invitation.group_id, invitation), method: :delete, class: "btn btn-primary btn-sm" %>
           <% end %>
         <% end %>
-      </tbody>
-    </table>
+      </div>
+    </div>
   </div>
-  <div class="row pt-5 d-flex justify-content-center">
-    <table class="table" style="width: 600px">
-      <thead>
-        <tr>
-          <th scope="col">Your Event Invitations</th>
-        </tr>
-      </thead>
-      <tbody>
+  <div class="d-flex justify-content-center">
+    <div class="card-trip mt-4 px-5 py-5 col-6" style="border-radius: 15px; max-width: 650px">
+      <h4 class="text-center">Your Event Invitations</h4>
         <% if @eventinvitations.size > 0 %>
           <% @eventinvitations.reverse.each do |invitation| %>
-            <tr>
-              <td>
-                <strong><%= invitation.event.group.user.first_name %></strong> has invited you to join: <strong><%= invitation.event.name.capitalize %></strong>
-                <%= link_to "Accept", accept_event_user_path(invitation), method: :put, class: "btn btn-primary btn-sm" %>
-                <%= link_to "Decline", event_user_path(invitation), method: :delete, class: "btn btn-primary btn-sm" %>
-              </td>
-            </tr>
+            <strong><%= invitation.event.group.user.first_name %></strong> has invited you to join: <strong><%= invitation.event.name.capitalize %></strong>
+            <%= link_to "Accept", accept_event_user_path(invitation), method: :put, class: "btn btn-primary btn-sm" %>
+            <%= link_to "Decline", event_user_path(invitation), method: :delete, class: "btn btn-primary btn-sm" %>
           <% end %>
         <% end %>
-      </tbody>
-    </table>
   </div>
 </div>
