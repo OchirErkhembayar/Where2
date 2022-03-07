@@ -7,9 +7,11 @@ body, html {
 
 .background-landing{
   height: 100vh;
-  background-size: cover;
   width: 100%;
   position: absolute;
+  background-size: cover;
+  background-position: 100% 70%;
+  background-repeat: no-repeat;
 }
 
 .frame {
