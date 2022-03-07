@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :groups do
     resources :events, only: %i[show new create update] do
       resources :messages, only: %i[create]
-      resources :event_users, only: %i[create new]
+      resources :event_users, only: %i[new]
     end
     resources :usergroups, only: %i[new create destroy] do
       member do
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
   resources :events, only: %i[index]
   resources :usergroups, only: %i[index]
-  resources :event_users, only: %i[index destroy] do
+  resources :event_users, only: %i[index destroy create] do
     member do
       put :accept
     end

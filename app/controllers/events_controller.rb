@@ -35,9 +35,16 @@ class EventsController < ApplicationController
     end
     @memberids = @users.map { |user| user.id }
     @eventusers = EventUser.where('event_id = ? AND status = ?', @event.id, true)
+    @eventusers_pending = EventUser.where('event_id = ? AND status = ?', @event.id, false)
     @messages = Event.where('event_id = ?', @event_id)
     @message = Message.new
     @event_user = EventUser.new
+    @markers = [@event].map do |event|
+      {
+        lat: event.latitude,
+        lng: event.longitude
+      }
+    end
   end
 
   def new
