@@ -18,7 +18,7 @@
     <div class="row py-3">
       <div class="col-12 col-sm-4">
         <div class="chatroom me-5 w-100" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>">
-          <div style="background-color: #F4F4F4; border: 1px solid black; height: 400px; overflow: scroll;" class="p-3 mb-3 rounded message-box">
+          <div style="background-color: #F4F4F4; border: 1px solid black; height: 463px; overflow: scroll;" class="p-3 mb-3 rounded message-box">
             <div class="messages mb-3" data-event-subscription-target="messages">
               <% @event.messages.each do |message| %>
                 <%= render "messages/message", message: message %>
@@ -41,39 +41,41 @@
       <div class="col-12 col-sm-4 me-0 pe-1 attendees">
         <div class="me-5 p-3 w-100 rounded" style="background-color: #F4F4F4; border: 1px solid black;height: 97%">
           <h4 class="my-3 text-center">Attendees </h4>
-          <div class="mx-3">
-            <% @users.each do |user| %>
-              <div class="d-flex my-3">
-                <% if user.photo.attached? %>
-                  <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
-                <% end %>
-                <p class="pt-3 ms-3"><%= user == @event.group.user ? "Admin: " : "" %><%= user == current_user ? "You" : user.first_name.capitalize %></p>
-              </div>
-            <% end %>
-          </div>
-          <div class="mx-3">
-            <% @eventusers.each do |user| %>
-              <div class="d-flex mt-3 " style="height: 250px; overflow: scroll;">
-                <% if user.user.photo.attached? %>
-                  <%= cl_image_tag user.user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
-                <% end %>
-                <p class="pt-3 ms-3"><%= user.user == current_user ? "You" : user.user.first_name.capitalize %></p>
-                <% if current_user == @event.group.user %>
-                  <%= link_to "Kick", event_user_path(user), method: :delete, class: "btn btn-primary btn-sm mb-2 mt-3 ms-3" %>
-                <% end %>
-              </div>
-            <% end %>
-            <% @eventusers_pending.each do |user| %>
-              <div class="d-flex mt-3">
-                <% if user.user.photo.attached? %>
-                  <%= cl_image_tag user.user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
-                <% end %>
-                <p class="pt-3 ms-3"><%= user.user.first_name.capitalize %> - (pending)</p>
-                <% if current_user == @event.group.user %>
-                  <%= link_to "Cancel invite", event_user_path(user), method: :delete, class: "btn btn-primary btn-sm mb-2 mt-3 ms-3" %>
-                <% end %>
-              </div>
-            <% end %>
+          <div style="height: 250px; overflow: scroll;">
+            <div class="mx-3">
+              <% @users.each do |user| %>
+                <div class="d-flex my-3">
+                  <% if user.photo.attached? %>
+                    <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <% end %>
+                  <p class="pt-3 ms-3"><%= user == @event.group.user ? "Admin: " : "" %><%= user == current_user ? "You" : user.first_name.capitalize %></p>
+                </div>
+              <% end %>
+            </div>
+            <div class="mx-3">
+              <% @eventusers.each do |user| %>
+                <div class="d-flex mt-3">
+                  <% if user.user.photo.attached? %>
+                    <%= cl_image_tag user.user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <% end %>
+                  <p class="pt-3 ms-3"><%= user.user == current_user ? "You" : user.user.first_name.capitalize %></p>
+                  <% if current_user == @event.group.user %>
+                    <%= link_to "Kick", event_user_path(user), method: :delete, class: "btn btn-primary btn-sm mb-2 mt-3 ms-3" %>
+                  <% end %>
+                </div>
+              <% end %>
+              <% @eventusers_pending.each do |user| %>
+                <div class="d-flex mt-3">
+                  <% if user.user.photo.attached? %>
+                    <%= cl_image_tag user.user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <% end %>
+                  <p class="pt-3 ms-3"><%= user.user.first_name.capitalize %> - (pending)</p>
+                  <% if current_user == @event.group.user %>
+                    <%= link_to "Cancel invite", event_user_path(user), method: :delete, class: "btn btn-primary btn-sm mb-2 mt-3 ms-3" %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
           </div>
           <%= simple_form_for @event_user, url: event_users_path(@event), remote: true do |f| %>
             <div class="form-group text-center">
