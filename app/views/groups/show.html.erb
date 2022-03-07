@@ -30,7 +30,9 @@
           <%= image_tag "background" %>
         <% end %>
         <div class="card-trip-infos">
-          <%= cl_image_tag @group.user.photo.key, class: "card-trip-user avatar-bordered" %>
+          <% if @group.user.photo.attached? %>
+            <%= cl_image_tag @group.user.photo.key, class: "card-trip-user avatar-bordered" %>
+          <% end %>
         </div>
           <h3 class="text-center mt-3"><%= @group.name %></h3>
           <div class="mt-2">
