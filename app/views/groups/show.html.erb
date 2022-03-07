@@ -23,13 +23,14 @@
 <div class="container">
   <div class="row container">
     <div class="col-12 col-xl-4">
-      <div class="card-trip" style="border-radius: 15px; height: 380px;">
-        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+      <div class="card-trip" style="border-radius: 15px; height: 400px;">
+        <%= cl_image_tag @group.photo.key %>
         <div class="card-trip-infos">
           <%= cl_image_tag @group.user.photo.key, class: "card-trip-user avatar-bordered" %>
         </div>
           <h3 class="text-center mt-3"><%= @group.name %></h3>
           <div class="mt-2">
+            <h6 class="text-center">Admin: <%= @group.user.first_name.capitalize %></h6>
             <h6 class="text-center"><%= UserGroup.where('group_id = ?', @group.id).count %> • members</h6>
             <div class="d-flex justify-content-center mt-3">
               <%= link_to edit_group_path(@group) do  %>
@@ -41,12 +42,77 @@
             </div>
           </div>
       </div>
-      <div class="card-trip mt-3" style="border-radius: 15px; height: auto;">
-        <h6 class="p-3">Members</h6>
+      <div class="card-trip mt-3 p-3" style="border-radius: 15px; height: auto;">
+        <h5 class="p-3">Members</h5>
+        <% @users.each do |user| %>
+          <h6 class="m-2 d-flex align-items-center">
+            <div>
+              <% if user.photo.attached? %>
+                <% if user == @group.user %>
+                  <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% else %>
+                  <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% end %>
+              <% else %>
+                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+              <% end %>
+            </div>
+            <div class="ms-3 d-flex justify-content-between">
+              <div class="mt-1">
+                <%= user == current_user ? "You" : user.first_name %>
+                <%= user == @group.user ? " -   Admin" : "" %>
+              </div>
+              <% if user != current_user %>
+                <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
+                  <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
+                <% end %>
+                <% if current_user == @group.user %>
+                  <%= link_to kick_group_usergroup_path(@group, user), method: :delete, style: "color: red;", class: "ms-3 mt-1" do%>
+                    <i class="fas fa-ban"></i>
+                  <% end %>
+                <% end %>
+              <% end %>
+          </h6>
+        <% end %>
+            </h6>
+        <% @pendingusers.each do |user| %>
+            <h6 class="m-2 d-flex align-items-center">
+              <% if user.user.photo.attached? %>
+                <%= cl_image_tag user.user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+              <% end %>
+              <div class="ms-3"><%= user.user == current_user ? "You" : user.user.first_name %> - pending</div>
+              </p>
+            </h6>
+        <% end %>
+        <%= simple_form_for @usergroup, url: group_usergroups_path(@group)  do |f| %>
+          <div class="form-group text-center">
+            <%= f.association :user, collection: current_user.user_group_invites(@group), label_method: :first_name, label: "Add friends", input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Type your friend's name", class: "flex-grow text-center" %>
+          <%= f.submit "Submit", class: "btn btn-primary w-100" %>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="col-12 col-xl-8">
-      Column
+      <div class="card-trip px-4 py-3" style="border-radius: 15px;">
+        <h3 class="text-center">Events   <%= link_to new_group_event_path(@group) do  %>
+            <i class="fas fa-plus" style="font-size: 22px; color: black;"></i>
+            <% end %></h3>
+        <div class="row">
+          <% @events.each do |event| %>
+            <div class="col-12 col-xl-6">
+              <%= link_to group_event_path(event), style: "text-decoration: none; color: white;" do %>
+                <div class="card-product justify-content-center rounded mb-1 mt-3" style="height: 120px; background-color: #F4B658;">
+                  <div class="card-product-infos text-center">
+                    <h2 class="mb-2"><%= event.name.capitalize %></h2>
+                    <h6 style="color: white;"><%= event.location %></h6>
+                    <h6 style="color: white;" class="mb-2"><%= event.start_date %> - <%= event.end_date %></h6>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -71,123 +137,9 @@
         <div class="modal-header">
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class data-open-form-target="form" ="modal-body">
+        <div class data-open-form-target="form" class="modal-body">
           <%= render "events/form", event: @event, group: @group%>
         </div>
       </div>
     </div>
   </div>
-  <div class="container">
-    <div class="text-center p-3" style="background-color: #F4B658; color: white;"r>
-      <h1><%= @group.name %></h1>
-    </div>
-    <div class="row">
-      <div class="col-6 pt-3">
-        <h3 class="text-center">Members</h3>
-        <table class="table group-table my-3 table-striped table-hover table-sm w-100">
-          <thead>
-            <tr>
-              <th scope="col d-flex">
-                <%= link_to edit_group_path(@group) do  %>
-                  <img src="https://www.seekpng.com/png/full/202-2022672_edit-comments-edit-icon-png-circle.png" class="group-icon" alt="">
-                <% end %>
-                <%= link_to group_path(@group), method: :delete do  %>
-                  <img src="https://www.seekpng.com/png/full/202-2022743_edit-delete-icon-png-download-delete-icon-png.png" class="group-icon" alt="">
-                <% end %>
-              </th>
-              <th scope="col">
-                <input type="image" src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/button_add-1024.png" class="group-icon" alt="" style="float:right" data-bs-toggle="modal" data-bs-target="#staticBackdrop"">
-                  <!--<%= link_to new_group_usergroup_path(@group) do  %>
-                    <img src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/button_add-1024.png" class="group-icon" alt="" style="float:right" data-action="click->open-form#openForm">
-                  <% end %>
-                  -->
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @users.each do |user| %>
-              <tr>
-                <td><h6 class="m-2 d-flex align-items-center">
-                  <% if user.photo.attached? %>
-                    <% if user == @group.user %>
-                      <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
-                    <% else %>
-                      <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
-                    <% end %>
-                  <% else %>
-
-                  <% end %>
-                  <div class="ms-3">
-                    <%= user == current_user ? "You" : user.first_name %>
-                    <%= user == @group.user ? " -   Admin" : "" %>
-                  </div>
-                </h6></td>
-                <td><h6 class="mt-3">
-                  <% if user != current_user %>
-                    <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
-                      <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
-                    <% end %>
-                    <% if current_user == @group.user %>
-                      <%= link_to "Kick", kick_group_usergroup_path(@group, user), method: :delete, class: "btn btn-primary btn-sm ml-3" %>
-                    <% end %>
-                  <% end %>
-                </h6></td>
-              </tr>
-            <% end %>
-            <% @pendingusers.each do |user| %>
-              <tr>
-                <td><h6 class="d-flex align-items-center">
-                  <p class="p-2 pb-0 mb-0">
-                    <% if user.user.photo.attached? %>
-                      <%= cl_image_tag user.user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
-                    <% end %>
-                    <p class="mt-4 ms-2"><%= user.user == current_user ? "You" : user.user.first_name %></p>
-                  </p>
-                </h6></td>
-                <td><h6 class="mt-4">Status: Pending</h6></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <%= simple_form_for @usergroup, url: group_usergroups_path(@group)  do |f| %>
-          <div class="form-group mb-3 text-center">
-            <%= f.association :user, collection: current_user.user_group_invites(@group), label_method: :first_name, label: "Add friends", input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Type your friend's name", class: "flex-grow text-center", required: true %>
-          <%= f.submit "Submit", class: "btn btn-primary mb-3 w-100" %>
-          </div>
-        <% end %>
-      </div>
-      <div class="col-6 align-center pt-3">
-        <div class="row">
-          <h2>
-            <h3 class="text-center">Events</h3>
-            <input type="image" src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/button_add-1024.png" class="group-icon" alt="" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
-            <!--
-            <%= link_to new_group_event_path(@group) do  %>
-            <img src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/button_add-1024.png" class="group-icon" alt="" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
-            <% end %>
-            -->
-          </h2>
-        </div>
-        <div class="row">
-          <% @events.each do |event| %>
-            <div class="col-12 col-xl-6">
-              <%= link_to group_event_path(event), style: "text-decoration: none; color: white;" do %>
-                <div class="card-product justify-content-center rounded mb-1 mt-3" style="height: 120px; background-color: #F4B658;">
-                  <div class="card-product-infos text-center">
-                    <h2 class="mb-2"><%= event.name.capitalize %></h2>
-                    <h6 style="color: white;"><%= event.location %></h6>
-                    <h6 style="color: white;" class="mb-2"><%= event.start_date %> - <%= event.end_date %></h6>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-    </div>
-    <div class="row d-flex justify-content-center mt-3">
-      <% if current_user != @group.user %>
-        <%= link_to "Leave Group", group_usergroup_path(@group, current_user), method: :delete, class: "btn btn-primary" %>
-      <% end %>
-    </div>
-  </div>
-</div>
