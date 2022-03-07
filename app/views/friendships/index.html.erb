@@ -1,34 +1,81 @@
 <div class="container">
-  <h3>Your friend requests</h3>
-  <% @friendship_requests.each do |friendship| %>
-    <p><%= User.find(friendship.friend_one_id).first_name.capitalize %> has sent you a friend request!</p>
-    <%= link_to "Accept", accept_user_friendship_path(current_user, friendship), method: :put, class: "btn btn-danger" %>
-    <%= link_to "Decline", user_friendship_path(current_user, friendship), method: :delete, class: "btn btn-danger" %>
-  <% end %>
-</div>
-<div class="container">
-  <h3>Your friends</h3>
-  <% if @two_is_friends %>
-    <% @two_is_friends.each do |f| %>
-      <p><%= User.find(f.friend_two_id).first_name %></p>
-      <%= link_to "Delete friend", user_friendship_path(current_user, f), method: :delete, class: "btn btn-danger" %>
-    <% end %>
-  <% end %>
-  <% if @one_is_friends %>
-    <% @one_is_friends.each do |f| %>
-      <p><%= User.find(f.friend_one_id).first_name %></p>
-      <%= link_to "Delete friend", user_friendship_path(current_user, f), method: :delete, class: "btn btn-danger" %>
-    <% end %>
-  <% end %>
-  <% if @friendships_pending %>
-    <% @friendships_pending.each do |f| %>
-      <% if User.find(f.friend_one_id) == current_user %>
-        <p><%= User.find(f.friend_two_id).first_name %> (pending)</p>
-         <%= link_to "cancel", user_friendship_path(current_user, f), method: :delete, class: "btn btn-danger" %>
-      <% end %>
-    <% end %>
-  <% end %>
-</div>
-<div class="container">
-  <%= render "form" %>
+  <div class="row">
+    <div class="col-12 col-xl-4">
+      <div class="card-trip mt-3 p-3" style="border-radius: 15px; height: auto;">
+        <h4 class="text-center">Your friends</h4>
+        <% if @two_is_friends %>
+          <% @two_is_friends.each do |f| %>
+            <div class="d-flex my-3 justify-content-between">
+              <div class="d-flex">
+                <% if User.find(f.friend_two_id).photo.attached? %>
+                  <%= cl_image_tag User.find(f.friend_two_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% else %>
+                  <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% end %>
+                <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_two_id).first_name %></h6>
+              </div>
+              <%= link_to "Delete friend", friendship_path(f), method: :delete, class: "btn btn-danger" %>
+            </div>
+          <% end %>
+        <% end %>
+        <% if @one_is_friends %>
+          <% @one_is_friends.each do |f| %>
+            <div class="d-flex my-3 justify-content-between">
+              <div class="d-flex">
+                <% if User.find(f.friend_one_id).photo.attached? %>
+                  <%= cl_image_tag User.find(f.friend_one_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% else %>
+                  <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% end %>
+                <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_one_id).first_name %></h6>
+              </div>
+              <%= link_to "Delete friend", friendship_path(f), method: :delete, class: "btn btn-danger" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-12 col-xl-4">
+      <div class="card-trip mt-3 p-3" style="border-radius: 15px; height: auto;">
+        <h4 class="text-center">Accept/Decline</h4>
+        <% @friendship_requests.each do |friendship| %>
+          <div class="d-flex my-3 justify-content-between">
+            <div class="d-flex">
+              <% if User.find(friendship.friend_one_id).photo.attached? %>
+                <%= cl_image_tag User.find(friendship.friend_one_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+              <% else %>
+                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+              <% end %>
+              <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(friendship.friend_one_id).first_name %></h6>
+            </div>
+            <%= link_to "Accept", accept_user_friendship_path(current_user, friendship), method: :put, class: "btn btn-danger" %>
+            <%= link_to "Decline", friendship_path(friendship), method: :delete, class: "btn btn-danger" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-12 col-xl-4">
+      <div class="card-trip mt-3 p-3" style="border-radius: 15px; height: auto;">
+        <h4 class="text-center">Add friends</h4>
+        <% if @friendships_pending %>
+          <% @friendships_pending.each do |f| %>
+            <% if User.find(f.friend_one_id) == current_user %>
+              <div class="d-flex my-3 justify-content-between">
+                <div class="d-flex">
+                  <% if User.find(f.friend_two_id).photo.attached? %>
+                    <%= cl_image_tag User.find(f.friend_two_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <% else %>
+                    <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <% end %>
+                  <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_two_id).first_name %> - (pending)</h6>
+                </div>
+                <%= link_to "cancel", friendship_path(f), method: :delete, class: "btn btn-danger" %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+        <%= render "form", class: "w-100" %>
+      </div>
+    </div>
+  </div>
 </div>

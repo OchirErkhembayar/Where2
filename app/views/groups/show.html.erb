@@ -46,7 +46,7 @@
             </div>
           </div>
       </div>
-      <div class="card-trip mt-3 p-3" style="border-radius: 15px; height: auto;">
+      <div class="card-trip mt-3 p-3 mb-3" style="border-radius: 15px; height: auto;">
         <h5 class="p-3">Members</h5>
         <% @users.sort_by { |u| u.created_at }.reverse.each do |user| %>
           <h6 class="m-2 d-flex align-items-center">

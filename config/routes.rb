@@ -22,11 +22,11 @@ Rails.application.routes.draw do
     end
   end
   resources :users, only: %i[show] do
-    resources :friendships, only: %i[create destroy] do
+    resources :friendships, only: %i[create] do
       member do
         put :accept
       end
     end
   end
-  resources :friendships, only: %i[index]
+  resources :friendships, only: %i[index destroy]
 end
