@@ -7,54 +7,25 @@
         <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 170px; width: 200px;" %>
       <% end %>
     </div>
-<<<<<<< HEAD
-  </div>
-  <div class="row py-3">
-    <div class="col-12 col-sm-4 mt-2">
-      <div class="chatroom me-5 w-100" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>">
-        <div style="background-color: #F4F4F4; border: 1px solid black;" class="p-3 mb-3 rounded" data-spy="scroll" data-target="#myScrollspy" data-offset="20">
-
-          <div class="messages mb-3" data-controller="infinite-scroll" data-event-subscription-target="messages">
-            <% @event.messages.last(5).each do |message| %>
-              <% unless message.content.empty? %>
-                <%= render "messages/message", message: message %>
-              <% end %>
-            <% end %>
-          </div>
-
-          <%= simple_form_for [@group, @event, @message], remote: true,
-            html: {data: {event_subscription_target: "form"}, class: "d-flex"}  do |f| %>
-            <%= f.text_field :content,
-              label: false,
-              class: "w-100",
-              placeholder: "Message ##{@event.name}",
-              wrapper_html: {class: "flex-grow-1"}
-            %>
-            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-            <%= f.submit "Send", class: "btn btn-primary btn-sm ms-2" %>
-          <% end %>
-        </div>
-=======
     <div class="row p-2">
       <div class="card-product infos d-flex flex-column justify-content-center rounded ms-1" style="height: auto; background-color: #F4B658; color: white;">
         <h3 class="mt-3"><%= @event.name %></h1>
         <h5 class="text-center"><%= @event.location %></h5>
         <h6 class="mb-1"><%= @event.description %></h6>
         <h6 class="mb-3 mt-1"><%= @event.start_date %> - <%= @event.end_date %></h6>
->>>>>>> f70cf6f524bee2a9ee075b8317796f22b7e488f8
       </div>
     </div>
     <div class="row py-3">
       <div class="col-12 col-sm-4 mt-2">
         <div class="chatroom me-5 w-100" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>">
-          <div style="background-color: #F4F4F4; border: 1px solid black;" class="p-3 mb-3 rounded">
+          <div style="background-color: #F4F4F4; border: 1px solid black;" class="p-3 mb-3 rounded message-box">
             <div class="messages mb-3" data-event-subscription-target="messages">
               <% @event.messages.last(5).each do |message| %>
                 <%= render "messages/message", message: message %>
               <% end %>
             </div>
-
-            <%= simple_form_for [@group, @event, @message], remote: true,
+            </div>
+              <%= simple_form_for [@group, @event, @message], remote: true,
               html: {data: {event_subscription_target: "form"}, class: "d-flex"}  do |f| %>
               <%= f.text_field :content,
                 label: false,
@@ -63,9 +34,9 @@
                 wrapper_html: {class: "flex-grow-1"}
               %>
               <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-              <%= f.submit "Send", class: "btn btn-primary btn-sm ms-2" %>
+              <%= f.submit "Send", class: "btn btn-primary btn-sm ms-2 send-button" %>
             <% end %>
-          </div>
+
         </div>
       </div>
       <div class="col-12 col-sm-4 me-0 pe-1 attendees">

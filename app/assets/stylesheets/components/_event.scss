@@ -13,19 +13,6 @@
     padding: 1rem;
   }
 
-  .messages {
-    height: 100%;
-    overflow: scroll;
-    padding: 1rem;
-  }
-
-  .chatroom {
-    padding: 1rem;
-    max-height: 220px;
-    overflow-y: auto;
-    scrollbar-gutter: stable;
-  }
-
   #new_message {
     border-top: 1px solid $gray-200;
     padding: 1rem;
@@ -34,4 +21,10 @@
       margin-bottom: 0;
     }
   }
+}
+
+.message-box {
+  height: 300px;
+  overflow: scroll;
+  padding: 1rem;
 }
