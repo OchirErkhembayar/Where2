@@ -27,8 +27,9 @@ class PagesController < ApplicationController
       end
     end
     if @events.length > 0
-      @events.reject! { |event| event.end_date >= Date.today }
-      @events.sort_by! { |event| event.end_date } if @events.length > 0
+      @events.reject! { |event| event.end_date <= Date.today }
+      @events.sort_by! { |event| event.start_date } if @events.length > 0
     end
+    @events = @events.first(5)
   end
 end
