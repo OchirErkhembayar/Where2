@@ -151,7 +151,7 @@
             <% end %>
           <% end %>
         </div>
-        <% if current_user.event_user_invites(@event).empty? %>
+        <% if current_user.event_user_invites(@event).nil? %>
           <h6>Add friends in order to invite them!</h6>
         <% else %>
           <%= simple_form_for @event_user, url: event_users_path(@event), remote: true do |f| %>

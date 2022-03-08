@@ -34,15 +34,18 @@ export default class extends Controller {
           message.classList.add("text-start");
           message.classList.remove("pe-2")
           message.classList.add("ps-2")
-          message.style.removeProperty("margin-left");
 
           // message.firstElementChild.classList.remove("text-right");
           // message.firstElementChild.classList.add("text-left");
           console.log(message.firstElementChild)
           message.firstElementChild.parentNode.insertBefore(message.childNodes[5], message.childNodes[1]);
           message.firstElementChild.parentNode.insertBefore(message.childNodes[4], message.childNodes[2]);
-          console.log(message.childNodes[7])
-
+          console.log(message.childNodes)
+          console.log(message.childNodes[7].innerHTML)
+          let htmlObject = document.createElement('div');
+          htmlObject.innerHTML = message.childNodes[7].innerHTML
+          message.childNodes[7].firstElementChild.style.removeProperty("margin-left")
+          console.log(message)
         }
 
         // send the message
