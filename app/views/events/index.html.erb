@@ -1,4 +1,5 @@
 
+<!--
 <div class="container my-5">
   <div class="d-flex justify-content-center">
     <h1>Past Events</h1>
@@ -19,4 +20,26 @@
       <% end %>
     </tbody>
   </table>
+</div>
+-->
+
+<div style="width:80%; margin: auto;">
+  <div class="card-trip px-4 py-3" style="border-radius: 15px; max-width: 800px; margin: auto;">
+    <h3 class="text-center">Past Events </h3>
+    <div class="row d-flex justify-content-between">
+      <% @events.each do |event| %>
+        <div class="col-12 col-xl-6">
+          <%= link_to group_event_path(event, event.group), style: "text-decoration: none; color: white;" do %>
+            <div class="card-product justify-content-center rounded mb-1 mt-3" style="height: 120px; background-color: #F4B658;">
+              <div class="card-product-infos text-center">
+                <h2 class="mb-2"><%= event.name.capitalize %></h2>
+                <h6 style="color: white;"><%= event.location %></h6>
+                <h6 style="color: white;" class="mb-2"><%= event.start_date %> - <%= event.end_date %></h6>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
