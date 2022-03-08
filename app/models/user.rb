@@ -50,4 +50,8 @@ class User < ApplicationRecord
   def friend_invites
     User.all.reject { |us| friends.include? us }.reject { |use| pending_friends.include? use }.reject { |u| u == self }
   end
+
+  def groups
+    @groups = Group.where('user_id = ?', self.id)
+  end
 end

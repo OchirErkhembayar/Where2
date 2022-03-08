@@ -206,7 +206,7 @@
           <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
             <div class="card-trip px-3 py-3" style="border-radius: 15px;">
               <div class="chatroom me-5 w-100" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>" data-event-subscription-current-user-id-value="<%= current_user.id %>">
-                <div style="height: 492px; overflow: scroll; border-radius: 15px;" class="p-3 mb-3 rounded message-box">
+                <div style="height: 492px; overflow: auto; border-radius: 15px;" class="p-3 mb-3 rounded message-box">
                   <div class="messages mb-3 d-flex flex-column justify-content-right" data-event-subscription-target="messages">
                     <% @event.messages.each do |message| %>
                       <%= render "messages/message", message: message %>
@@ -227,7 +227,7 @@
             </div>
           </div>
           <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-            <div class="card-trip px-3 py-3" style="border-radius: 15px; height: 570px; overflow: scroll;">
+            <div class="card-trip px-3 py-3" style="border-radius: 15px; height: 570px; overflow: auto;">
               <div class="row pt-1 px-1 pb-0">
                 <%= simple_form_for([@event.group, @event], remote: true) do |f| %>
                   <div class="form-group">
