@@ -33,9 +33,16 @@ class EventsController < ApplicationController
     @users = @usergroups.map do |ug|
       ug.user
     end
+    @my_friendships = Friendship.where('friend_one_id = ? OR friend_two_id = ?', current_user.id, current_user.id)
     @memberids = @users.map { |user| user.id }
     @eventusers = EventUser.where('event_id = ? AND status = ?', @event.id, true)
+    @eventusers_users = @eventusers.map do |eu|
+      eu.user
+    end
     @eventusers_pending = EventUser.where('event_id = ? AND status = ?', @event.id, false)
+    @eventusers_pending_users = @eventusers_pending.map do |eup|
+      eup.user
+    end
     @messages = Event.where('event_id = ?', @event_id)
     @message = Message.new
     @event_user = EventUser.new
@@ -57,7 +64,7 @@ class EventsController < ApplicationController
     @group = Group.find(params[:group_id])
     @event.group = @group
     if @event.save
-      redirect_to "/groups/#{@event.id}/events/#{@group.id}"
+      redirect_to "/groups/#{@group.id}"
     else
       render :new
     end
@@ -73,7 +80,7 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-    redirect_to "/groups/#{@event.group.id}"
+    redirect_to "/groups/#{@event.id}/events/#{@event.group.id}"
   end
 
   def my_events

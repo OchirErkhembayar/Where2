@@ -38,7 +38,7 @@ class User < ApplicationRecord
     @eventusers = EventUser.where('event_id = ?', event.id).map { |eu| eu.user }
     @users = UserGroup.where('group_id = ?', event.group.id).map { |ug| ug.user }
     @friends = @friends.reject { |f| @eventusers.include? f }
-    @friends.reject { |f| @users.include? f }
+    @friends.reject! { |f| @users.include? f }
   end
 
   def user_group_invites(group)
