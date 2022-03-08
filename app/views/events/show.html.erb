@@ -26,9 +26,9 @@
             </div>
           </div>
       </div>
-      <div class="card-trip mt-3 p-3 mb-3" style="border-radius: 15px; height: auto;">
+      <div class="card-trip mt-3 p-3 mb-3" style="border-radius: 15px; height: 415px;">
         <h5 class="pt-3">Attendees</h5>
-        <div style="height: 120px; overflow: scroll;">
+        <div style="height: 215px; overflow: auto;">
           <% @users.sort_by { |u| u.created_at }.reverse.each do |user| %>
             <h6 class="m-2 d-flex align-items-center">
               <div>
@@ -172,7 +172,9 @@
             <h6>Ending: <%= @event.end_date %></h6>
           </div>
         </div>
-        <p><%= @event.description %></p>
+        <div class="p-1" style="overflow: auto; height: 100px;">
+          <p><%= @event.description %></p>
+        </div>
       </div>
       <div class="mt-3 ms-3">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
