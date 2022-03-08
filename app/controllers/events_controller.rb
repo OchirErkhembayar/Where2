@@ -33,9 +33,16 @@ class EventsController < ApplicationController
     @users = @usergroups.map do |ug|
       ug.user
     end
+    @my_friendships = Friendship.where('friend_one_id = ? OR friend_two_id = ?', current_user.id, current_user.id)
     @memberids = @users.map { |user| user.id }
     @eventusers = EventUser.where('event_id = ? AND status = ?', @event.id, true)
+    @eventusers_users = @eventusers.map do |eu|
+      eu.user
+    end
     @eventusers_pending = EventUser.where('event_id = ? AND status = ?', @event.id, false)
+    @eventusers_pending_users = @eventusers_pending.map do |eup|
+      eup.user
+    end
     @messages = Event.where('event_id = ?', @event_id)
     @message = Message.new
     @event_user = EventUser.new
