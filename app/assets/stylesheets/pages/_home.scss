@@ -135,7 +135,7 @@ body, html {
   font-family: Raleway, Helvetica, sans-serif;
   margin-bottom: 120px;
   text-align: center;
-  padding: 0 150px;
+  padding: 0 550px;
 }
 
 
@@ -240,4 +240,13 @@ body, html {
 
   * {
     box-sizing: border-box;
+  }
+
+  .landing-page-title {
+    justify-content: center;
+    color: black;
+    font-family:'Josefin Sans', sans-serif;
+    margin-bottom: 120px;
+    text-align: center;
+    padding: 0 150px;
   }
