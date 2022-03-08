@@ -80,7 +80,7 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-    redirect_to "/groups/#{@event.id}/events/#{@event.group.id}"
+    redirect_to "/groups/#{@event.group.id}"
   end
 
   def my_events
