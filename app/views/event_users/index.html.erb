@@ -2,35 +2,33 @@
 <div class="d-flex justify-content-center">
   <div class="card-trip px-4 py-3 col-6" style="border-radius: 15px; max-width: 800px">
   <h3 class="text-center">My Events </h3>
-  <div class="row">
-    <% @events.each do |event| %>
-      <div class="col-12 col-xl-6">
-        <%= link_to group_event_path(event, event.group.id), style: "text-decoration: none; color: white;" do %>
-          <div class="card-product justify-content-center rounded mb-1 mt-3" style="height: 120px; background-color: #F4B658;">
-            <div class="card-product-infos text-center">
-              <h2 class="mb-2"><%= event.name.capitalize %></h2>
-              <h6 style="color: white;"><%= event.location %></h6>
-              <h6 style="color: white;" class="mb-2"><%= event.start_date %> - <%= event.end_date %></h6>
+    <div class="row">
+      <% @events.each do |event| %>
+        <div class="col-12 col-xl-6">
+          <%= link_to group_event_path(event, event.group.id), style: "text-decoration: none; color: white;" do %>
+            <div class="card-product justify-content-center rounded mb-1 mt-3" style="height: 120px; background-color: #F4B658;">
+              <div class="card-product-infos text-center">
+                <h2 class="mb-2"><%= event.name.capitalize %></h2>
+                <h6 style="color: white;"><%= event.location %></h6>
+                <h6 style="color: white;" class="mb-2"><%= event.start_date %> - <%= event.end_date %></h6>
+              </div>
             </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-     <% @event_users.each do |eventuser| %>
+          <% end %>
+        </div>
+      <% end %>
+      <% @event_users.each do |eventuser| %>
         <div class="col-12 col-xl-6">
           <%= link_to group_event_path(eventuser.event.id, eventuser.event.group.id), style: "text-decoration: none; color: white;" do %>
-          <div class="card-product justify-content-center rounded mb-1 mt-3" style="height: 120px; background-color: #F4B658;">
-            <div class="card-product-infos text-center">
-              <h2><%= eventuser.event.name %></h2>
-              <h6 style="color: white;"><%= eventuser.event.location %></h6>
-              <h6 style="color: white;" class="mb-2"><%= eventuser.event.start_date %> - <%= eventuser.event.end_date %></h6>
+            <div class="card-product justify-content-center rounded mb-1 mt-3" style="height: 120px; background-color: #F4B658;">
+              <div class="card-product-infos text-center">
+                <h2><%= eventuser.event.name %></h2>
+                <h6 style="color: white;"><%= eventuser.event.location %></h6>
+                <h6 style="color: white;" class="mb-2"><%= eventuser.event.start_date %> - <%= eventuser.event.end_date %></h6>
+              </div>
             </div>
-          </div>
+          <% end %>
+        </div>
       <% end %>
-      </div>
-      <% end %>
+    </div>
   </div>
-</div>
-
-
 </div>
