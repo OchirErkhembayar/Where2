@@ -18,12 +18,14 @@
       </div>
       <div class="row px-5 d-flex justify-content-center">
         <div class="col-7 d-flex flex-column justify-content-center">
-          <div class="card-trip" style="height: 350px;">
-            <%= image_tag "background", style: "height: 280px" %>
-            <div>
-              <h6 class="text-center dash-text" style="margin: 15px 0px 8px 0px; text-decoration: none;">Events</h6>
+          <%= link_to events_path, style: "text-decoration: none;" do %>
+            <div class="card-trip" style="height: 350px;">
+              <%= image_tag "background", style: "height: 280px" %>
+              <div>
+                <h6 class="text-center dash-text" style="margin: 15px 0px 8px 0px; text-decoration: none;">Events</h6>
+              </div>
             </div>
-          </div>
+          <% end %>
         </div>
         <div class="col-5 d-flex flex-column justify-content-center">
           <div>
@@ -38,22 +40,26 @@
           </div>
         </div>
         <div class="col-7 d-flex flex-column justify-content-center">
-          <div class="card-trip" style="height: 350px;">
-            <%= image_tag "background", style: "height: 280px" %>
-            <div>
-              <h6 class="text-center dash-text" style="margin: 15px 0px 8px 0px; text-decoration: none;">Groups</h6>
+          <%= link_to  groups_path, style: "text-decoration: none;" do %>
+            <div class="card-trip" style="height: 350px;">
+              <%= image_tag "background", style: "height: 280px" %>
+              <div>
+                <h6 class="text-center dash-text" style="margin: 15px 0px 8px 0px; text-decoration: none;">Groups</h6>
+              </div>
             </div>
-          </div>
+          <% end %>
         </div>
       </div>
       <div class="row px-5 mt-5 d-flex justify-content-center">
         <div class="col-7 d-flex flex-column justify-content-center">
-          <div class="card-trip" style="height: 350px;">
-            <%= image_tag "background", style: "height: 280px" %>
-            <div>
-              <h6 class="text-center dash-text" style="margin: 15px 0px 8px 0px; text-decoration: none;">Invitations</h6>
+          <%= link_to events_path, style: "text-decoration: none;" do %>
+            <div class="card-trip" style="height: 350px;">
+              <%= image_tag "background", style: "height: 280px" %>
+              <div>
+                <h6 class="text-center dash-text" style="margin: 15px 0px 8px 0px; text-decoration: none;">Invitations</h6>
+              </div>
             </div>
-          </div>
+          <% end %>
         </div>
         <div class="col-5 d-flex flex-column justify-content-center">
           <div>
