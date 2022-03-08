@@ -1,4 +1,4 @@
-<%= simple_form_for(@group) do |f| %>
+<%= simple_form_for(@group, html: { class: "nice-class"}) do |f| %>
 <div class="form-group mb-3 mx-5 px-5">
     <%= f.input :name, class: "form-control", placeholder: "Group name" %>
     <%= f.input :photo, as: :file, input_html: { multiple: false }, label: "Attach a group photo" %>
