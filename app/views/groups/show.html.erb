@@ -27,7 +27,7 @@
         <% if @group.photo.attached? %>
           <%= cl_image_tag @group.photo.key %>
         <% else %>
-          <%= image_tag "background" %>
+          <%= image_tag "background.jpg" %>
         <% end %>
         <div class="card-trip-infos">
           <% if @group.user.photo.attached? %>
