@@ -64,7 +64,7 @@ class EventsController < ApplicationController
     @group = Group.find(params[:group_id])
     @event.group = @group
     if @event.save
-      redirect_to "/groups/#{@event.id}/events/#{@group.id}"
+      redirect_to "/groups/#{@group.id}"
     else
       render :new
     end
@@ -80,7 +80,7 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-    redirect_to "/groups/#{@event.group.id}"
+    redirect_to "/groups/#{@event.id}/events/#{@event.group.id}"
   end
 
   def my_events

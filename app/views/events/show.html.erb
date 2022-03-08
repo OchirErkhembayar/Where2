@@ -15,13 +15,11 @@
           <h3 class="text-center mt-3"><%= @event.name %></h3>
           <div class="mt-2">
             <h6 class="text-center">Admin: <%= @event.group.user.first_name.capitalize %></h6>
-            <h6 class="text-center"><%= (UserGroup.where('group_id = ?', @event.group.id).count) + (EventUser.where('event_id = ?', @event.id).count) %> • attendees</h6>
+            <h6 class="text-center"><%= (UserGroup.where('group_id = ? AND status = ?', @event.group.id, true).count) + (EventUser.where('event_id = ? AND status = ?', @event.id, true).count) %> • attendees</h6>
             <div class="d-flex justify-content-center mt-3">
-              <%= link_to group_path(@event.group) do  %>
-                <i class="far fa-edit mx-3" style="color: black; font-size: 20px;"></i>
-              <% end %>
+              <%= link_to "Group", group_path(@event.group), class: "btn btn-sm btn-warning" %>
               <% if current_user == @event.group.user %>
-                <%= link_to event_path(@event), method: :put do  %>
+                <%= link_to event_path(@event), method: :delete do  %>
                   <i class="fas fa-trash-alt mx-3" style="color: black; font-size: 20px;"></i>
                 <% end %>
               <% end %>
@@ -29,39 +27,9 @@
           </div>
       </div>
       <div class="card-trip mt-3 p-3 mb-3" style="border-radius: 15px; height: auto;">
-        <h5 class="p-3">Attendees</h5>
-        <% @users.sort_by { |u| u.created_at }.reverse.each do |user| %>
-          <h6 class="m-2 d-flex align-items-center">
-            <div>
-              <% if user.photo.attached? %>
-                <% if user == @group.user %>
-                  <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
-                <% else %>
-                  <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
-                <% end %>
-              <% else %>
-                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
-              <% end %>
-            </div>
-            <div class="ms-3 d-flex justify-content-between">
-              <div class="mt-1">
-                <%= user == current_user ? "You" : user.first_name %>
-                <%= user == @group.user ? " -   Admin" : "" %>
-              </div>
-              <% if user != current_user %>
-                <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
-                  <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
-                <% end %>
-                <% if current_user == @group.user %>
-                  <%= link_to kick_group_usergroup_path(@group, user), method: :delete, style: "color: red;", class: "ms-3 mt-1" do%>
-                    <i class="fas fa-ban"></i>
-                  <% end %>
-                <% end %>
-              <% end %>
-          </h6>
-        <% end %>
-        <% if @event_users != nil %>
-          <% @eventuser_users.sort_by { |u| u.created_at }.reverse.each do |user| %>
+        <h5 class="pt-3">Attendees</h5>
+        <div style="height: 120px; overflow: scroll;">
+          <% @users.sort_by { |u| u.created_at }.reverse.each do |user| %>
             <h6 class="m-2 d-flex align-items-center">
               <div>
                 <% if user.photo.attached? %>
@@ -83,79 +51,106 @@
                   <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
                     <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
                   <% end %>
-                  <% if current_user == @group.user %>
-                    <%= link_to kick_group_usergroup_path(@group, user), method: :delete, style: "color: red;", class: "ms-3 mt-1" do%>
-                      <i class="fas fa-ban"></i>
-                    <% end %>
-                  <% end %>
                 <% end %>
             </h6>
           <% end %>
-        <% end %>
-        <% if @event_users != nil %>
-          <% @eventuser_users.sort_by { |u| u.created_at }.reverse.each do |user| %>
-            <h6 class="m-2 d-flex align-items-center">
-              <div>
-                <% if user.photo.attached? %>
-                  <% if user == @group.user %>
-                    <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+          <% if @event_users != nil %>
+            <% @eventuser_users.sort_by { |u| u.created_at }.reverse.each do |user| %>
+              <h6 class="m-2 d-flex align-items-center">
+                <div>
+                  <% if user.photo.attached? %>
+                    <% if user == @group.user %>
+                      <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                    <% else %>
+                      <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                    <% end %>
                   <% else %>
-                    <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                    <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
                   <% end %>
-                <% else %>
-                  <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
-                <% end %>
-              </div>
-              <div class="ms-3 d-flex justify-content-between">
-                <div class="mt-1">
-                  <%= user == current_user ? "You" : user.first_name %>
-                  <%= user == @group.user ? " -   Admin" : "" %>
                 </div>
-                <% if user != current_user %>
-                  <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
-                    <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
-                  <% end %>
-                  <% if current_user == @group.user %>
-                    <%= link_to kick_group_usergroup_path(@group, user), method: :delete, style: "color: red;", class: "ms-3 mt-1" do%>
-                      <i class="fas fa-ban"></i>
+                <div class="ms-3 d-flex justify-content-between">
+                  <div class="mt-1">
+                    <%= user == current_user ? "You" : user.first_name %>
+                    <%= user == @group.user ? " -   Admin" : "" %>
+                  </div>
+                  <% if user != current_user %>
+                    <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
+                      <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
+                    <% end %>
+                    <% if current_user == @group.user %>
+                      <%= link_to event_user_path(EventUser.where('event_id = ? AND user_id = ?', @event.id, user.id).first), method: :delete, style: "color: red;", class: "ms-3 mt-1" do%>
+                        <i class="fas fa-ban"></i>
+                      <% end %>
                     <% end %>
                   <% end %>
-                <% end %>
-            </h6>
+              </h6>
+            <% end %>
           <% end %>
-        <% end %>
-        <% if @eventusers_pending != nil %>
-          <% @eventusers_pending_users.sort_by { |u| u.created_at }.reverse.each do |user| %>
-            <h6 class="m-2 d-flex align-items-center">
-              <div>
-                <% if user.photo.attached? %>
-                  <% if user == @group.user %>
-                    <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+          <% if @eventusers != nil %>
+            <% @eventusers_users.sort_by { |u| u.created_at }.reverse.each do |user| %>
+              <h6 class="m-2 d-flex align-items-center">
+                <div>
+                  <% if user.photo.attached? %>
+                    <% if user == @group.user %>
+                      <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                    <% else %>
+                      <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                    <% end %>
                   <% else %>
-                    <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                    <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
                   <% end %>
-                <% else %>
-                  <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
-                <% end %>
-              </div>
-              <div class="ms-3 d-flex justify-content-between">
-                <div class="mt-1">
-                  <%= user == current_user ? "You" : "#{user.first_name} - (pending)" %>
-                  <%= user == @group.user ? " -   Admin" : "" %>
                 </div>
-                <% if user != current_user %>
-                  <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
-                    <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
-                  <% end %>
-                  <% if current_user == @group.user %>
-                    <%= link_to kick_group_usergroup_path(@group, user), method: :delete, style: "color: red;", class: "ms-3 mt-1" do%>
-                      <i class="fas fa-ban"></i>
+                <div class="ms-3 d-flex justify-content-between">
+                  <div class="mt-1">
+                    <%= user == current_user ? "You" : user.first_name %>
+                    <%= user == @group.user ? " -   Admin" : "" %>
+                  </div>
+                  <% if user != current_user %>
+                    <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
+                      <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
+                    <% end %>
+                    <% if current_user == @group.user %>
+                      <%= link_to event_user_path(EventUser.where('event_id = ? AND user_id = ?', @event.id, user.id).first), method: :delete, style: "color: red;", class: "ms-3 mt-1" do%>
+                        <i class="fas fa-ban"></i>
+                      <% end %>
                     <% end %>
                   <% end %>
-                <% end %>
-            </h6>
+              </h6>
+            <% end %>
           <% end %>
-        <% end %>
+          <% if @eventusers_pending != nil %>
+            <% @eventusers_pending_users.sort_by { |u| u.created_at }.reverse.each do |user| %>
+              <h6 class="m-2 d-flex align-items-center">
+                <div>
+                  <% if user.photo.attached? %>
+                    <% if user == @group.user %>
+                      <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                    <% else %>
+                      <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                    <% end %>
+                  <% else %>
+                    <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <% end %>
+                </div>
+                <div class="ms-3 d-flex justify-content-between">
+                  <div class="mt-1">
+                    <%= user == current_user ? "You" : "#{user.first_name} - (pending)" %>
+                    <%= user == @group.user ? " -   Admin" : "" %>
+                  </div>
+                  <% if user != current_user %>
+                    <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
+                      <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
+                    <% end %>
+                    <% if current_user == @group.user %>
+                      <%= link_to kick_group_usergroup_path(@group, user), method: :delete, style: "color: red;", class: "ms-3 mt-1" do%>
+                        <i class="fas fa-ban"></i>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+              </h6>
+            <% end %>
+          <% end %>
+        </div>
         <%= simple_form_for @event_user, url: event_users_path(@event), remote: true do |f| %>
           <div class="form-group text-center">
             <%= f.association :user, collection: current_user.event_user_invites(@event), label_method: :first_name, method: :post, input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Add your friends", label: "Select friends to add" %>
@@ -204,9 +199,9 @@
           </div>
           <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
             <div class="card-trip px-3 py-3" style="border-radius: 15px;">
-              <div class="chatroom me-5 w-100" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>">
+              <div class="chatroom me-5 w-100" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>" data-event-subscription-current-user-id-value="<%= current_user.id %>">
                 <div style="height: 492px; overflow: scroll; border-radius: 15px;" class="p-3 mb-3 rounded message-box">
-                  <div class="messages mb-3" data-event-subscription-target="messages">
+                  <div class="messages mb-3 d-flex flex-column justify-content-right" data-event-subscription-target="messages">
                     <% @event.messages.each do |message| %>
                       <%= render "messages/message", message: message %>
                     <% end %>
@@ -218,7 +213,7 @@
                         label: false,
                         class: "w-100",
                         placeholder: "Message ##{@event.name}",
-                        wrapper_html: {class: "flex-grow-1"}
+                        wrapper_html: {class: "flex-grow-1" }
                       %>
                       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                     <%= f.submit "Send", class: "btn btn-primary btn-sm ms-2 send-button" %>
