@@ -14,10 +14,14 @@ const updateScroll = () => {
   console.log("hello");
 }
 
-updateScroll();
+if (document.querySelector(".message-box")) {
+  updateScroll();
+}
 
 const element = document.querySelector(".send-button")
 
-element.addEventListener('click', (event) => {
+if (document.querySelector(".send-button")){
+  element.addEventListener('click', (event) => {
   setInterval(updateScroll, 500);
 });
+}

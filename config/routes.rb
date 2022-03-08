@@ -9,24 +9,27 @@ Rails.application.routes.draw do
     end
     resources :usergroups, only: %i[new create destroy] do
       member do
-        put :accept
         delete :kick
       end
     end
   end
   resources :events, only: %i[index destroy]
-  resources :usergroups, only: %i[index]
+  resources :usergroups, only: %i[index] do
+    member do
+      put :accept
+    end
+  end
   resources :event_users, only: %i[index destroy create] do
     member do
       put :accept
     end
   end
   resources :users, only: %i[show] do
-    resources :friendships, only: %i[create destroy] do
-      member do
-        put :accept
-      end
+    resources :friendships, only: %i[create]
+  end
+  resources :friendships, only: %i[index destroy] do
+    member do
+      put :accept
     end
   end
-  resources :friendships, only: %i[index]
 end

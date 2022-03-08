@@ -6,7 +6,7 @@
             <div class="modal-header">
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class data-open-form-target="form" = "modal-body">
+            <div class data-open-form-target="form"  class="modal-body">
               <%= render "form", group: @group%>
             </div>
           </div>
@@ -32,3 +32,4 @@
     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#newGroup">New Group</button>
   </div>
 </div>
+<%= render "form", group: @group%>
