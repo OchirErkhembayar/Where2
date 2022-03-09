@@ -216,8 +216,6 @@
                       <%= render "messages/message", message: message %>
                     <% end %>
                   </div>
-                </div>
-              </div>
                   <%= simple_form_for [@group, @event, @message], remote: true, html: {data: {event_subscription_target: "form"}, class: "d-flex"}  do |f| %>
                       <%= f.text_field :content,
                         label: false,
@@ -228,6 +226,8 @@
                       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                     <%= f.submit "Send", class: "btn btn-primary btn-sm ms-2 send-button" %>
                   <% end %>
+                </div>
+              </div>
             </div>
           </div>
           <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
