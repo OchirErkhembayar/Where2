@@ -69,6 +69,81 @@
       </div>
       </div>
     </div>
+    <%# OFF CANVAS %>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title larger-text" id="offcanvasWithBackdropLabel"></h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body smaller-text">
+        <h4 class="text-center larger-text">Your Friends</h4>
+        <% if @two_is_friends %>
+          <% @two_is_friends.each do |f| %>
+            <div class="d-flex my-3 justify-content-between">
+              <div class="d-flex">
+                <% if User.find(f.friend_two_id).photo.attached? %>
+                  <%= cl_image_tag User.find(f.friend_two_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% else %>
+                  <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% end %>
+                <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_two_id).first_name %></h6>
+              </div>
+              <%= link_to "DESTROY!!!", friendship_path(f), method: :delete, class: "btn btn-danger" %>
+            </div>
+          <% end %>
+        <% end %>
+        <% if @one_is_friends %>
+          <% @one_is_friends.each do |f| %>
+            <div class="d-flex my-3 justify-content-between">
+              <div class="d-flex">
+                <% if User.find(f.friend_one_id).photo.attached? %>
+                  <%= cl_image_tag User.find(f.friend_one_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% else %>
+                  <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% end %>
+                <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_one_id).first_name %></h6>
+              </div>
+              <%= link_to "DESTROY!!!", friendship_path(f), method: :delete, class: "btn btn-danger" %>
+            </div>
+          <% end %>
+        <% end %>
+        <h4 class="text-center larger-text">Accept/Decline Requests</h4>
+        <% @friendship_requests.each do |friendship| %>
+          <div class="d-flex my-3 justify-content-between">
+            <div class="d-flex">
+              <% if User.find(friendship.friend_one_id).photo.attached? %>
+                <%= cl_image_tag User.find(friendship.friend_one_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+              <% else %>
+                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+              <% end %>
+              <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(friendship.friend_one_id).first_name %></h6>
+            </div>
+            <%= link_to "Accept", accept_friendship_path(friendship), method: :put, class: "btn btn-danger" %>
+            <%= link_to "Decline", friendship_path(friendship), method: :delete, class: "btn btn-danger" %>
+          </div>
+        <% end %>
+        <h4 class="text-center larger-text">Send friend requests</h4>
+        <% if @friendships_pending %>
+          <% @friendships_pending.each do |f| %>
+            <% if User.find(f.friend_one_id) == current_user %>
+              <div class="d-flex my-3 justify-content-between">
+                <div class="d-flex">
+                  <% if User.find(f.friend_two_id).photo.attached? %>
+                    <%= cl_image_tag User.find(f.friend_two_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <% else %>
+                    <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <% end %>
+                  <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_two_id).first_name %> - (pending)</h6>
+                </div>
+                <%= link_to "DESTROY!!!", friendship_path(f), method: :delete, class: "btn btn-danger" %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+        <%= render "form", class: "w-100" %>
+      </div>
+    </div>
+    <%# OFF CANVAS %>
    <% else %>
     <div style="background-image: url(<%= asset_path "background.jpg" %>)" class="background-landing">
       <div class="frame">
