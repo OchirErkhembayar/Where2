@@ -52,7 +52,7 @@ export default class extends Controller {
     #insertMessageScrollDownAndResetForm(data) {
       this.messagesTarget.insertAdjacentElement("beforeend", data)
       this.messagesTarget.scrollTo(0, this.messagesTarget.scrollHeight)
-      // this.formTarget.reset()
+      this.formTarget.reset()
     }
 
     disconnect() {
