@@ -33,7 +33,7 @@
           <% if @group.user.photo.attached? %>
             <%= cl_image_tag @group.user.photo.key, class: "card-trip-user avatar-bordered" %>
           <% else %>
-            <%= cl_image_tag "unknown-avatar.png", class: "card-trip-user avatar-bordered" %>
+            <%= image_tag "Clint.jpeg", class: "card-trip-user avatar-bordered" %>
           <% end %>
         </div>
           <h3 class="text-center mt-3 larger-text"><%= @group.name %></h3>
