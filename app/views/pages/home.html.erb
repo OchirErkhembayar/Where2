@@ -3,7 +3,7 @@
     <div class="container pb-5">
       <div class="row mb-5" style="height: 300px;">
         <div class="col-12 d-flex  flex-column justify-content-center">
-          <h1 class="dash-text text-center" style="margin: 30px 0 10px 0; text-decoration: none;">Welcome, <%= current_user.first_name.capitalize %></h1>
+          <h1 class="dash-text text-center" style="margin: 30px 0 10px 0; text-decoration: none;">Hello, <%= current_user.first_name.capitalize %></h1>
           <h6 class="landing-page-text text-center" style="margin-bottom: 30px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero cum non et, placeat quidem facilis fugit quaerat ut sapiente. Corporis facere repellat quasi. Officiis repudiandae laborum laudantium ad maxime illo.</h6>
           <% if current_user.groups.empty? %>
             <div class="d-flex justify-content-center">
@@ -52,7 +52,7 @@
       </div>
       <div class="row px-5 mt-5 d-flex justify-content-center">
         <div class="col-7 d-flex flex-column justify-content-center">
-          <%= link_to events_path, style: "text-decoration: none;" do %>
+          <%= link_to usergroups_path, style: "text-decoration: none;" do %>
             <div class="card-trip" style="height: 350px;">
               <%= image_tag "background", style: "height: 280px" %>
               <div>

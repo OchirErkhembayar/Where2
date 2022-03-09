@@ -12,9 +12,9 @@
             <%= cl_image_tag @group.user.photo.key, class: "card-trip-user avatar-bordered" %>
           <% end %>
         </div>
-          <h3 class="text-center mt-3"><%= @event.name %></h3>
+          <h3 class="text-center mt-3 dash-title"><%= @event.name %></h3>
           <div class="mt-2">
-            <h6 class="text-center">Admin: <%= @event.group.user.first_name.capitalize %></h6>
+            <h6 class="text-center landing-page-text">Admin: <%= @event.group.user.first_name.capitalize %></h6>
             <h6 class="text-center"><%= (UserGroup.where('group_id = ? AND status = ?', @event.group.id, true).count) + (EventUser.where('event_id = ? AND status = ?', @event.id, true).count) %> • attendees</h6>
             <div class="d-flex justify-content-center mt-3">
               <%= link_to "Group", group_path(@event.group), class: "btn btn-sm btn-warning" %>
