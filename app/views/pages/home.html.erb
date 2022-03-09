@@ -4,7 +4,7 @@
       <div class="row mb-5 py-5">
         <div class="col-12 d-flex  flex-column justify-content-center">
           <h1 class="dash-text text-center" style="margin: 30px 0 10px 0; text-decoration: none; font-size: 50px;">Hello, <%= current_user.first_name.capitalize %></h1>
-          <h6 class="landing-page-text text-center" style="margin-bottom: 30px; font-size: 20px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero cum non et, placeat quidem facilis fugit quaerat ut sapiente. Corporis facere repellat quasi. Officiis repudiandae laborum laudantium ad maxime illo.</h6>
+          <h6 class="landing-page-text text-center" style="margin-bottom: 30px; font-size: 20px;">Welcome to your dashboard, from here you can access all your groups, events and invitations, to get started with an event go ahead into your group and create the event you want to from there!</h6>
           <% if current_user.groups.empty? %>
             <div class="d-flex justify-content-center">
               <%= link_to "Create your first group", new_group_path, class: "btn btn-ghost", style: "" %>
@@ -29,14 +29,14 @@
         </div>
         <div class="col-12 col-sm-6 col-xl-7 d-flex flex-column justify-content-center">
           <div>
-            <p class="landing-page-text text-start ps-5 pe-0" style="margin: 0px 0px 10px 0px">Lorem ipsum dolor sit amet consectetur adipisicing elit. At delectus temporibus voluptatibus nobis. Velit expedita, modi et numquam voluptatum praesentium corrupti cum quos tempore autem dolorum molestias sapiente impedit culpa!</p>
+            <p class="landing-page-text text-start ps-5 pe-0" style="margin: 0px 0px 10px 0px">Take a look at your past events and see what your friends have uploaded to the photos section to reminisce on all the great events you've been to with your friends.</p>
           </div>
         </div>
       </div>
       <div class="row px-5 mt-5 d-flex justify-content-center">
         <div class="col-12 col-sm-6 col-xl-7 d-flex flex-column justify-content-center">
           <div>
-            <p class="landing-page-text text-start ps-5 pe-0" style="margin: 0px 0px 10px 0px">Lorem ipsum dolor sit amet consectetur adipisicing elit. At delectus temporibus voluptatibus nobis. Velit expedita, modi et numquam voluptatum praesentium corrupti cum quos tempore autem dolorum molestias sapiente impedit culpa!</p>
+            <p class="landing-page-text text-start ps-5 pe-0" style="margin: 0px 0px 10px 0px">Here is where you can create your friendship groups simply by adding the from your friends list. Groups are a great way of organising your circles and creating events through the groups page.</p>
           </div>
         </div>
         <div class="col-12 col-sm-6 col-xl-5 d-flex flex-column justify-content-center">
@@ -63,7 +63,7 @@
         </div>
         <div class="col-12 col-sm-6 col-xl-7 d-flex flex-column justify-content-center">
           <div>
-            <p class="landing-page-text text-start ps-5 pe-0" style="margin: 0px 0px 10px 0px">Lorem ipsum dolor sit amet consectetur adipisicing elit. At delectus temporibus voluptatibus nobis. Velit expedita, modi et numquam voluptatum praesentium corrupti cum quos tempore autem dolorum molestias sapiente impedit culpa!</p>
+            <p class="landing-page-text text-start ps-5 pe-0" style="margin: 0px 0px 10px 0px">Here is where you will find all the awesome events and groups you've been invited to !</p>
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@
       </div>
       <div class="offcanvas-body" style="overflow: auto;">
         <% if (@invitations.size + @eventinvitations.size) == 0 %>
-          <h3 class="larger-text text-center">All</h3>
+          <h3 class="larger-text text-center">All Clear</h3>
         <% end %>
           <% if @invitations.size > 0 %>
             <h3 class="larger-text text-center">Group Invitations</h3>
