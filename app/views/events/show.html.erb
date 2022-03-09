@@ -1,7 +1,7 @@
 <div class="container mb-5 mt-3">
   <div class="row container">
     <div class="col-12 col-xl-4">
-      <div class="card-trip" style="border-radius: 15px; height: 400px;">
+      <div class="card-trip" style=" height: 400px;">
         <% if @event.event_photo.attached? %>
           <%= cl_image_tag @event.event_photo.key %>
         <% else %>
@@ -26,7 +26,7 @@
             </div>
           </div>
       </div>
-      <div class="card-trip mt-3 p-3 mb-3" style="border-radius: 15px; height: 415px;">
+      <div class="card-trip mt-3 p-3 mb-3" style=" height: 415px;">
         <h5 class="pt-3">Attendees</h5>
         <div style="height: 215px; overflow: auto;">
           <% @users.sort_by { |u| u.created_at }.reverse.each do |user| %>
@@ -164,7 +164,7 @@
         </div>
     </div>
     <div class="col-12 col-xl-8">
-      <div class="card-trip px-4 py-3" style="border-radius: 15px;">
+      <div class="card-trip px-4 py-3" style="">
         <div class="d-flex justify-content-between align-items-center">
           <h3 class="text-center"><%= @event.name %></h3>
           <div class="text-right">
@@ -191,12 +191,12 @@
       </div>
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-            <div class="card-trip px-3 py-3" style="border-radius: 15px;">
+            <div class="card-trip px-3 py-3" style="">
               <div class="d-flex align-items-center justify-content-around">
                 <h5 class="text-center mb-2"><%= @event.location %></h5>
                 <h4><a href="https://www.google.com/maps/place/<%= @event.location %>" target="_blank" class="btn btn-sm btn-link">Google Maps</a></h4>
               </div>
-              <div style="height: 500px; border-radius: 15px;" class="w-100 container"
+              <div style="height: 500px; " class="w-100 container"
                 data-controller="mapbox"
                 data-mapbox-markers-value="<%= @markers.to_json %>"
                 data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
@@ -204,9 +204,9 @@
             </div>
           </div>
           <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-            <div class="card-trip px-3 py-3" style="border-radius: 15px;">
+            <div class="card-trip px-3 py-3" style="">
               <div class="chatroom me-5 w-100" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>" data-event-subscription-current-user-id-value="<%= current_user.id %>">
-                <div style="height: 492px; overflow: auto; border-radius: 15px;" class="p-3 mb-3 rounded message-box">
+                <div style="height: 492px; overflow: auto; " class="p-3 mb-3 rounded message-box">
                   <div class="messages mb-3 d-flex flex-column justify-content-right" data-event-subscription-target="messages">
                     <% @event.messages.each do |message| %>
                       <%= render "messages/message", message: message %>
@@ -227,7 +227,7 @@
             </div>
           </div>
           <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-            <div class="card-trip px-3 py-3" style="border-radius: 15px; height: 570px; overflow: auto;">
+            <div class="card-trip px-3 py-3" style=" height: 570px; overflow: auto;">
               <div class="row pt-1 px-1 pb-0">
                 <%= simple_form_for([@event.group, @event], remote: true) do |f| %>
                   <div class="form-group">

@@ -23,7 +23,7 @@
 <div class="container mb-5 mt-3">
   <div class="row container">
     <div class="col-12 col-xl-4">
-      <div class="card-trip" style="border-radius: 15px; height: 400px;">
+      <div class="card-trip" style=" height: 400px;">
         <% if @group.photo.attached? %>
           <%= cl_image_tag @group.photo.key %>
         <% else %>
@@ -48,7 +48,7 @@
             </div>
           </div>
       </div>
-      <div class="card-trip mt-3 p-3 mb-3" style="border-radius: 15px; height: auto;">
+      <div class="card-trip mt-3 p-3 mb-3" style=" height: auto;">
         <h5 class="p-3">Members</h5>
         <% @users.sort_by { |u| u.created_at }.reverse.each do |user| %>
           <h6 class="m-2 d-flex align-items-center">
@@ -101,7 +101,7 @@
       </div>
     </div>
     <div class="col-12 col-xl-8">
-      <div class="card-trip px-4 py-3" style="border-radius: 15px;">
+      <div class="card-trip px-4 py-3" style="">
         <h3 class="text-center">Events   <%= link_to new_group_event_path(@group) do  %>
             <i class="fas fa-plus" style="font-size: 22px; color: black;"></i>
             <% end %></h3>
@@ -123,7 +123,7 @@
       </div>
       <% if @events_past.length > 0 %>
       <div class="col-12 col-xl-8 w-100 mt-3">
-        <div class="card-trip px-4 py-3" style="border-radius: 15px;">
+        <div class="card-trip px-4 py-3" style="">
           <h3 class="text-center">Past Events</h3>
           <div class="row">
             <% @events_past.each do |event| %>
