@@ -10,6 +10,8 @@
         <div class="card-trip-infos">
           <% if @event.group.user.photo.attached? %>
             <%= cl_image_tag @group.user.photo.key, class: "card-trip-user avatar-bordered" %>
+          <% else %>
+            <%= image_tag "Clint.jpeg", class: "card-trip-user avatar-bordered" %>
           <% end %>
         </div>
           <h3 class="text-center mt-3 larger-text"><%= @event.name %></h3>
