@@ -4,7 +4,7 @@
       <% if User.find(friendship.friend_one_id).photo.attached? %>
         <%= cl_image_tag User.find(friendship.friend_one_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
       <% else %>
-        <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+        <%= asset_path "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
       <% end %>
       <p><%= User.find(friendship.friend_one_id).first_name.capitalize %> has sent you a friend request!</p>
       <%= link_to "Accept", accept_user_friendship_path(current_user.id, friendship.id), method: :put, class: "btn btn-danger" %>

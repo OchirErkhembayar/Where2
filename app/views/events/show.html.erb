@@ -5,7 +5,7 @@
         <% if @event.event_photo.attached? %>
           <%= cl_image_tag @event.event_photo.key %>
         <% else %>
-          <%= image_tag "background.jpg" %>
+          <%= asset_path "background.jpg" %>
         <% end %>
         <div class="card-trip-infos">
           <% if @event.group.user.photo.attached? %>
@@ -41,7 +41,7 @@
                     <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
                   <% end %>
                 <% else %>
-                  <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <%= asset_path "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
                 <% end %>
               </div>
               <div class="ms-3 d-flex justify-content-between">
@@ -67,7 +67,7 @@
                       <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
                     <% end %>
                   <% else %>
-                    <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                    <%= asset_path "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
                   <% end %>
                 </div>
                 <div class="ms-3 d-flex justify-content-between">
@@ -99,7 +99,7 @@
                       <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
                     <% end %>
                   <% else %>
-                    <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                    <%= asset_path "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
                   <% end %>
                 </div>
                 <div class="ms-3 d-flex justify-content-between">
@@ -131,7 +131,7 @@
                       <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
                     <% end %>
                   <% else %>
-                    <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                    <%= asset_path "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
                   <% end %>
                 </div>
                 <div class="ms-3 d-flex justify-content-between">

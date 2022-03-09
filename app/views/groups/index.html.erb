@@ -10,7 +10,7 @@
             <% if group.group.photo.attached? %>
               <%= cl_image_tag group.group.photo.key, height: 200, width: 400 %>
             <% else %>
-              <%= image_tag "background.jpg", height: 200, width: 400 %>
+              <%= asset_path "background.jpg", height: 200, width: 400 %>
             <% end %>
             <div class="card-trip-infos">
               <% if group.group.user.photo.attached? %>

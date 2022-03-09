@@ -5,7 +5,7 @@
     <% if message.user.photo.attached? %>
       <%= cl_image_tag message.user.photo.key, class: "avatar mb-1", style: "height: 30px; width: 30px;" %>
     <% else %>
-      <%= image_tag "unknown-avatar.png", class: "avatar mb-1", style: "height: 30px; width: 30px;" %>
+      <%= asset_path "unknown-avatar.png", class: "avatar mb-1", style: "height: 30px; width: 30px;" %>
     <% end %>
   <div>
     <% width = message.content.length > 20 ? 40 : message.content.length * (40/20) %>
@@ -18,7 +18,7 @@
     <% if message.user.photo.attached? %>
       <%= cl_image_tag message.user.photo.key, class: "avatar mb-1", style: "height: 30px; width: 30px;" %>
     <% else %>
-      <%= image_tag "unknown-avatar.png", class: "avatar mb-1", style: "height: 30px; width: 30px;" %>
+      <%= asset_path "unknown-avatar.png", class: "avatar mb-1", style: "height: 30px; width: 30px;" %>
     <% end %>
     <strong><%= message.user.first_name %></strong>
     <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
