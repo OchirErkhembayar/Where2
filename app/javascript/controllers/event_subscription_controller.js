@@ -32,17 +32,15 @@ export default class extends Controller {
         if (senderId !== currentUserId){
           message.classList.remove("text-end");
           message.classList.add("text-start");
-          message.classList.remove("pe-2")
-          message.classList.add("ps-2")
-          message.style.removeProperty("margin-left");
 
           // message.firstElementChild.classList.remove("text-right");
           // message.firstElementChild.classList.add("text-left");
           console.log(message.firstElementChild)
           message.firstElementChild.parentNode.insertBefore(message.childNodes[5], message.childNodes[1]);
           message.firstElementChild.parentNode.insertBefore(message.childNodes[4], message.childNodes[2]);
-          console.log(message.childNodes[7])
-
+          message.childNodes[7].firstElementChild.style.removeProperty("margin-left")
+          message.childNodes[7].firstElementChild.classList.remove("pe-2")
+          message.childNodes[7].firstElementChild.classList.add("ps-1")
         }
 
         // send the message
@@ -55,7 +53,7 @@ export default class extends Controller {
     #insertMessageScrollDownAndResetForm(data) {
       this.messagesTarget.insertAdjacentElement("beforeend", data)
       this.messagesTarget.scrollTo(0, this.messagesTarget.scrollHeight)
-      // this.formTarget.reset()
+      this.formTarget.reset()
     }
 
     disconnect() {

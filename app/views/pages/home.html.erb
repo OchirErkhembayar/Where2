@@ -1,61 +1,149 @@
+<div class="home-page-background-top" style="height: 100%;">
   <% if user_signed_in? %>
-  <div class="container">
-    <h1 class="dash-text">My Dashboard</h1>
-   <div class="home-grid">
-    <div class="grid-section"></div>
-      <div class="grid-section">
-        <div class="wrapper">
-          <div class="link_wrapper">
-            <%= link_to "Groups", groups_path, class: "btn btn-test" %>
-            <div class="arrow-button">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 268.832 268.832">
-                <path d="M265.17 125.577l-80-80c-4.88-4.88-12.796-4.88-17.677 0-4.882 4.882-4.882 12.796 0 17.678l58.66 58.66H12.5c-6.903 0-12.5 5.598-12.5 12.5 0 6.903 5.597 12.5 12.5 12.5h213.654l-58.66 58.662c-4.88 4.882-4.88 12.796 0 17.678 2.44 2.44 5.64 3.66 8.84 3.66s6.398-1.22 8.84-3.66l79.997-80c4.883-4.882 4.883-12.796 0-17.678z"/>
-              </svg>
+    <div class="container pb-5">
+      <div class="row mb-5" style="height: 300px;">
+        <div class="col-12 d-flex  flex-column justify-content-center">
+          <h1 class="dash-text text-center" style="margin: 30px 0 10px 0; text-decoration: none;">Hello, <%= current_user.first_name.capitalize %></h1>
+          <h6 class="landing-page-text text-center" style="margin-bottom: 30px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero cum non et, placeat quidem facilis fugit quaerat ut sapiente. Corporis facere repellat quasi. Officiis repudiandae laborum laudantium ad maxime illo.</h6>
+          <% if current_user.groups.empty? %>
+            <div class="d-flex justify-content-center">
+              <%= link_to "Create your first group", new_group_path, class: "btn btn-ghost w-40" %>
             </div>
+          <% else %>
+            <div class="d-flex justify-content-center">
+              <%= link_to "See your groups", groups_path, class: "btn btn-ghost w-40" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row px-5 d-flex justify-content-center">
+        <div class="col-5 d-flex flex-column justify-content-center">
+          <%= link_to events_path, style: "text-decoration: none;" do %>
+            <div class="card-trip" style="height: 350px;">
+              <%= image_tag "background", style: "height: 280px" %>
+              <div>
+                <h6 class="text-center dash-text" style="margin: 15px 0px 8px 0px; text-decoration: none;">Events</h6>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-7 d-flex flex-column justify-content-center">
+          <div>
+            <p class="landing-page-text text-start ps-5 pe-0" style="margin: 0px 0px 10px 0px">Lorem ipsum dolor sit amet consectetur adipisicing elit. At delectus temporibus voluptatibus nobis. Velit expedita, modi et numquam voluptatum praesentium corrupti cum quos tempore autem dolorum molestias sapiente impedit culpa!</p>
           </div>
         </div>
       </div>
-    <div class="grid-section"></div>
-     <div class="grid-section">
-      <div class="wrapper">
-        <div class="link_wrapper">
-          <%= link_to "Events", event_users_path, class: "btn btn-test" %>
-          <div class="arrow-button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 268.832 268.832">
-              <path d="M265.17 125.577l-80-80c-4.88-4.88-12.796-4.88-17.677 0-4.882 4.882-4.882 12.796 0 17.678l58.66 58.66H12.5c-6.903 0-12.5 5.598-12.5 12.5 0 6.903 5.597 12.5 12.5 12.5h213.654l-58.66 58.662c-4.88 4.882-4.88 12.796 0 17.678 2.44 2.44 5.64 3.66 8.84 3.66s6.398-1.22 8.84-3.66l79.997-80c4.883-4.882 4.883-12.796 0-17.678z"/>
-            </svg>
+      <div class="row px-5 mt-5 d-flex justify-content-center">
+        <div class="col-7 d-flex flex-column justify-content-center">
+          <div>
+            <p class="landing-page-text text-start ps-5 pe-0" style="margin: 0px 0px 10px 0px">Lorem ipsum dolor sit amet consectetur adipisicing elit. At delectus temporibus voluptatibus nobis. Velit expedita, modi et numquam voluptatum praesentium corrupti cum quos tempore autem dolorum molestias sapiente impedit culpa!</p>
           </div>
         </div>
+        <div class="col-5 d-flex flex-column justify-content-center">
+          <%= link_to  groups_path, style: "text-decoration: none;" do %>
+            <div class="card-trip" style="height: 350px;">
+              <%= image_tag "background", style: "height: 280px" %>
+              <div>
+                <h6 class="text-center dash-text" style="margin: 15px 0px 8px 0px; text-decoration: none;">Groups</h6>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row px-5 mt-5 d-flex justify-content-center">
+        <div class="col-5 d-flex flex-column justify-content-center">
+          <%= link_to usergroups_path, style: "text-decoration: none;" do %>
+            <div class="card-trip" style="height: 350px;">
+              <%= image_tag "background", style: "height: 280px" %>
+              <div>
+                <h6 class="text-center dash-text" style="margin: 15px 0px 8px 0px; text-decoration: none;">Invitations</h6>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-7 d-flex flex-column justify-content-center">
+          <div>
+            <p class="landing-page-text text-start ps-5 pe-0" style="margin: 0px 0px 10px 0px">Lorem ipsum dolor sit amet consectetur adipisicing elit. At delectus temporibus voluptatibus nobis. Velit expedita, modi et numquam voluptatum praesentium corrupti cum quos tempore autem dolorum molestias sapiente impedit culpa!</p>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
-     <div style="background-image: url(<%= asset_path "home-image.png" %>)" class="home-image"></div>
-     <div class="grid-section">
-      <div class="wrapper">
-        <div class="link_wrapper">
-          <%= link_to "Invitation#{@notification_count == 1 ? "" : "s"} (#{@notification_count})", usergroups_path(current_user), class: "btn btn-test" %>
-          <div class="arrow-button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 268.832 268.832">
-              <path d="M265.17 125.577l-80-80c-4.88-4.88-12.796-4.88-17.677 0-4.882 4.882-4.882 12.796 0 17.678l58.66 58.66H12.5c-6.903 0-12.5 5.598-12.5 12.5 0 6.903 5.597 12.5 12.5 12.5h213.654l-58.66 58.662c-4.88 4.882-4.88 12.796 0 17.678 2.44 2.44 5.64 3.66 8.84 3.66s6.398-1.22 8.84-3.66l79.997-80c4.883-4.882 4.883-12.796 0-17.678z"/>
-            </svg>
+    <%# OFF CANVAS %>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title larger-text" id="offcanvasWithBackdropLabel"></h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body smaller-text">
+        <h4 class="text-center larger-text">Your Friends</h4>
+        <% if @two_is_friends %>
+          <% @two_is_friends.each do |f| %>
+            <div class="d-flex my-3 justify-content-between">
+              <div class="d-flex">
+                <% if User.find(f.friend_two_id).photo.attached? %>
+                  <%= cl_image_tag User.find(f.friend_two_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% else %>
+                  <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% end %>
+                <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_two_id).first_name %></h6>
+              </div>
+              <%= link_to "DESTROY!!!", friendship_path(f), method: :delete, class: "btn btn-danger" %>
+            </div>
+          <% end %>
+        <% end %>
+        <% if @one_is_friends %>
+          <% @one_is_friends.each do |f| %>
+            <div class="d-flex my-3 justify-content-between">
+              <div class="d-flex">
+                <% if User.find(f.friend_one_id).photo.attached? %>
+                  <%= cl_image_tag User.find(f.friend_one_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% else %>
+                  <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% end %>
+                <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_one_id).first_name %></h6>
+              </div>
+              <%= link_to "DESTROY!!!", friendship_path(f), method: :delete, class: "btn btn-danger" %>
+            </div>
+          <% end %>
+        <% end %>
+        <h4 class="text-center larger-text">Accept/Decline Requests</h4>
+        <% @friendship_requests.each do |friendship| %>
+          <div class="d-flex my-3 justify-content-between">
+            <div class="d-flex">
+              <% if User.find(friendship.friend_one_id).photo.attached? %>
+                <%= cl_image_tag User.find(friendship.friend_one_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+              <% else %>
+                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+              <% end %>
+              <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(friendship.friend_one_id).first_name %></h6>
+            </div>
+            <%= link_to "Accept", accept_friendship_path(friendship), method: :put, class: "btn btn-danger" %>
+            <%= link_to "Decline", friendship_path(friendship), method: :delete, class: "btn btn-danger" %>
           </div>
-        </div>
+        <% end %>
+        <h4 class="text-center larger-text">Send friend requests</h4>
+        <% if @friendships_pending %>
+          <% @friendships_pending.each do |f| %>
+            <% if User.find(f.friend_one_id) == current_user %>
+              <div class="d-flex my-3 justify-content-between">
+                <div class="d-flex">
+                  <% if User.find(f.friend_two_id).photo.attached? %>
+                    <%= cl_image_tag User.find(f.friend_two_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <% else %>
+                    <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <% end %>
+                  <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_two_id).first_name %> - (pending)</h6>
+                </div>
+                <%= link_to "DESTROY!!!", friendship_path(f), method: :delete, class: "btn btn-danger" %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+        <%= render "form", class: "w-100" %>
       </div>
     </div>
-     <div class="grid-section"></div>
-     <div class="grid-section">
-      <div class="wrapper">
-        <div class="link_wrapper">
-          <%= link_to "Past Events", events_path, class: "btn btn-test" %>
-          <div class="arrow-button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 268.832 268.832">
-              <path d="M265.17 125.577l-80-80c-4.88-4.88-12.796-4.88-17.677 0-4.882 4.882-4.882 12.796 0 17.678l58.66 58.66H12.5c-6.903 0-12.5 5.598-12.5 12.5 0 6.903 5.597 12.5 12.5 12.5h213.654l-58.66 58.662c-4.88 4.882-4.88 12.796 0 17.678 2.44 2.44 5.64 3.66 8.84 3.66s6.398-1.22 8.84-3.66l79.997-80c4.883-4.882 4.883-12.796 0-17.678z"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-     <div class="grid-section"></div>
-   </div>
+    <%# OFF CANVAS %>
    <% else %>
     <div style="background-image: url(<%= asset_path "background.jpg" %>)" class="background-landing">
       <div class="frame">
@@ -74,4 +162,4 @@
     </div>
   <% end %>
 
-  </div>
+ </div>

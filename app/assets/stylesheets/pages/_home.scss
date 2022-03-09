@@ -1,4 +1,9 @@
 // // Specific CSS for your home-page
+.home-page-background-top {
+  background: rgb(250,204,124);
+  background: linear-gradient(0deg, rgba(250,204,124,1) 0%, rgba(254,249,217,1) 86%, rgba(254,249,217,1) 100%);
+}
+
 .banner {
   background-size: cover;
   background-position: center;
