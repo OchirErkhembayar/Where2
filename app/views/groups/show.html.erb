@@ -117,9 +117,13 @@
                 <img src="<%= asset_path "background.jpg" %>" alt="">
               <% end %>
               <div class="card-product-infos">
-                <h2 class="mb-2 mt-4 larger-text"><%= event.name.capitalize %></h2>
+                <div class="card-name">
+                  <h2 class="mb-2 mt-4 larger-text"><%= event.name.capitalize %></h2>
                   <h6 style="color: black;" class="smaller-text"><%= event.location %></h6>
-                  <h6 style="color: black;" class="mb-2 pb-2 smaller-text"><%= event.start_date %> - <%= event.end_date %></>
+                </div>
+                <div class="card-date d-flex align-items-end">
+                  <h6 style="color: black;" class="mb-2 pb-2 smaller-text"><%= event.start_date %> - <%= event.end_date %>
+                </div>
               </div>
             </div>
             <% end %>
