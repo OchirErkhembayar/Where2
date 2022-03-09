@@ -152,11 +152,7 @@
           <% end %>
         </div>
         <% if current_user.event_user_invites(@event).nil? %>
-<<<<<<< HEAD
-          <h6>Add friends in order to invite them!</h6>
-=======
           <h6 class="larger-text">Add friends in order to invite them!</h6>
->>>>>>> 71053d59d8bfe05e09579d98b623b00ae20e2f71
         <% else %>
           <%= simple_form_for @event_user, url: event_users_path(@event), remote: true do |f| %>
             <div class="form-group text-center">

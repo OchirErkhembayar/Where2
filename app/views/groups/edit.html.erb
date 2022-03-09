@@ -1,6 +1,10 @@
-<%= simple_form_for(@group) do |f| %>
-<div class="form-group mb-3 mx-5 px-5">
-    <%= f.input :name, class: "form-control", placeholder: "Group name" %>
-  <%= f.submit "Update Group", class: "btn btn-primary mb-3 w-100" %>
+<div class="form-container">
+  <div class="update-form-card">
+    <%= simple_form_for(@group) do |f| %>
+    <div class="form-group">
+        <%= f.input :name, class: "form-control", placeholder: "Group name" %>
+      <%= f.submit "Update Group", class: "btn btn-primary mb-3 w-100" %>
+    </div>
+    <% end %>
+  </div>
 </div>
-<% end %>
