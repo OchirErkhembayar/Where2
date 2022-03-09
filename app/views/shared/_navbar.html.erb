@@ -1,13 +1,15 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid justify-content-between">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag "logo-new.png"%>
-    <% end %>
+    <div class="leftside">
+      <%= link_to root_path, class: "navbar-brand" do %>
+        <%= image_tag "logo-new.png"%>
+      <% end %>
+    </div>
   <h1 class="nav-title">WHERE2</h1>
+  <div class="rightside">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
@@ -55,4 +57,5 @@
       </ul>
     </div>
   </div>
+ </div>
 </div>

@@ -23,3 +23,13 @@
     font-family: Raleway, Helvetica, sans-serif;
     color: black;
 }
+
+.leftside{
+  width: calc(50% - 150px) ;
+}
+
+.rightside{
+  width: calc(50% - 150px) ;
+  display: flex;
+  justify-content: flex-end;
+}
