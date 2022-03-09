@@ -20,7 +20,7 @@
         <div class="col-12 col-sm-6 col-xl-5 d-flex flex-column justify-content-center">
           <%= link_to event_users_path, style: "text-decoration: none;" do %>
             <div class="card-trip" style="height: 350px;">
-              <%= image_tag "background.jpg", style: "height: 280px" %>
+              <%= image_tag "events-card", style: "height: 280px" %>
               <div>
                 <h6 class="text-center dash-text" style="margin: 15px 0px 8px 0px; text-decoration: none;">Events</h6>
               </div>
@@ -41,8 +41,7 @@
         </div>
         <div class="col-12 col-sm-6 col-xl-5 d-flex flex-column justify-content-center">
           <%= link_to  groups_path, style: "text-decoration: none;" do %>
-            <div class="card-trip" style="height: 350px;">
-              <%= image_tag "background.jpg", style: "height: 280px" %>
+              <%= image_tag "card-style-home-group", style: "height: 280px" %>
               <div>
                 <h6 class="text-center dash-text" style="margin: 15px 0px 8px 0px; text-decoration: none;">Groups</h6>
               </div>
@@ -54,7 +53,7 @@
         <div class="col-12 col-sm-6 col-xl-5 d-flex flex-column justify-content-center">
           <%= link_to usergroups_path, style: "text-decoration: none;" do %>
             <div class="card-trip" style="height: 350px;">
-              <%= image_tag "background.jpg", style: "height: 280px" %>
+              <%= image_tag "card-style-groups3", style: "height: 280px" %>
               <div>
                 <h6 class="text-center dash-text" style="margin: 15px 0px 8px 0px; text-decoration: none;">Invitations</h6>
               </div>
@@ -225,6 +224,7 @@
    <% else %>
     <div style="background-image: url(<%= asset_path "background.jpg" %>)" class="background-landing">
       <div class="frame">
+        <h1 class="landing-page-title">Welcome to Where2!</h1>
         <p  class="landing-page-text">At Where2, we have created a new and fun way for you and your friends to connect and organise events. Are you tired of having not having one place where you can organise all your events with your friends, well now you can.  With Where2 you can now organise, plan and search for events in your local area. Planning has never been easier !</p>
         <%= link_to new_user_registration_path do %>
           <div class="button-landing-sign">
