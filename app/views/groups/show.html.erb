@@ -107,17 +107,20 @@
             <% end %></h3>
         <div class="row">
           <% @events.each do |event| %>
-            <div class="col-12 col-xl-6">
-              <%= link_to group_event_path(event), style: "text-decoration: none; color: white;" do %>
-                <div class="card-product justify-content-center rounded mb-1 mt-3" style="height: 120px; background-color: #F4B658;">
-                  <div class="card-product-infos text-center">
-                    <h2 class="mb-2 larger-text"><%= event.name.capitalize %></h2>
-                    <h6 style="color: white;" class="smaller-text"><%= event.location %></h6>
-                    <h6 style="color: white;" class="mb-2 smaller-text"><%= event.start_date %> - <%= event.end_date %></h6>
-                  </div>
-                </div>
+          <%= link_to group_event_path(event), style: "text-decoration: none; color: white;" do %>
+            <div class="card-product mb-4">
+              <% if event.photos.attached? %>
+                    <%= cl_image_tag event.photo.key %>
+                <% else %>
+                    <img src="<%= asset_path "background.jpg" %>" alt="">
               <% end %>
+              <div class="card-product-infos">
+                <h2 class="mb-2 mt-4 larger-text"><%= event.name.capitalize %></h2>
+                  <h6 style="color: black;" class="smaller-text"><%= event.location %></h6>
+                  <h6 style="color: black;" class="mb-2 pb-2 smaller-text"><%= event.start_date %> - <%= event.end_date %></>
+              </div>
             </div>
+            <% end %>
           <% end %>
         </div>
       </div>
