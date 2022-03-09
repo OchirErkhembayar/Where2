@@ -101,7 +101,7 @@
                 <% if User.find(f.friend_one_id).photo.attached? %>
                   <%= cl_image_tag User.find(f.friend_one_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
                 <% else %>
-                  <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 60px;" %>
                 <% end %>
                 <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_one_id).first_name %></h6>
               </div>
@@ -111,14 +111,16 @@
             </div>
           <% end %>
         <% end %>
+        <% if @friendship_requests.size > 0 %>
+          <h4 class="text-center larger-text">Accept/Decline Requests</h4>
+        <% end %>
         <% @friendship_requests.each do |friendship| %>
-        <h4 class="text-center larger-text">Accept/Decline Requests</h4>
           <div class="d-flex my-3 justify-content-between">
             <div class="d-flex ps-3">
               <% if User.find(friendship.friend_one_id).photo.attached? %>
                 <%= cl_image_tag User.find(friendship.friend_one_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
               <% else %>
-                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 60px;" %>
               <% end %>
               <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(friendship.friend_one_id).first_name %></h6>
             </div>
@@ -161,7 +163,7 @@
       </div>
       <div class="offcanvas-body" style="overflow: auto;">
         <% if (@invitations.size + @eventinvitations.size) == 0 %>
-          <h3 class="larger-text text-center">All Clear!</h3>
+          <h3 class="larger-text text-center">All</h3>
         <% end %>
           <% if @invitations.size > 0 %>
             <h3 class="larger-text text-center">Group Invitations</h3>
