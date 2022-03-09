@@ -1,34 +1,44 @@
-
-<div class="d-flex justify-content-center">
-  <div class="card-trip px-4 py-3 col-6" style="border-radius: 15px; max-width: 800px">
-  <h3 class="text-center">My Events </h3>
-    <div class="row">
-      <% @events.each do |event| %>
-        <div class="col-12 col-xl-6">
-          <%= link_to group_event_path(event, event.group.id), style: "text-decoration: none; color: white;" do %>
-            <div class="card-product justify-content-center rounded mb-1 mt-3" style="height: 120px; background-color: #F4B658;">
-              <div class="card-product-infos text-center">
-                <h2 class="mb-2"><%= event.name.capitalize %></h2>
-                <h6 style="color: white;"><%= event.location %></h6>
-                <h6 style="color: white;" class="mb-2"><%= event.start_date %> - <%= event.end_date %></h6>
-              </div>
+<div class="container">
+  <h1 class="dash-text text-center mt-3 mb-3" style="padding: 0; margin: 0;">My Events</h1>
+  <div class="row mt-1">
+    <% @events.reverse.each do |event| %>
+      <div class="col-12 col-sm-6 col-xl-4 d-flex justify-content-center">
+        <%= link_to group_event_path(event, event.group.id) do %>
+          <div class="card-trip mb-4" style="height: 400px;">
+            <% if event.event_photo.attached? %>
+              <%= cl_image_tag event.event_photo.key, height: 200, width: 400 %>
+            <% else %>
+              <%= image_tag "background.jpg", height: 200, width: 400 %>
+            <% end %>
+            <div class="card-trip-infos">
+              <% if event.group.user.photo.attached? %>
+                <%= cl_image_tag event.group.user.photo.key, class: "card-trip-user avatar-bordered" %>
+              <% else %>
+                <%= image_tag "Clint.jpeg", class: "card-trip-user avatar-bordered" %>
+              <% end %>
             </div>
-          <% end %>
-        </div>
-      <% end %>
-      <% @event_users.each do |eventuser| %>
-        <div class="col-12 col-xl-6">
-          <%= link_to group_event_path(eventuser.event.id, eventuser.event.group.id), style: "text-decoration: none; color: white;" do %>
-            <div class="card-product justify-content-center rounded mb-1 mt-3" style="height: 120px; background-color: #F4B658;">
-              <div class="card-product-infos text-center">
-                <h2><%= eventuser.event.name %></h2>
-                <h6 style="color: white;"><%= eventuser.event.location %></h6>
-                <h6 style="color: white;" class="mb-2"><%= eventuser.event.start_date %> - <%= eventuser.event.end_date %></h6>
+              <h3 class="text-center mt-3 larger-text" style="text-decoration: none; color: black;"><%= event.name %></h3>
+              <div class="mt-2">
+                <h6 class="text-center smaller-text" style="text-decoration: none; color: black;">Admin: <%= event.group.user.first_name.capitalize %></h6>
+                <h6 class="text-center smaller-text" style="text-decoration: none; color: black;"><%= (UserGroup.where('group_id = ? AND status = ?', event.group.id, true).count) + (EventUser.where('event_id = ? AND status = ?', event.id, true).count) %> • attendees</h6>
+                <div class="d-flex justify-content-center mt-3">
+                  <% if current_user == event.group.user %>
+                    <%= link_to group_path(event.group) do  %>
+                      <i class="far fa-edit mx-3" style="color: black; font-size: 20px;"></i>
+                    <% end %>
+                    <%= link_to event_path(event), method: :delete do  %>
+                      <i class="fas fa-trash-alt mx-3" style="color: black; font-size: 20px;"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to root_path do  %>
+                      <i class="fas fa-trash-alt mx-3" style="color: black; font-size: 20px;"></i>
+                    <% end %>
+                  <% end %>
+                </div>
               </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
