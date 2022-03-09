@@ -17,10 +17,10 @@
             <h6 class="text-center smaller-text">Admin: <%= @event.group.user.first_name.capitalize %></h6>
             <h6 class="text-center smaller-text"><%= (UserGroup.where('group_id = ? AND status = ?', @event.group.id, true).count) + (EventUser.where('event_id = ? AND status = ?', @event.id, true).count) %> • attendees</h6>
             <div class="d-flex justify-content-center mt-3">
-              <%= link_to "Group", group_path(@event.group), class: "btn btn-sm btn-warning" %>
+              <%= link_to "Group", group_path(@event.group), class: "btn btn-sm btn-outline-secondary" %>
               <% if current_user == @event.group.user %>
                 <%= link_to event_path(@event), method: :delete do  %>
-                  <i class="fas fa-trash-alt mx-3" style="color: black; font-size: 20px;"></i>
+                  <i class="fas fa-trash-alt mx-3" style="color: black; font-size: 20px; margin-top: 5px;"></i>
                 <% end %>
               <% end %>
             </div>

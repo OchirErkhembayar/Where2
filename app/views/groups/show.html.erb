@@ -36,7 +36,7 @@
         </div>
           <h3 class="text-center mt-3 larger-text"><%= @group.name %></h3>
           <div class="mt-2">
-            <h6 class="text-center larger-text">Admin: <%= @group.user.first_name.capitalize %></h6>
+            <h6 class="text-center smaller-text">Admin: <%= @group.user.first_name.capitalize %></h6>
             <h6 class="text-center smaller-text"><%= UserGroup.where('group_id = ?', @group.id).count %> • members</h6>
             <div class="d-flex justify-content-center mt-3">
               <%= link_to edit_group_path(@group) do  %>
