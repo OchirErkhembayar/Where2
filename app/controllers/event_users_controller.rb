@@ -57,7 +57,7 @@ class EventUsersController < ApplicationController
     @eventuser = EventUser.find(params[:id])
     @eventuser.destroy
     if @eventuser.user_id == current_user.id
-      redirect_to "/usergroups"
+      redirect_to "/"
     else
       redirect_to "/groups/#{@eventuser.event.id}/events/#{@eventuser.event.group.id}"
     end
