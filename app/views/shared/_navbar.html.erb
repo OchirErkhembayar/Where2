@@ -17,17 +17,19 @@
           <li class="nav-item active">
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
-          <% if @friend_count %>
+            <% if @friend_count %>
               <% if @friend_count > 0 %>
-                <button class="btn btn-ghost-nav nav-item mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop" style="font-size: 17px; padding: 0 15px 9px 7px; border: none; border: none; color: rgba(0, 0, 0, 0.85)">Friends(<%= @friend_count %>)</button>
+                <button class="btn btn-ghost-nav nav-item mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdropFriends" aria-controls="offcanvasWithBackdropFriends" style="font-size: 17px; padding: 0 15px 9px 7px; border: none; border: none; color: rgba(0, 0, 0, 0.85)">Friends(<%= @friend_count %>)</button>
               <% else %>
-                <button class="btn btn-ghost-nav nav-item mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop" style="font-size: 17px; padding: 0 15px 9px 7px; border: none; border: none; color: rgba(0, 0, 0, 0.85)">Friends<%=  %></button>
+                <button class="btn btn-ghost-nav nav-item mb-2 text-start" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdropFriends" aria-controls="offcanvasWithBackdropFriends" style="font-size: 17px; padding: 0 15px 9px 7px; border: none; border: none; color: rgba(0, 0, 0, 0.85)">Friends</button>
               <% end %>
             <% end %>
           <li class="nav-item">
             <% if @notification_count %>
               <% if @notification_count > 0 %>
-                <%= link_to "#{@notification_count} invitation#{@notification_count == 1 ? "" : "s"}", usergroups_path(current_user), class: "nav-link" %>
+                <button class="btn btn-ghost-nav nav-item mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="font-size: 17px; padding: 7px 15px 0 7px; border: none; border: none; color: rgba(0, 0, 0, 0.85)">Notifications (<%= @notification_count %>)</button>
+              <% else %>
+                <button class="btn btn-ghost-nav nav-item mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="font-size: 17px; padding: 7px 15px 0 7px; border: none; border: none; color: rgba(0, 0, 0, 0.85)">Notifications</button>
               <% end %>
             <% end %>
           </li>

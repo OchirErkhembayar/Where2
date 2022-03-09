@@ -43,6 +43,13 @@ class PagesController < ApplicationController
         @one_is_friends = @friendships.select { |f| f.friend_two_id == current_user.id } # friend_one_id is friend
       end
       @friendship = Friendship.new
+
+      #INVITES
+      @invitations = UserGroup.where('user_id = ? AND status = ?', current_user.id, false)
+      @eventinvitations = EventUser.where('user_id = ? AND status = ?', current_user.id, false)
+      if @eventinvitations.length.positive?
+        @eventinvitations = @eventinvitations.reject { |ei| ei.event.end_date <= Date.today }
+      end
     end
   end
 end

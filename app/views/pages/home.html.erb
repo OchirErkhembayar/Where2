@@ -3,21 +3,21 @@
     <div class="container pb-5">
       <div class="row mb-5" style="height: 300px;">
         <div class="col-12 d-flex  flex-column justify-content-center">
-          <h1 class="dash-text text-center" style="margin: 30px 0 10px 0; text-decoration: none;">Hello, <%= current_user.first_name.capitalize %></h1>
-          <h6 class="landing-page-text text-center" style="margin-bottom: 30px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero cum non et, placeat quidem facilis fugit quaerat ut sapiente. Corporis facere repellat quasi. Officiis repudiandae laborum laudantium ad maxime illo.</h6>
+          <h1 class="dash-text text-center" style="margin: 30px 0 10px 0; text-decoration: none; font-size: 50px;">Hello, <%= current_user.first_name.capitalize %></h1>
+          <h6 class="landing-page-text text-center" style="margin-bottom: 30px; font-size: 20px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero cum non et, placeat quidem facilis fugit quaerat ut sapiente. Corporis facere repellat quasi. Officiis repudiandae laborum laudantium ad maxime illo.</h6>
           <% if current_user.groups.empty? %>
             <div class="d-flex justify-content-center">
-              <%= link_to "Create your first group", new_group_path, class: "btn btn-ghost w-40" %>
+              <%= link_to "Create your first group", new_group_path, class: "btn btn-ghost", style: "" %>
             </div>
           <% else %>
             <div class="d-flex justify-content-center">
-              <%= link_to "See your groups", groups_path, class: "btn btn-ghost w-40" %>
+              <%= link_to "See your groups", groups_path, class: "btn btn-ghost", style: "font-size: 17px;" %>
             </div>
           <% end %>
         </div>
       </div>
       <div class="row px-5 d-flex justify-content-center">
-        <div class="col-5 d-flex flex-column justify-content-center">
+        <div class="col-12 col-sm-6 col-xl-5 d-flex flex-column justify-content-center">
           <%= link_to events_path, style: "text-decoration: none;" do %>
             <div class="card-trip" style="height: 350px;">
               <%= image_tag "background", style: "height: 280px" %>
@@ -27,19 +27,19 @@
             </div>
           <% end %>
         </div>
-        <div class="col-7 d-flex flex-column justify-content-center">
+        <div class="col-12 col-sm-6 col-xl-7 d-flex flex-column justify-content-center">
           <div>
             <p class="landing-page-text text-start ps-5 pe-0" style="margin: 0px 0px 10px 0px">Lorem ipsum dolor sit amet consectetur adipisicing elit. At delectus temporibus voluptatibus nobis. Velit expedita, modi et numquam voluptatum praesentium corrupti cum quos tempore autem dolorum molestias sapiente impedit culpa!</p>
           </div>
         </div>
       </div>
       <div class="row px-5 mt-5 d-flex justify-content-center">
-        <div class="col-7 d-flex flex-column justify-content-center">
+        <div class="col-12 col-sm-6 col-xl-7 d-flex flex-column justify-content-center">
           <div>
             <p class="landing-page-text text-start ps-5 pe-0" style="margin: 0px 0px 10px 0px">Lorem ipsum dolor sit amet consectetur adipisicing elit. At delectus temporibus voluptatibus nobis. Velit expedita, modi et numquam voluptatum praesentium corrupti cum quos tempore autem dolorum molestias sapiente impedit culpa!</p>
           </div>
         </div>
-        <div class="col-5 d-flex flex-column justify-content-center">
+        <div class="col-12 col-sm-6 col-xl-5 d-flex flex-column justify-content-center">
           <%= link_to  groups_path, style: "text-decoration: none;" do %>
             <div class="card-trip" style="height: 350px;">
               <%= image_tag "background", style: "height: 280px" %>
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="row px-5 mt-5 d-flex justify-content-center">
-        <div class="col-5 d-flex flex-column justify-content-center">
+        <div class="col-12 col-sm-6 col-xl-5 d-flex flex-column justify-content-center">
           <%= link_to usergroups_path, style: "text-decoration: none;" do %>
             <div class="card-trip" style="height: 350px;">
               <%= image_tag "background", style: "height: 280px" %>
@@ -61,7 +61,7 @@
             </div>
           <% end %>
         </div>
-        <div class="col-7 d-flex flex-column justify-content-center">
+        <div class="col-12 col-sm-6 col-xl-7 d-flex flex-column justify-content-center">
           <div>
             <p class="landing-page-text text-start ps-5 pe-0" style="margin: 0px 0px 10px 0px">Lorem ipsum dolor sit amet consectetur adipisicing elit. At delectus temporibus voluptatibus nobis. Velit expedita, modi et numquam voluptatum praesentium corrupti cum quos tempore autem dolorum molestias sapiente impedit culpa!</p>
           </div>
@@ -70,7 +70,7 @@
       </div>
     </div>
     <%# OFF CANVAS %>
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdropFriends" aria-labelledby="offcanvasWithBackdropLabelFriends">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title larger-text" id="offcanvasWithBackdropLabel"></h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -144,6 +144,69 @@
       </div>
     </div>
     <%# OFF CANVAS %>
+    <%# OFF CANVAS - INVITES START %>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body" style="overflow: auto;">
+          <% if @invitations.size > 0 %>
+            <h3 class="larger-text text-center">Group Invitations</h3>
+            <% @invitations.reverse.each do |invitation| %>
+              <div class="card-trip">
+                <% if invitation.group.photo.attached? %>
+                  <%= cl_image_tag invitation.group.photo %>
+                <% else %>
+                  <%= image_tag "background.jpg" %>
+                <% end %>
+                <div class="card-trip-infos text-center d-flex justify-content-center mb-0">
+                  <div>
+                    <h2 class="larger-text my-1 mt-0" style="font-size: 25px;"><%= invitation.group.name %></h2>
+                    <p class="smaller-text my-1 mb-0" style="font-size: 15px;"><%= invitation.group.user.first_name %> has invited you!</p>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-around mt-0">
+                  <%= link_to accept_usergroup_path(invitation), method: :put do %>
+                    <i class="fas fa-check mt-0 mb-3" style="color: green;"></i>
+                  <% end %>
+                  <%= link_to group_usergroup_path(invitation.group, invitation), method: :delete do %>
+                    <i class="fas fa-ban mt-0 mb-3" style="color: red;"></i>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+          <% if @eventinvitations.size > 0 %>
+            <h3 class="larger-text text-center mt-3 mb-1">Event Invitations</h3>
+            <% @eventinvitations.reverse.each do |invitation| %>
+              <div class="card-trip">
+                <% if invitation.event.event_photo.attached? %>
+                  <%= cl_image_tag invitation.event.event_photo %>
+                <% else %>
+                  <%= image_tag "background.jpg" %>
+                <% end %>
+                <div class="card-trip-infos text-center d-flex justify-content-center mb-0">
+                  <div>
+                    <h2 class="larger-text my-1 mt-0" style="font-size: 25px;"><%= invitation.event.name %></h2>
+                    <p class="smaller-text my-1 mb-0" style="font-size: 15px;">Held by group: <%= invitation.event.group.name %></p>
+                    <p class="smaller-text my-1 mb-0" style="font-size: 15px;"><%= invitation.event.start_date %> to <%= invitation.event.end_date %></p>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-around mt-0">
+                  <%= link_to accept_event_user_path(invitation), method: :put do %>
+                    <i class="fas fa-check mt-0 mb-3" style="color: green;"></i>
+                  <% end %>
+                  <%= link_to event_user_path(invitation.event, invitation), method: :delete do %>
+                    <i class="fas fa-ban mt-0 mb-3" style="color: red;"></i>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%# INVITES END %>
    <% else %>
     <div style="background-image: url(<%= asset_path "background.jpg" %>)" class="background-landing">
       <div class="frame">
