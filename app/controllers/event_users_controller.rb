@@ -16,6 +16,9 @@ class EventUsersController < ApplicationController
         @events << event
       end
     end
+    @event_users.each do |eu|
+      @events << eu.event
+    end
     if @events.length > 0
       @events.reject! { |event| event.end_date <= Date.today }
       @events.sort_by! { |event| event.end_date } if @events.length > 0
