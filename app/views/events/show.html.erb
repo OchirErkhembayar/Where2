@@ -1,7 +1,7 @@
 <div class="container mb-5 mt-3">
   <div class="row container">
     <div class="col-12 col-xl-4">
-      <div class="card-trip" style=" height: 400px;">
+      <div class="card-trip">
         <% if @event.event_photo.attached? %>
           <%= cl_image_tag @event.event_photo.key %>
         <% else %>
