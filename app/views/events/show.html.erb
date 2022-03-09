@@ -12,10 +12,10 @@
             <%= cl_image_tag @group.user.photo.key, class: "card-trip-user avatar-bordered" %>
           <% end %>
         </div>
-          <h3 class="text-center mt-3 dash-title"><%= @event.name %></h3>
+          <h3 class="text-center mt-3 larger-text"><%= @event.name %></h3>
           <div class="mt-2">
-            <h6 class="text-center landing-page-text">Admin: <%= @event.group.user.first_name.capitalize %></h6>
-            <h6 class="text-center"><%= (UserGroup.where('group_id = ? AND status = ?', @event.group.id, true).count) + (EventUser.where('event_id = ? AND status = ?', @event.id, true).count) %> • attendees</h6>
+            <h6 class="text-center smaller-text">Admin: <%= @event.group.user.first_name.capitalize %></h6>
+            <h6 class="text-center smaller-text"><%= (UserGroup.where('group_id = ? AND status = ?', @event.group.id, true).count) + (EventUser.where('event_id = ? AND status = ?', @event.id, true).count) %> • attendees</h6>
             <div class="d-flex justify-content-center mt-3">
               <%= link_to "Group", group_path(@event.group), class: "btn btn-sm btn-warning" %>
               <% if current_user == @event.group.user %>
@@ -27,7 +27,7 @@
           </div>
       </div>
       <div class="card-trip mt-3 p-3 mb-3" style=" height: 415px;">
-        <h5 class="pt-3">Attendees</h5>
+        <h5 class="pt-3 larger-text">Attendees</h5>
         <div style="height: 215px; overflow: auto;">
           <% @users.sort_by { |u| u.created_at }.reverse.each do |user| %>
             <h6 class="m-2 d-flex align-items-center">
@@ -43,7 +43,7 @@
                 <% end %>
               </div>
               <div class="ms-3 d-flex justify-content-between">
-                <div class="mt-1">
+                <div class="mt-1 smaller-text">
                   <%= user == current_user ? "You" : user.first_name %>
                   <%= user == @group.user ? " -   Admin" : "" %>
                 </div>
@@ -69,7 +69,7 @@
                   <% end %>
                 </div>
                 <div class="ms-3 d-flex justify-content-between">
-                  <div class="mt-1">
+                  <div class="mt-1 smaller-text">
                     <%= user == current_user ? "You" : user.first_name %>
                     <%= user == @group.user ? " -   Admin" : "" %>
                   </div>
@@ -101,7 +101,7 @@
                   <% end %>
                 </div>
                 <div class="ms-3 d-flex justify-content-between">
-                  <div class="mt-1">
+                  <div class="mt-1 smaller-text">
                     <%= user == current_user ? "You" : user.first_name %>
                     <%= user == @group.user ? " -   Admin" : "" %>
                   </div>
@@ -133,7 +133,7 @@
                   <% end %>
                 </div>
                 <div class="ms-3 d-flex justify-content-between">
-                  <div class="mt-1">
+                  <div class="mt-1 smaller-text">
                     <%= user == current_user ? "You" : "#{user.first_name} - (pending)" %>
                     <%= user == @group.user ? " -   Admin" : "" %>
                   </div>
@@ -152,7 +152,7 @@
           <% end %>
         </div>
         <% if current_user.event_user_invites(@event).nil? %>
-          <h6>Add friends in order to invite them!</h6>
+          <h6 class="larger-text">Add friends in order to invite them!</h6>
         <% else %>
           <%= simple_form_for @event_user, url: event_users_path(@event), remote: true do |f| %>
             <div class="form-group text-center">
@@ -166,14 +166,14 @@
     <div class="col-12 col-xl-8">
       <div class="card-trip px-4 py-3" style="">
         <div class="d-flex justify-content-between align-items-center">
-          <h3 class="text-center"><%= @event.name %></h3>
-          <div class="text-right">
-            <h6>Starting: <%= @event.start_date %></h6>
-            <h6>Ending: <%= @event.end_date %></h6>
+          <h3 class="text-center larger-text"><%= @event.name %></h3>
+          <div class="text-right larger-text">
+            <h6 class="larger-text">Starting: <%= @event.start_date %></h6>
+            <h6 class="larger-text">Ending: <%= @event.end_date %></h6>
           </div>
         </div>
         <div class="p-1" style="overflow: auto; height: 100px;">
-          <p><%= @event.description %></p>
+          <p class="smaller-text"><%= @event.description %></p>
         </div>
       </div>
       <div class="mt-3 ms-3">
@@ -193,8 +193,8 @@
           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             <div class="card-trip px-3 py-3" style="">
               <div class="d-flex align-items-center justify-content-around">
-                <h5 class="text-center mb-2"><%= @event.location %></h5>
-                <h4><a href="https://www.google.com/maps/place/<%= @event.location %>" target="_blank" class="btn btn-sm btn-link">Google Maps</a></h4>
+                <h5 class="text-center mb-2 larger-text"><%= @event.location %></h5>
+                <h4 smaller-text><a href="https://www.google.com/maps/place/<%= @event.location %>" target="_blank" class="btn btn-sm btn-link">Google Maps</a></h4>
               </div>
               <div style="height: 500px; " class="w-100 container"
                 data-controller="mapbox"
@@ -204,7 +204,7 @@
             </div>
           </div>
           <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-            <div class="card-trip px-3 py-3" style="">
+            <div class="card-trip px-3 py-3">
               <div class="chatroom me-5 w-100" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>" data-event-subscription-current-user-id-value="<%= current_user.id %>">
                 <div style="height: 492px; overflow: auto; " class="p-3 mb-3 rounded message-box">
                   <div class="messages mb-3 d-flex flex-column justify-content-right" data-event-subscription-target="messages">
