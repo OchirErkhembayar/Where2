@@ -11,7 +11,6 @@ export default class extends Controller {
     //   { received: data => this.#insertMessageScrollDownAndResetForm(data) }
     //   )
     //   console.log(`Subscribed to the chatroom with the id ${this.eventIdValue}.`)
-
     this.channel = consumer.subscriptions.create(
       { channel: "EventChannel", id: this.eventIdValue },
       { received: data => {
