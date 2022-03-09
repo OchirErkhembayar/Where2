@@ -4,7 +4,7 @@
       <div class="row mb-5 py-5">
         <div class="col-12 d-flex  flex-column justify-content-center">
           <h1 class="dash-text text-center" style="margin: 30px 0 10px 0; text-decoration: none; font-size: 50px;">Hello, <%= current_user.first_name.capitalize %></h1>
-          <h6 class="landing-page-text text-center" style="margin-bottom: 30px; font-size: 20px;">Welcome to your dashboard, from here you can access all your groups, events and invitations, to get started with an event go ahead into your group and create the event you want to from there!</h6>
+          <h6 class="landing-page-text text-center" style="margin-bottom: 30px; font-size: 20px;">Welcome to your dashboard, from here you can access all your groups, events and invitations. To get started with an event go ahead into your group and create the event you want to from there!</h6>
           <% if current_user.groups.empty? %>
             <div class="d-flex justify-content-center">
               <%= link_to "Create your first group", new_group_path, class: "btn btn-ghost", style: "" %>
