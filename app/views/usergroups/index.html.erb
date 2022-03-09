@@ -1,3 +1,6 @@
+
+
+
 <div class="container">
   <div class="d-flex justify-content-center">
     <div class="card-trip px-5 py-4 col-6" style="border-radius: 15px; max-width: 800px">
@@ -15,12 +18,13 @@
   <div class="d-flex justify-content-center">
     <div class="card-trip mt-4 px-5 py-5 col-6" style="border-radius: 15px; max-width: 650px">
       <h4 class="text-center">Your Event Invitations</h4>
-        <% if @eventinvitations.size > 0 %>
-          <% @eventinvitations.reverse.each do |invitation| %>
-            <strong><%= invitation.event.group.user.first_name %></strong> has invited you to join: <strong><%= invitation.event.name.capitalize %></strong>
-            <%= link_to "Accept", accept_event_user_path(invitation), method: :put, class: "btn btn-primary btn-sm" %>
-            <%= link_to "Decline", event_user_path(invitation), method: :delete, class: "btn btn-primary btn-sm" %>
-          <% end %>
+      <% if @eventinvitations.size > 0 %>
+        <% @eventinvitations.reverse.each do |invitation| %>
+          <strong><%= invitation.event.group.user.first_name %></strong> has invited you to join: <strong><%= invitation.event.name.capitalize %></strong>
+          <%= link_to "Accept", accept_event_user_path(invitation), method: :put, class: "btn btn-primary btn-sm" %>
+          <%= link_to "Decline", event_user_path(invitation), method: :delete, class: "btn btn-primary btn-sm" %>
         <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
