@@ -123,3 +123,20 @@
     text-decoration: none;
   }
 }
+
+
+.form-card{
+  background-color: white;
+  padding: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  margin-top: 10px;
+  font-family:'Josefin Sans', sans-serif;
+
+  .form-control{
+    background-color: transparent;
+  }
+
+  .form-select{
+    background-color: transparent;
+  }
+}
