@@ -40,11 +40,7 @@ class UsergroupsController < ApplicationController
   def destroy
     @usergroup = UserGroup.where('user_id = ? AND group_id = ?', current_user.id, params[:group_id])
     @usergroup.first.destroy
-    if @usergroup.first.status == false
-      redirect_to "/usergroups"
-    else
-      redirect_to "/groups"
-    end
+    redirect_to "/"
   end
 
   def kick
