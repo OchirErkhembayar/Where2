@@ -19,7 +19,7 @@
           </li>
             <% if @friend_count %>
               <% if @friend_count > 0 %>
-                <button class="btn btn-ghost-nav nav-item mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdropFriends" aria-controls="offcanvasWithBackdropFriends" style="font-size: 17px; padding: 0 15px 9px 7px; border: none; border: none; color: rgba(0, 0, 0, 0.85)">Friends(<%= @friend_count %>)</button>
+                <button class="btn btn-ghost-nav nav-item mb-2 text-start" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdropFriends" aria-controls="offcanvasWithBackdropFriends" style="font-size: 17px; padding: 0 15px 9px 7px; border: none; border: none; color: rgba(0, 0, 0, 0.85)">Friends(<%= @friend_count %>)</button>
               <% else %>
                 <button class="btn btn-ghost-nav nav-item mb-2 text-start" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdropFriends" aria-controls="offcanvasWithBackdropFriends" style="font-size: 17px; padding: 0 15px 9px 7px; border: none; border: none; color: rgba(0, 0, 0, 0.85)">Friends</button>
               <% end %>
@@ -27,9 +27,9 @@
           <li class="nav-item">
             <% if @notification_count %>
               <% if @notification_count > 0 %>
-                <button class="btn btn-ghost-nav nav-item mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="font-size: 17px; padding: 7px 15px 0 7px; border: none; border: none; color: rgba(0, 0, 0, 0.85)">Notifications (<%= @notification_count %>)</button>
+                <button class="btn btn-ghost-nav nav-item mb-2 text-start" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="font-size: 17px; padding: 7px 15px 0 7px; border: none; border: none; color: rgba(0, 0, 0, 0.85)">Notifications (<%= @notification_count %>)</button>
               <% else %>
-                <button class="btn btn-ghost-nav nav-item mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="font-size: 17px; padding: 7px 15px 0 7px; border: none; border: none; color: rgba(0, 0, 0, 0.85)">Notifications</button>
+                <button class="btn btn-ghost-nav nav-item mb-2 text-start" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="font-size: 17px; padding: 7px 15px 0 7px; border: none; border: none; color: rgba(0, 0, 0, 0.85)">Notifications</button>
               <% end %>
             <% end %>
           </li>

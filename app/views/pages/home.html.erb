@@ -1,7 +1,7 @@
 <div class="home-page-background-top" style="height: 100%;">
   <% if user_signed_in? %>
     <div class="container pb-5">
-      <div class="row mb-5" style="height: 300px;">
+      <div class="row mb-5 py-5">
         <div class="col-12 d-flex  flex-column justify-content-center">
           <h1 class="dash-text text-center" style="margin: 30px 0 10px 0; text-decoration: none; font-size: 50px;">Hello, <%= current_user.first_name.capitalize %></h1>
           <h6 class="landing-page-text text-center" style="margin-bottom: 30px; font-size: 20px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero cum non et, placeat quidem facilis fugit quaerat ut sapiente. Corporis facere repellat quasi. Officiis repudiandae laborum laudantium ad maxime illo.</h6>
@@ -80,7 +80,7 @@
         <% if @two_is_friends %>
           <% @two_is_friends.each do |f| %>
             <div class="d-flex my-3 justify-content-between">
-              <div class="d-flex">
+              <div class="d-flex ps-3">
                 <% if User.find(f.friend_two_id).photo.attached? %>
                   <%= cl_image_tag User.find(f.friend_two_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
                 <% else %>
@@ -88,14 +88,16 @@
                 <% end %>
                 <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_two_id).first_name %></h6>
               </div>
-              <%= link_to "DESTROY!!!", friendship_path(f), method: :delete, class: "btn btn-danger" %>
+              <%= link_to friendship_path(f), method: :delete do %>
+                <i class="fas fa-ban mt-3 me-5" style="color: red;"></i>
+              <% end %>
             </div>
           <% end %>
         <% end %>
         <% if @one_is_friends %>
           <% @one_is_friends.each do |f| %>
             <div class="d-flex my-3 justify-content-between">
-              <div class="d-flex">
+              <div class="d-flex ps-3">
                 <% if User.find(f.friend_one_id).photo.attached? %>
                   <%= cl_image_tag User.find(f.friend_one_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
                 <% else %>
@@ -103,14 +105,16 @@
                 <% end %>
                 <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_one_id).first_name %></h6>
               </div>
-              <%= link_to "DESTROY!!!", friendship_path(f), method: :delete, class: "btn btn-danger" %>
+              <%= link_to friendship_path(f), method: :delete do %>
+                <i class="fas fa-ban mt-3 me-5" style="color: red;"></i>
+              <% end %>
             </div>
           <% end %>
         <% end %>
-        <h4 class="text-center larger-text">Accept/Decline Requests</h4>
         <% @friendship_requests.each do |friendship| %>
+        <h4 class="text-center larger-text">Accept/Decline Requests</h4>
           <div class="d-flex my-3 justify-content-between">
-            <div class="d-flex">
+            <div class="d-flex ps-3">
               <% if User.find(friendship.friend_one_id).photo.attached? %>
                 <%= cl_image_tag User.find(friendship.friend_one_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
               <% else %>
@@ -118,8 +122,12 @@
               <% end %>
               <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(friendship.friend_one_id).first_name %></h6>
             </div>
-            <%= link_to "Accept", accept_friendship_path(friendship), method: :put, class: "btn btn-danger" %>
-            <%= link_to "Decline", friendship_path(friendship), method: :delete, class: "btn btn-danger" %>
+            <%= link_to accept_friendship_path(friendship), method: :put do %>
+              <i class="fas fa-check mt-3 me-5" style="color: green;"></i>
+            <% end %>
+            <%= link_to friendship_path(friendship), method: :delete do %>
+              <i class="fas fa-ban mt-3 me-5" style="color: red;"></i>
+            <% end %>
           </div>
         <% end %>
         <h4 class="text-center larger-text">Send friend requests</h4>
@@ -127,15 +135,17 @@
           <% @friendships_pending.each do |f| %>
             <% if User.find(f.friend_one_id) == current_user %>
               <div class="d-flex my-3 justify-content-between">
-                <div class="d-flex">
+                <div class="d-flex ps-3">
                   <% if User.find(f.friend_two_id).photo.attached? %>
                     <%= cl_image_tag User.find(f.friend_two_id).photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
                   <% else %>
-                    <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                    <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 60px;" %>
                   <% end %>
-                  <h6 class="ms-3 mt-3" style="color: black;"><%= User.find(f.friend_two_id).first_name %> - (pending)</h6>
+                  <h6 class="ms-1 mt-3" style="color: black;"><%= User.find(f.friend_two_id).first_name %> - (pending)</h6>
                 </div>
-                <%= link_to "DESTROY!!!", friendship_path(f), method: :delete, class: "btn btn-danger" %>
+                <%= link_to friendship_path(f), method: :delete do %>
+                  <i class="fas fa-ban mt-3 me-5" style="color: red;"></i>
+                <% end %>
               </div>
             <% end %>
           <% end %>

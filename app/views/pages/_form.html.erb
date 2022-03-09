@@ -1,8 +1,7 @@
-<div class="container">
-  <%= simple_form_for @friendship, url: user_friendships_path(current_user)  do |f| %>
-  <div class="form-group d-flex flex-column align-items-center">
-      <%= f.association :user, collection: current_user.friend_invites, label_method: :first_name, input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Add your friends", class: "w-100", label: "" %>
-    <%= f.submit "Send friend requests", class: "btn btn-primary btn-sm ms-2 send-button" %>
-  </div>
-  <% end %>
+
+<%= simple_form_for @friendship, url: user_friendships_path(current_user)  do |f| %>
+<div class="form-group d-flex flex-column align-items-center mt-5">
+    <%= f.association :user, collection: current_user.friend_invites, label_method: :first_name, input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Add your friends", class: "w-100", label: "" %>
+  <%= f.submit "Send friend requests", class: "btn btn-primary btn-sm ms-2 send-button" %>
 </div>
+<% end %>
