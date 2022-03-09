@@ -170,7 +170,7 @@
             <% @invitations.reverse.each do |invitation| %>
               <div class="card-trip">
                 <% if invitation.group.photo.attached? %>
-                  <%= cl_image_tag invitation.group.photo %>
+                  <%= cl_image_tag invitation.group.photo.key %>
                 <% else %>
                   <%= image_tag "background.jpg" %>
                 <% end %>
