@@ -116,15 +116,6 @@
               <% else %>
                 <img src="<%= asset_path "background.jpg" %>" alt="">
               <% end %>
-<<<<<<< HEAD
-              <div class="card-product-infos">
-                <div class="card-name">
-                  <h2 class="mb-2 mt-4 larger-text"><%= event.name.capitalize %></h2>
-                  <h6 style="color: black;" class="smaller-text"><%= event.location %></h6>
-                </div>
-                <div class="card-date d-flex align-items-end">
-                  <h6 style="color: black;" class="mb-2 pb-2 smaller-text"><%= event.start_date %> - <%= event.end_date %>
-=======
               <div class="card-product-infos d-flex justify-content-between h-100 w-100">
                 <div class="card-name pt-3">
                   <h2 class="larger-text text-black"><%= event.name.capitalize %></h2>
@@ -132,7 +123,6 @@
                 </div>
                 <div class="card-date d-flex align-items-end">
                   <h6 style="color: black;" class="mb-0 smaller-text"><%= event.start_date %> - <%= event.end_date %>
->>>>>>> bff1db10115c8f1b36386860d59e08cd5e3900e4
                 </div>
               </div>
             </div>
