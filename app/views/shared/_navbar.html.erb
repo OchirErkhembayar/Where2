@@ -17,6 +17,7 @@
           <li class="nav-item active">
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
+          <button class="btn btn-ghost-nav nav-item mb-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop" style="font-size: 17px; padding: 0 15px 9px 7px; border: none; border: none; color: rgba(0, 0, 0, 0.85)">Friends</button>
           <li class="nav-item">
             <% if @notification_count %>
               <% if @notification_count > 0 %>
