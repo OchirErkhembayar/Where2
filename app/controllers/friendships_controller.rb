@@ -35,19 +35,19 @@ class FriendshipsController < ApplicationController
       @friendship.friend_two_id = User.find(params[:user_id]).id
       @friendship.save!
     end
-    redirect_to "/friendships"
+    redirect_to "/"
   end
 
   def destroy
     @friendship = Friendship.find(params[:id])
     @friendship.destroy
-    redirect_to "/friendships"
+    redirect_to "/"
   end
 
   def accept
     @friendship = Friendship.find(params[:id])
     @friendship.confirmed = true
     @friendship.save
-    redirect_to "/friendships"
+    redirect_to "/"
   end
 end

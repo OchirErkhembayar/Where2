@@ -1,33 +1,62 @@
-  <div class="container mb-5 p-0">
-    <div class="modal fade" id="newGroup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="newGroupForm" aria-hidden="true" >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class data-open-form-target="form"  class="modal-body">
-              <%= render "form", group: @group%>
-            </div>
-          </div>
-        </div>
-      </div>
-    <div class="d-flex justify-content-center">
-      <h1 class="dash-text mb-4" style="margin-left:0; margin-top: 0px; padding-top: 0px; font-size: 50px;">My Groups</h1>
-    </div>
-    <div>
-        <% @usergroups.reverse.each do |group| %>
-          <div class="group-card">
-            <% if current_user.photo.attached? %>
-                      <%= cl_image_tag current_user.photo.key, class: "avatar", style: "height: 75px; width: 90px;" %>
+<div class="container">
+  <div class="d-flex justify-content-center mb-4">
+    <button type="button" class="btn btn-ghost mb-0 mt-2" data-bs-toggle="modal" data-bs-target="#newGroup">New Group</button>
+  </div>
+  <div class="row mt-1">
+    <% @usergroups.reverse.each do |group| %>
+      <div class="col-12 col-sm-6 col-xl-4 d-flex justify-content-center">
+        <%= link_to group_path(group.group) do %>
+          <div class="card-trip mb-4" style="height: 400px;">
+            <% if group.group.photo.attached? %>
+              <%= cl_image_tag group.group.photo.key, height: 200, width: 400 %>
             <% else %>
-              <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 75px; width: 90px;" %>
+              <%= image_tag "background.jpg", height: 200, width: 400 %>
             <% end %>
-              <h3><%= link_to group.group.name, group_path(group.group)%></h3>
+            <div class="card-trip-infos">
+              <% if group.group.user.photo.attached? %>
+                <%= cl_image_tag group.group.user.photo.key, class: "card-trip-user avatar-bordered" %>
+              <% else %>
+                <%= image_tag "Clint.jpeg", class: "card-trip-user avatar-bordered" %>
+              <% end %>
+            </div>
+              <h3 class="text-center mt-3 larger-text" style="text-decoration: none; color: black;"><%= group.group.name %></h3>
+              <div class="mt-2">
+                <h6 class="text-center smaller-text" style="text-decoration: none; color: black;">Admin: <%= group.group.user.first_name.capitalize %></h6>
+                <h6 class="text-center smaller-text" style="text-decoration: none; color: black;"><%= UserGroup.where('group_id = ?', group.group.id).count %> • members</h6>
+                <div class="d-flex justify-content-center mt-3">
+                  <% if current_user == group.group.user %>
+                    <%= link_to edit_group_path(group.group) do  %>
+                      <i class="far fa-edit mx-3" style="color: black; font-size: 20px;"></i>
+                    <% end %>
+                    <%= link_to group_path(group.group), method: :delete do  %>
+                      <i class="fas fa-trash-alt mx-3" style="color: black; font-size: 20px;"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to group_usergroup_path(group.group, group), method: :delete do  %>
+                      <i class="fas fa-trash-alt mx-3" style="color: black; font-size: 20px;"></i>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
           </div>
         <% end %>
-    </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-  <div class="d-flex justify-content-center mb-5">
-    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#newGroup">New Group</button>
+
+<div class="container mb-5 p-0">
+  <div class="modal fade" id="newGroup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="newGroupForm" aria-hidden="true" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class data-open-form-target="form"  class="modal-body">
+          <%= render "form", group: @group%>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
