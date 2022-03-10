@@ -52,7 +52,7 @@
       </div>
       <div class="card-trip mt-3 p-3 mb-3" style=" height: auto;">
         <h5 class="p-3 larger-text">Members</h5>
-        <div style="height: 500px; overflow: scroll;">
+        <div style="height: 200px; overflow: scroll;">
           <% @users.sort_by { |u| u.created_at }.reverse.each do |user| %>
             <h6 class="m-2 d-flex align-items-center">
               <div>
