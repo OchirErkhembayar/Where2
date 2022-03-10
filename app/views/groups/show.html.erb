@@ -122,7 +122,7 @@
                   <h6 style="color: black;" class="smaller-text"><%= event.location %></h6>
                 </div>
                 <div class="card-date d-flex align-items-end">
-                  <h6 style="color: black;" class="mb-0 smaller-text"><%= event.start_date %> - <%= event.end_date %>
+                  <h6 style="color: black;" class="mb-0 smaller-text"><%= event.start_date.strftime("%A, %b %d") %> - <%= event.end_date.strftime("%A, %b %d") %>
                 </div>
               </div>
             </div>
@@ -142,7 +142,8 @@
                     <div class="card-product-infos text-center">
                       <h2 class="mb-2 smaller-text"><%= event.name.capitalize %></h2>
                       <h6 style="color: white;" class="smaller-text"><%= event.location %></h6>
-                      <h6 style="color: white;" class="mb-2 smaller-text"><%= event.start_date %> - <%= event.end_date %></h6>
+                      <h6 style="color: white;" class="mb-2 smaller-text"><%= event.start_date.strftime("%A, %b %d")
+ %> - <%= event.end_date.strftime("%A, %b %d") %></h6>
                     </div>
                   </div>
                 <% end %>
