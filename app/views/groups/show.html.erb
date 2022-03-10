@@ -50,50 +50,52 @@
             </div>
           </div>
       </div>
-      <div class="card-trip mt-3 p-3 mb-3" style=" height: 500px; overflow: auto;">
+      <div class="card-trip mt-3 p-3 mb-3" style=" height: auto;">
         <h5 class="p-3 larger-text">Members</h5>
-        <% @users.sort_by { |u| u.created_at }.reverse.each do |user| %>
-          <h6 class="m-2 d-flex align-items-center">
-            <div>
-              <% if user.photo.attached? %>
-                <% if user == @group.user %>
-                  <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+        <div style="height: 500px; overflow: scroll;">
+          <% @users.sort_by { |u| u.created_at }.reverse.each do |user| %>
+            <h6 class="m-2 d-flex align-items-center">
+              <div>
+                <% if user.photo.attached? %>
+                  <% if user == @group.user %>
+                    <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <% else %>
+                    <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <% end %>
                 <% else %>
-                  <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                  <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
                 <% end %>
-              <% else %>
-                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
-              <% end %>
-            </div>
-            <div class="ms-3 d-flex justify-content-between">
-              <div class="mt-1 smaller-text">
-                <%= user == current_user ? "You" : user.first_name %>
-                <%= user == @group.user ? " -   Admin" : "" %>
               </div>
-              <% if user != current_user %>
-                <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
-                  <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
-                <% end %>
-                <% if current_user == @group.user %>
-                  <%= link_to kick_group_usergroup_path(@group, user), method: :delete, style: "color: red;", class: "ms-3 mt-1" do%>
-                    <i class="fas fa-ban"></i>
+              <div class="ms-3 d-flex justify-content-between">
+                <div class="mt-1 smaller-text">
+                  <%= user == current_user ? "You" : user.first_name %>
+                  <%= user == @group.user ? " -   Admin" : "" %>
+                </div>
+                <% if user != current_user %>
+                  <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
+                    <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
+                  <% end %>
+                  <% if current_user == @group.user %>
+                    <%= link_to kick_group_usergroup_path(@group, user), method: :delete, style: "color: red;", class: "ms-3 mt-1" do%>
+                      <i class="fas fa-ban"></i>
+                    <% end %>
                   <% end %>
                 <% end %>
-              <% end %>
-          </h6>
-        <% end %>
             </h6>
-        <% @pendingusers.each do |user| %>
-            <h6 class="m-2 d-flex align-items-center">
-              <% if user.user.photo.attached? %>
-                <%= cl_image_tag user.user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
-              <% else %>
-                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
-              <% end %>
-              <div class="ms-3 smaller-text"><%= user.user == current_user ? "You" : user.user.first_name %> - pending</div>
-              </p>
-            </h6>
-        <% end %>
+          <% end %>
+              </h6>
+          <% @pendingusers.each do |user| %>
+              <h6 class="m-2 d-flex align-items-center">
+                <% if user.user.photo.attached? %>
+                  <%= cl_image_tag user.user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% else %>
+                  <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                <% end %>
+                <div class="ms-3 smaller-text"><%= user.user == current_user ? "You" : user.user.first_name %> - pending</div>
+                </p>
+              </h6>
+          <% end %>
+        </div>
         <%= simple_form_for @usergroup, url: group_usergroups_path(@group)  do |f| %>
           <div class="form-group text-center">
             <%= f.association :user, collection: current_user.user_group_invites(@group), label_method: :first_name, method: :post, input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Add your friends", label: "Select friends to add" %>
