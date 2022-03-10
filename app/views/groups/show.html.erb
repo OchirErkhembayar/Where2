@@ -97,7 +97,7 @@
         <%= simple_form_for @usergroup, url: group_usergroups_path(@group)  do |f| %>
           <div class="form-group text-center">
             <%= f.association :user, collection: current_user.user_group_invites(@group), label_method: :first_name, label: "Add friends", input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Type your friend's name", class: "flex-grow text-center" %>
-          <%= f.submit "Submit", class: "btn btn-primary w-100" %>
+          <%= f.submit "Invite Friends", class: "btn btn-primary w-100" %>
           </div>
         <% end %>
       </div>
