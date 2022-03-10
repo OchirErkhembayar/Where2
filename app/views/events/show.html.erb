@@ -209,13 +209,14 @@
           </div>
           <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
             <div class="card-trip px-3 py-3">
-              <div class="chatroom me-5 w-100" data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>" data-event-subscription-current-user-id-value="<%= current_user.id %>">
-                <div style="height: 492px; overflow: auto; " class="p-3 mb-3 rounded message-box">
+              <div class="chatroom me-5 w-100"  data-controller="event-subscription" data-event-subscription-event-id-value="<%= @event.id %>" data-event-subscription-current-user-id-value="<%= current_user.id %>">
+                <div style="height: 492px; overflow: auto;" class="p-3 mb-3 rounded message-box">
                   <div class="messages mb-3 d-flex flex-column justify-content-right" data-event-subscription-target="messages">
                     <% @event.messages.each do |message| %>
                       <%= render "messages/message", message: message %>
                     <% end %>
                   </div>
+                </div>
                   <%= simple_form_for [@group, @event, @message], remote: true, html: {data: {event_subscription_target: "form"}, class: "d-flex"}  do |f| %>
                       <%= f.text_field :content,
                         label: false,
@@ -226,7 +227,6 @@
                       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
                     <%= f.submit "Send", class: "btn btn-primary btn-sm ms-2 send-button" %>
                   <% end %>
-                </div>
               </div>
             </div>
           </div>
