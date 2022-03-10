@@ -1,16 +1,17 @@
 <% if message.user_id == current_user.id %>
   <div class="text-end my-2"id="message-<%= message.id %>" data-sender-id="<%= current_user.id %>">
-    <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-    <strong><%= message.user.first_name %></strong>
-    <% if message.user.photo.attached? %>
-      <%= cl_image_tag message.user.photo.key, class: "avatar mb-1", style: "height: 30px; width: 30px;" %>
-    <% else %>
-      <%= asset_path "unknown-avatar.png", class: "avatar mb-1", style: "height: 30px; width: 30px;" %>
-    <% end %>
-  <div>
-    <% width = message.content.length > 20 ? 40 : message.content.length * (40/20) %>
-    <div style="background-color: #F4B658; border-radius: 5px; margin-left: <%= 100 - width %>%; width: <%= width %>%; max-width: 40%;" class="py-1 pe-2">
-      <p style="font-size: 15px; color: white; opacity: 1;"><%= message.content %></p>
+      <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+      <strong><%= message.user.first_name %></strong>
+      <% if message.user.photo.attached? %>
+        <%= cl_image_tag message.user.photo.key, class: "avatar mb-1", style: "height: 30px; width: 30px;" %>
+      <% else %>
+        <%= image_tag "unknown-avatar.png", class: "avatar mb-1", style: "height: 30px; width: 30px;" %>
+      <% end %>
+    <div>
+      <% width = message.content.length > 20 ? 40 : message.content.length * (40/20) %>
+      <div style="background-color: #F4B658; border-radius: 5px; margin-left: <%= 100 - width %>%; width: <%= width %>%; max-width: 40%;" class="py-1 pe-2">
+        <p style="font-size: 15px; color: white; opacity: 1;"><%= message.content %></p>
+      </div>
     </div>
   </div>
 <% else %>
@@ -28,7 +29,7 @@
       <p style="font-size: 15px; color: white; opacity: 1;"><%= message.content %></p>
     </div>
   </div>
-<% end %>
 </div>
+<% end %>
 <%# 40% == 25 characters %>
 <%# width == 40/25 %>
