@@ -27,13 +27,13 @@
         <% if @group.photo.attached? %>
           <%= cl_image_tag @group.photo.key %>
         <% else %>
-          <%= asset_path "background.jpg" %>
+          <%= image_tag "background.jpg" %>
         <% end %>
         <div class="card-trip-infos">
           <% if @group.user.photo.attached? %>
             <%= cl_image_tag @group.user.photo.key, class: "card-trip-user avatar-bordered" %>
           <% else %>
-            <img src="<%= asset_path "card-style-groups3.jpg" %>" alt=""class="card-trip-user avatar-bordered">
+            <img src="<%= image_tag "card-style-groups3.jpg" %>" alt=""class="card-trip-user avatar-bordered">
           <% end %>
         </div>
           <h3 class="text-center mt-3 larger-text"><%= @group.name %></h3>
@@ -62,7 +62,7 @@
                   <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
                 <% end %>
               <% else %>
-                <%= asset_path "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
               <% end %>
             </div>
             <div class="ms-3 d-flex justify-content-between">
@@ -88,7 +88,7 @@
               <% if user.user.photo.attached? %>
                 <%= cl_image_tag user.user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
               <% else %>
-                <%= asset_path "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
               <% end %>
               <div class="ms-3 smaller-text"><%= user.user == current_user ? "You" : user.user.first_name %> - pending</div>
               </p>
@@ -114,7 +114,7 @@
               <% if event.event_photo.attached? %>
                 <%= cl_image_tag event.event_photo.key %>
               <% else %>
-                <img src="<%= asset_path "background.jpg" %>" alt="">
+                <img src="<%= image_tag "background.jpg" %>" alt="">
               <% end %>
               <div class="card-product-infos d-flex justify-content-between h-100 w-100">
                 <div class="card-name pt-3">
