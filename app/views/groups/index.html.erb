@@ -5,7 +5,7 @@
   <div class="row mt-1">
     <% @usergroups.reverse.each do |group| %>
       <div class="col-12 col-sm-6 col-xl-4 d-flex mb-4 justify-content-center">
-        <%= link_to group_path(group.group) do %>
+        <%= link_to group_path(group.group), style: "text-decoration: none;" do %>
           <div class="card-trip mb-4" style="height: 100%;">
             <% if group.group.photo.attached? %>
               <%= cl_image_tag group.group.photo.key, height: 200, width: 400 %>
