@@ -51,7 +51,7 @@
                 </div>
                 <% if user != current_user %>
                   <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
-                    <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
+                    <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3 ms-3" %>
                   <% end %>
                 <% end %>
             </h6>
@@ -77,7 +77,7 @@
                   </div>
                   <% if user != current_user %>
                     <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
-                      <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
+                      <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3 ms-3" %>
                     <% end %>
                     <% if current_user == @group.user %>
                       <%= link_to event_user_path(EventUser.where('event_id = ? AND user_id = ?', @event.id, user.id).first), method: :delete, style: "color: red;", class: "ms-3 mt-1" do%>
@@ -109,7 +109,7 @@
                   </div>
                   <% if user != current_user %>
                     <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
-                      <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
+                      <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3 ms-3" %>
                     <% end %>
                     <% if current_user == @group.user %>
                       <%= link_to event_user_path(EventUser.where('event_id = ? AND user_id = ?', @event.id, user.id).first), method: :delete, style: "color: red;", class: "ms-3 mt-1" do%>
@@ -141,7 +141,7 @@
                   </div>
                   <% if user != current_user %>
                     <% if Friendship.where('friend_one_id = ? OR friend_two_id = ?', user.id, user.id).select { |f| @my_friendships.include? f }.empty? %>
-                      <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3" %>
+                      <%= link_to "Add friend", user_friendships_path(current_user, user), method: :post, class: "btn btn-primary btn-sm ml-3 ms-3" %>
                     <% end %>
                     <% if current_user == @group.user %>
                       <%= link_to kick_group_usergroup_path(@group, user), method: :delete, style: "color: red;", class: "ms-3 mt-1" do%>
