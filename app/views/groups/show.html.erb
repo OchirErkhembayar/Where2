@@ -27,7 +27,7 @@
         <% if @group.photo.attached? %>
           <%= cl_image_tag @group.photo.key %>
         <% else %>
-          <%= asset_path "background.jpg" %>
+          <%= image_tag "background.jpg" %>
         <% end %>
         <div class="card-trip-infos">
           <% if @group.user.photo.attached? %>
@@ -62,7 +62,7 @@
                   <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
                 <% end %>
               <% else %>
-                <%= asset_path "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
               <% end %>
             </div>
             <div class="ms-3 d-flex justify-content-between">
@@ -88,7 +88,7 @@
               <% if user.user.photo.attached? %>
                 <%= cl_image_tag user.user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
               <% else %>
-                <%= asset_path "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
               <% end %>
               <div class="ms-3 smaller-text"><%= user.user == current_user ? "You" : user.user.first_name %> - pending</div>
               </p>
