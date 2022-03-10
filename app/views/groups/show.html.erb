@@ -27,7 +27,7 @@
         <% if @group.photo.attached? %>
           <%= cl_image_tag @group.photo.key %>
         <% else %>
-          <%= asset_path "background.jpg" %>
+          <%= image_tag "background.jpg" %>
         <% end %>
         <div class="card-trip-infos">
           <% if @group.user.photo.attached? %>
@@ -62,7 +62,7 @@
                   <%= cl_image_tag user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
                 <% end %>
               <% else %>
-                <%= asset_path "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
               <% end %>
             </div>
             <div class="ms-3 d-flex justify-content-between">
@@ -88,7 +88,7 @@
               <% if user.user.photo.attached? %>
                 <%= cl_image_tag user.user.photo.key, class: "avatar", style: "height: 50px; width: 50px;" %>
               <% else %>
-                <%= asset_path "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
+                <%= image_tag "unknown-avatar.png", class: "avatar", style: "height: 50px; width: 50px;" %>
               <% end %>
               <div class="ms-3 smaller-text"><%= user.user == current_user ? "You" : user.user.first_name %> - pending</div>
               </p>
@@ -96,8 +96,8 @@
         <% end %>
         <%= simple_form_for @usergroup, url: group_usergroups_path(@group)  do |f| %>
           <div class="form-group text-center">
-            <%= f.association :user, collection: current_user.user_group_invites(@group), label_method: :first_name, label: "Add friends", input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Type your friend's name", class: "flex-grow text-center" %>
-          <%= f.submit "Submit", class: "btn btn-primary w-100" %>
+            <%= f.association :user, collection: current_user.user_group_invites(@group), label_method: :first_name, method: :post, input_html: {multiple: true, data: {controller: 'select2', select2_options_value: {tags: true}}}, placeholder: "Add your friends", label: "Select friends to add" %>
+          <%= f.submit "Invite Friends", class: "btn btn-primary w-100" %>
           </div>
         <% end %>
       </div>

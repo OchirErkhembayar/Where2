@@ -4,7 +4,7 @@
   </div>
   <div class="row mt-1">
     <% @usergroups.reverse.each do |group| %>
-      <div class="col-12 col-sm-6 col-xl-4 d-flex justify-content-center">
+      <div class="col-12 col-sm-6 col-xl-4 d-flex mb-4 justify-content-center">
         <%= link_to group_path(group.group) do %>
           <div class="card-trip mb-4" style="height: 100%;">
             <% if group.group.photo.attached? %>
@@ -16,7 +16,7 @@
               <% if group.group.user.photo.attached? %>
                 <%= cl_image_tag group.group.user.photo.key, class: "card-trip-user avatar-bordered" %>
               <% else %>
-                <img src="<%= image_tag "card-style-groups3.jpg" %>" alt=""class="card-trip-user avatar-bordered">
+                <img src="<%= asset_path "card-style-groups3.jpg" %>" alt="" class="card-trip-user avatar-bordered">
               <% end %>
             </div>
               <h3 class="text-center mt-3 larger-text" style="text-decoration: none; color: black;"><%= group.group.name %></h3>
