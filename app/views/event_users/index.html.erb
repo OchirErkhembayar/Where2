@@ -3,7 +3,7 @@
   <div class="row mt-1">
     <% @events.reverse.each do |event| %>
       <div class="col-12 col-sm-6 col-xl-4 d-flex justify-content-center mb-4">
-        <%= link_to group_event_path(event, event.group.id) do %>
+        <%= link_to group_event_path(event, event.group.id), style: "text-decoration: none;" do %>
           <div class="card-trip mb-4" style="height: 100%;">
             <% if event.event_photo.attached? %>
               <%= cl_image_tag event.event_photo.key, height: 200, width: 400 %>
