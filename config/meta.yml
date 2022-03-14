@@ -1,0 +1,5 @@
+meta_product_name: "Where2"
+meta_title: "Where 2 - What where and when, all in one."
+meta_description: "Plan great events with your friend groups. Add friends, create groups with them and plan great events together. Find directions and dates as well as chat and add photos for the event."
+meta_image: "cover.png" # should exist in `app/assets/images/`
+twitter_account: "@Where2_806"   # required for Twitter Cards
